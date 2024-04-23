@@ -12,7 +12,7 @@ public interface FacturaService {
 	
 	Flux<Factura> searchFactura(String rucCliente);
 	
-	Mono<Factura> createFactura(Factura factura);
+	Mono<Factura> setFactura(Factura factura);
 	
 	Mono<Factura> updateFactura(Factura factura);
 	

@@ -31,9 +31,8 @@ public class FacturaServiceImpl implements FacturaService{
 	}*/
 	
 	@Override
-	public Mono<Factura> createFactura(Factura factura) {
-		return facturaRepository.save(factura);
-						
+	public Mono<Factura> setFactura(Factura factura) {
+		return facturaRepository.save(factura);				
 	}
 
 	@Override

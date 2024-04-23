@@ -8,9 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -39,16 +40,20 @@ public class ErpController {
 		return new ResponseEntity<>(facturaService.listFactura(), HttpStatus.OK) ;
 	}
 	
-	@GetMapping(value="factura")
-	public ResponseEntity<Mono<Factura>> productoCodigo(@RequestParam("id") String id) {
+	@GetMapping(value="factura/{id}")
+	public ResponseEntity<Mono<Factura>> facturaForId(@PathVariable("id") String id) {
 		return new ResponseEntity<>(facturaService.facturaForId(id),HttpStatus.OK);
 	}
 	
 	@PostMapping(value="factura")
-	public ResponseEntity<Mono<Factura>> nuevaFactura(@RequestBody Factura factura) {
-		return new ResponseEntity<>(facturaService.createFactura(factura),HttpStatus.OK);
+	public ResponseEntity<Mono<Factura>> createfactura(@RequestBody Factura factura) {
+		return new ResponseEntity<>(facturaService.setFactura(factura),HttpStatus.OK);
 	}
 	
+	@PutMapping(value="factura")
+	public ResponseEntity<Mono<Factura>> editfactura(@RequestBody Factura factura) {
+		return new ResponseEntity<>(facturaService.setFactura(factura),HttpStatus.OK);
+	}
 	
 
 }
