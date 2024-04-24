@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import model.Cliente;
 import model.Factura;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import service.ClienteService;
 import service.FacturaService;
 
 @CrossOrigin("*")
@@ -26,6 +27,9 @@ public class ErpController {
 	
 	@Autowired
 	FacturaService facturaService;
+	
+	@Autowired
+	ClienteService clienteService;
 	
 	@GetMapping(value = "names")
 	public Flux<String> getNames(){
@@ -53,6 +57,11 @@ public class ErpController {
 	@PutMapping(value="factura")
 	public ResponseEntity<Mono<Factura>> editfactura(@RequestBody Factura factura) {
 		return new ResponseEntity<>(facturaService.setFactura(factura),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="cliente/{ruc}")
+	public ResponseEntity<Flux<Cliente>> clienteForRuc(@PathVariable("ruc") String ruc) {
+		return new ResponseEntity<>(clienteService.clienteForRuc(ruc),HttpStatus.OK);
 	}
 	
 
