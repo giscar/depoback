@@ -64,5 +64,9 @@ public class ErpController {
 		return new ResponseEntity<>(clienteService.clienteForRuc(ruc),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="clientes/{descripcion}")
+	public ResponseEntity<Flux<Cliente>> clienteForDescripcion(@PathVariable("descripcion") String descripcion) {
+		return new ResponseEntity<>(clienteService.clienteForDescripcion(descripcion),HttpStatus.OK);
+	}
 
 }

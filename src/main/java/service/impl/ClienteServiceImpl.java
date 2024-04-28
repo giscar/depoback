@@ -25,4 +25,10 @@ public class ClienteServiceImpl implements ClienteService{
 		return clienteRepository.findByRuc(ruc);
 	}
 
+
+	@Override
+	public Flux<Cliente> clienteForDescripcion(String descripcion) {
+		return clienteRepository.clienteForDescripcion(descripcion);
+	}
+
 }
