@@ -68,5 +68,14 @@ public class ErpController {
 	public ResponseEntity<Flux<Cliente>> clienteForDescripcion(@PathVariable("descripcion") String descripcion) {
 		return new ResponseEntity<>(clienteService.clienteForDescripcion(descripcion),HttpStatus.OK);
 	}
+	
+	@PostMapping(value="cliente")
+	public ResponseEntity<Mono<Cliente>> createCliente(@RequestBody Cliente cliente) {
+		return new ResponseEntity<>(clienteService.setCliente(cliente),HttpStatus.OK);
+	}
 
+	@PutMapping(value="cliente")
+	public ResponseEntity<Mono<Cliente>> editCliente(@RequestBody Cliente cliente) {
+		return new ResponseEntity<>(clienteService.setCliente(cliente),HttpStatus.OK);
+	}
 }

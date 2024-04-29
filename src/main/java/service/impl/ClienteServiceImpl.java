@@ -28,7 +28,13 @@ public class ClienteServiceImpl implements ClienteService{
 
 	@Override
 	public Flux<Cliente> clienteForDescripcion(String descripcion) {
-		return clienteRepository.clienteForDescripcion(descripcion);
+		return clienteRepository.clienteForDescripcion(descripcion.toUpperCase());
+	}
+
+
+	@Override
+	public Mono<Cliente> setCliente(Cliente cliente) {
+		return clienteRepository.save(cliente);
 	}
 
 }
