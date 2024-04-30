@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import model.Cliente;
@@ -64,8 +65,13 @@ public class ErpController {
 		return new ResponseEntity<>(clienteService.clienteForRuc(ruc),HttpStatus.OK);
 	}
 	
-	@GetMapping(value="clientes/{descripcion}")
-	public ResponseEntity<Flux<Cliente>> clienteForDescripcion(@PathVariable("descripcion") String descripcion) {
+	@GetMapping(value="cliente")
+	public ResponseEntity<Mono<Cliente>> clienteForId(@RequestParam(name = "id") String id) {
+		return new ResponseEntity<>(clienteService.clienteForID(id),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="cliente/descrip")
+	public ResponseEntity<Flux<Cliente>> clienteForDescripcion(@RequestParam(name = "descripcion") String descripcion) {
 		return new ResponseEntity<>(clienteService.clienteForDescripcion(descripcion),HttpStatus.OK);
 	}
 	

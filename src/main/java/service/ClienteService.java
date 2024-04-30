@@ -11,5 +11,7 @@ public interface ClienteService {
 	Flux<Cliente> clienteForDescripcion(String descripcion);
 	
 	Mono<Cliente> setCliente(Cliente cliente);
+	
+	Mono<Cliente> clienteForID(String id);
 
 }

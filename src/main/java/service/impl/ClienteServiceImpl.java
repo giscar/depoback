@@ -37,4 +37,10 @@ public class ClienteServiceImpl implements ClienteService{
 		return clienteRepository.save(cliente);
 	}
 
+
+	@Override
+	public Mono<Cliente> clienteForID(String id) {
+		return clienteRepository.findById(id);
+	}
+
 }
