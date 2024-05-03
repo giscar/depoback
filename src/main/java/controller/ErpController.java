@@ -100,6 +100,11 @@ public class ErpController {
 		return new ResponseEntity<>(montacargaService.findById(id),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="montacarga/estado")
+	public ResponseEntity<Flux<Montacarga>> montacargaForActivo(@RequestParam(name = "estado") String estado) {
+		return new ResponseEntity<>(montacargaService.findByEstado(estado),HttpStatus.OK);
+	}
+	
 	@GetMapping(value="montacarga/all")
 	public ResponseEntity<Flux<Montacarga>> montacargaFindAll() {
 		return new ResponseEntity<>(montacargaService.all(),HttpStatus.OK);
