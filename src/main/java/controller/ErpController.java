@@ -139,4 +139,9 @@ public class ErpController {
 	public ResponseEntity<Mono<Operador>> operadorUpdate(@RequestBody Operador operador) {
 		return new ResponseEntity<>(operadorService.save(operador),HttpStatus.OK);
 	}
+	
+	@GetMapping(value="operador/estado")
+	public ResponseEntity<Flux<Operador>> operadorForActivo(@RequestParam(name = "estado") String estado) {
+		return new ResponseEntity<>(operadorService.findByEstado(estado),HttpStatus.OK);
+	}
 }

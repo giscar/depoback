@@ -39,6 +39,11 @@ public class OperadorServiceImpl implements OperadorService{
 		return operadorRepository.findById(id);
 	}
 
+	@Override
+	public Flux<Operador> findByEstado(String estado) {
+		return operadorRepository.findByEstado(estado);
+	}
+
 	
 	
 	
