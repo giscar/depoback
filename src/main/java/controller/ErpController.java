@@ -19,12 +19,14 @@ import model.Cliente;
 import model.Factura;
 import model.Montacarga;
 import model.Operador;
+import model.Servicio;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import service.ClienteService;
 import service.FacturaService;
 import service.MontacargaService;
 import service.OperadorService;
+import service.ServicioService;
 
 @CrossOrigin("*")
 @RestController
@@ -41,6 +43,9 @@ public class ErpController {
 	
 	@Autowired
 	OperadorService operadorService;
+	
+	@Autowired
+	ServicioService servicioService;
 	
 	@GetMapping(value = "names")
 	public Flux<String> getNames(){
@@ -143,5 +148,30 @@ public class ErpController {
 	@GetMapping(value="operador/estado")
 	public ResponseEntity<Flux<Operador>> operadorForActivo(@RequestParam(name = "estado") String estado) {
 		return new ResponseEntity<>(operadorService.findByEstado(estado),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="servicio")
+	public ResponseEntity<Mono<Servicio>> servicioForId(@RequestParam(name = "id") String id) {
+		return new ResponseEntity<>(servicioService.findById(id),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="servicio/all")
+	public ResponseEntity<Flux<Servicio>> servicioFindAll() {
+		return new ResponseEntity<>(servicioService.all(),HttpStatus.OK);
+	}
+	
+	@PostMapping(value="servicio")
+	public ResponseEntity<Mono<Servicio>> servicioSave(@RequestBody Servicio servicio) {
+		return new ResponseEntity<>(servicioService.save(servicio),HttpStatus.OK);
+	}
+
+	@PutMapping(value="servicio")
+	public ResponseEntity<Mono<Servicio>> servicioUpdate(@RequestBody Servicio servicio) {
+		return new ResponseEntity<>(servicioService.save(servicio),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="servicio/estado")
+	public ResponseEntity<Flux<Servicio>> servicioForActivo(@RequestParam(name = "estado") String estado) {
+		return new ResponseEntity<>(servicioService.findByEstado(estado),HttpStatus.OK);
 	}
 }

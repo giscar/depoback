@@ -28,5 +28,7 @@ public class Servicio {
 	
 	private String horaRetornoLocal;
 	
+	private String estado;
+	
 
 }
