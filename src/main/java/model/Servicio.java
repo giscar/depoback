@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(collection = "servicio")
+@Document(collection = "servicios")
 public class Servicio {
 	
 	@Id
