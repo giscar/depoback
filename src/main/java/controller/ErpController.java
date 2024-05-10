@@ -174,4 +174,9 @@ public class ErpController {
 	public ResponseEntity<Flux<Servicio>> servicioForActivo(@RequestParam(name = "estado") String estado) {
 		return new ResponseEntity<>(servicioService.findByEstado(estado),HttpStatus.OK);
 	}
+	
+	@GetMapping(value="servicio/busqueda")
+	public ResponseEntity<Flux<Servicio>> servicioForRucAndCodServicio(@RequestParam(name = "codServicio") String codServicio, @RequestParam(name = "ruc") String ruc) {
+		return new ResponseEntity<>(servicioService.findByRucCodServicio(ruc, codServicio),HttpStatus.OK);
+	}
 }

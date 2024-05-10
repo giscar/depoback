@@ -34,6 +34,11 @@ public class ServicioServiceImpl implements ServicioService{
 	public Flux<Servicio> findByEstado(String estado) {
 		return servicioRepository.findByEstado(estado);
 	}
+
+	@Override
+	public Flux<Servicio> findByRucCodServicio(String ruc, String codServicio) {
+		return servicioRepository.findByRucCodServicio(ruc, codServicio);
+	}
 	
 	
 

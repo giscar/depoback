@@ -13,5 +13,7 @@ public interface ServicioService {
 	Flux<Servicio> findByEstado(String estado);
 	
 	Flux<Servicio> all();
+	
+	Flux<Servicio> findByRucCodServicio(String ruc, String codServicio);
 
 }
