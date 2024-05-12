@@ -40,4 +40,10 @@ public class ClienteServiceImpl implements ClienteService{
 		return clienteRepository.findById(id);
 	}
 
+
+	@Override
+	public Flux<Cliente> findByRucOrName(String ruc, String estado) {
+		return clienteRepository.findByRucOrName(ruc, estado);
+	}
+
 }

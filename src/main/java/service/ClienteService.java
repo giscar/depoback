@@ -10,6 +10,8 @@ public interface ClienteService {
 	
 	Flux<Cliente> clienteForDescripcion(String descripcion);
 	
+	Flux<Cliente> findByRucOrName(String ruc, String estado);
+	
 	Mono<Cliente> setCliente(Cliente cliente);
 	
 	Mono<Cliente> clienteForID(String id);

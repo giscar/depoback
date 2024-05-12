@@ -90,6 +90,11 @@ public class ErpController {
 		return new ResponseEntity<>(clienteService.clienteForDescripcion(descripcion),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="cliente/busqueda")
+	public ResponseEntity<Flux<Cliente>> clienteForRucAndName(@RequestParam(name = "ruc") String ruc, @RequestParam(name = "razonSocial") String razonSocial) {
+		return new ResponseEntity<>(clienteService.findByRucOrName(ruc, razonSocial),HttpStatus.OK);
+	}
+	
 	@PostMapping(value="cliente")
 	public ResponseEntity<Mono<Cliente>> createCliente(@RequestBody Cliente cliente) {
 		return new ResponseEntity<>(clienteService.setCliente(cliente),HttpStatus.OK);

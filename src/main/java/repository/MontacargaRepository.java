@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 
 public interface MontacargaRepository extends ReactiveMongoRepository<Montacarga, String> {
 	
-	@Query("{'estado': '1'})")
+	@Query("{'estado': '1'}")
 	Flux<Montacarga> findByEstado(String estado);
 
 }
