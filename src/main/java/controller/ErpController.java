@@ -184,4 +184,11 @@ public class ErpController {
 	public ResponseEntity<Flux<Servicio>> servicioForRucAndCodServicio(@RequestParam(name = "codServicio") String codServicio, @RequestParam(name = "ruc") String ruc) {
 		return new ResponseEntity<>(servicioService.findByRucCodServicio(ruc, codServicio),HttpStatus.OK);
 	}
+	
+	@GetMapping(value="servicio/busquedaAggregate")
+	public ResponseEntity<Flux<Servicio>> findByRucCodServicioAggregate(@RequestParam(name = "codServicio") String codServicio, @RequestParam(name = "ruc") String ruc) {
+		return new ResponseEntity<>(servicioService.findByRucCodServicioAggregate(ruc, codServicio),HttpStatus.OK);
+	}
+	
+	
 }

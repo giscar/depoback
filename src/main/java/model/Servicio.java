@@ -30,5 +30,11 @@ public class Servicio {
 	
 	private String estado;
 	
-
+	private String operadorId;
+	
+	private String operadorNombre;
+	
+	private String montacargaId;
+	
+	private String montacargaNombre;
 }
