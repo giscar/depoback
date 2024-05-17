@@ -1,6 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.aggregation.ArrayOperators.ArrayElemAt;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -30,11 +33,9 @@ public class Servicio {
 	
 	private String estado;
 	
-	private String operadorId;
+	private Object[] operador;
 	
-	private String operadorNombre;
+	private Object[] montacarga;
 	
-	private String montacargaId;
-	
-	private String montacargaNombre;
+	private Object[] cliente;
 }

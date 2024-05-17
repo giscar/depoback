@@ -17,8 +17,10 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 	Flux<Servicio> findByRucCodServicio(String ruc, String estado);
 	
 	@Aggregation(pipeline = {
-			"{ $addFields: { 'operadorObjId': { '$toObjectId': '$operadorId' }}},",
-			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'innerOperadores'}},",
+			"{ $addFields: { 'operadorObjId': { '$toObjectId': '$operadorId' }, 'montacargaObjId': { '$toObjectId': '$montacargaId' },}},",
+			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
+			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
+			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
 			//"{ $replaceRoot: { newRoot: { $mergeObjects: [{$arrayElemAt: ['$innerOperadores', 0]}, '$$ROOT']}} }"
 			
 	})
