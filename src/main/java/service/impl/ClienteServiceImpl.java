@@ -42,8 +42,8 @@ public class ClienteServiceImpl implements ClienteService{
 
 
 	@Override
-	public Flux<Cliente> findByRucOrName(String ruc, String estado) {
-		return clienteRepository.findByRucOrName(ruc, estado);
+	public Flux<Cliente> findByRucOrName(String ruc, String razonSocial) {
+		return clienteRepository.findByRucOrName(ruc, razonSocial);
 	}
 
 }

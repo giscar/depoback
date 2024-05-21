@@ -38,4 +38,8 @@ public class Servicio {
 	private Object[] montacarga;
 	
 	private Object[] cliente;
+	
+	private String operadorId;
+	
+	private String montacargaId;
 }

@@ -21,7 +21,7 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
-			"{match:{or :[{'ruc' : ?0},{'codServicio' : ?1}]}},"
+			"{ $match:{ $or :[{'ruc' : ?0},{'codServicio' : ?1}]}},"
 			//"{ $replaceRoot: { newRoot: { $mergeObjects: [{$arrayElemAt: ['$innerOperadores', 0]}, '$$ROOT']}} }"
 			
 	})
