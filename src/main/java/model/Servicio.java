@@ -1,9 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators.ArrayElemAt;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -14,8 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Document(collection = "servicios")
-public class Servicio {
+public class Servicio implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private String id;
 	
@@ -33,11 +35,11 @@ public class Servicio {
 	
 	private String estado;
 	
-	private Object[] operador;
+	private Operador operador;
 	
-	private Object[] montacarga;
+	private Object montacarga;
 	
-	private Object[] cliente;
+	private Object cliente;
 	
 	private String operadorId;
 	
