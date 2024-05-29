@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -35,7 +34,7 @@ public class Servicio implements Serializable {
 	
 	private String estado;
 	
-	private Operador operador;
+	private Object operador;
 	
 	private Object montacarga;
 	

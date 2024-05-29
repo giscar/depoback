@@ -1,5 +1,9 @@
 package service.impl;
 
+import java.util.ArrayList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +11,6 @@ import model.Operador;
 import model.Servicio;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import repository.OperadorRepository;
 import repository.ServicioRepository;
 import service.OperadorService;
 import service.ServicioService;
@@ -15,6 +18,9 @@ import service.ServicioService;
 @Service
 public class ServicioServiceImpl implements ServicioService{
 	
+	Logger logger = LoggerFactory.getLogger(ServicioServiceImpl.class);
+	
+
 	@Autowired
 	private ServicioRepository servicioRepository;
 	
@@ -23,14 +29,7 @@ public class ServicioServiceImpl implements ServicioService{
 
 	@Override
 	public Mono<Servicio> save(Servicio servicio) {
-		return Mono.just(servicio).flatMap(p -> {
-			operadorService.findById(p.getOperadorId()).map(q -> {
-				System.out.println(q);
-			p.setOperador(q);	
-				return Mono.just(q);
-			});		
-			return servicioRepository.save(p);
-		});
+		return servicioRepository.save(servicio);
 				
 	}
 
@@ -56,15 +55,27 @@ public class ServicioServiceImpl implements ServicioService{
 
 	@Override
 	public Flux<Servicio> findByRucCodServicioAggregate(String ruc, String codServicio) {
-		return servicioRepository.findByRucCodServicioAggregate(ruc, codServicio)
+		return servicioRepository.findByRucCodServicioAggregate(ruc, codServicio);
+		/*return servicioRepository.findByRucCodServicioAggregate(ruc, codServicio).
+				map(p -> {
+					operadorService.findById(p.getOperadorId()).map(q -> {
+						ArrayList<Operador> listaOperador = new ArrayList<>();
+						listaOperador.add(q);
+						p.setOperador(listaOperador);
+						return q;
+					});
+					return p;
+				});*/
+				
+		/*return servicioRepository.findByRucCodServicioAggregate(ruc, codServicio)
 				.flatMap(p -> {
 					operadorService.findById(p.getOperadorId()).flatMap(q -> {
+						logger.info("MENSAJE DE PRUEBA LOG");
 						p.setOperador(q);
 						return Mono.just(q);
 					});
-					System.out.print(p);
 					return Flux.just(p);
-				});
+				});*/
 	}
 	
 	
