@@ -43,4 +43,8 @@ public class Servicio implements Serializable {
 	private String operadorId;
 	
 	private String montacargaId;
+	
+	private Double totalHoras;
+	
+	private Double montoServicio;
 }

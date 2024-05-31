@@ -157,7 +157,7 @@ public class ErpController {
 	
 	@GetMapping(value="servicio")
 	public ResponseEntity<Mono<Servicio>> servicioForId(@RequestParam(name = "id") String id) {
-		return new ResponseEntity<>(servicioService.findById(id),HttpStatus.OK);
+		return new ResponseEntity<>(servicioService.findByIdAggregate(id),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/all")

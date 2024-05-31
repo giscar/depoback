@@ -55,7 +55,7 @@ public class ServicioServiceImpl implements ServicioService{
 
 	@Override
 	public Flux<Servicio> findByRucCodServicioAggregate(String ruc, String codServicio) {
-		return servicioRepository.findByRucCodServicioAggregate(ruc, codServicio);
+		return servicioRepository.findByRucCodServicioAggregate(ruc, codServicio).log();
 		/*return servicioRepository.findByRucCodServicioAggregate(ruc, codServicio).
 				map(p -> {
 					operadorService.findById(p.getOperadorId()).map(q -> {
@@ -76,6 +76,11 @@ public class ServicioServiceImpl implements ServicioService{
 					});
 					return Flux.just(p);
 				});*/
+	}
+	
+	@Override
+	public Mono<Servicio> findByIdAggregate(String id) {
+		return servicioRepository.findByIdAggregate(id).log();
 	}
 	
 	
