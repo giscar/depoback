@@ -1,11 +1,17 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +19,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import model.Cliente;
 import model.Factura;
+import model.Imagen;
 import model.Montacarga;
 import model.Operador;
 import model.Servicio;
@@ -27,6 +36,7 @@ import service.FacturaService;
 import service.MontacargaService;
 import service.OperadorService;
 import service.ServicioService;
+import service.impl.ImagenServiceImpl;
 
 @CrossOrigin("*")
 @RestController
@@ -46,6 +56,9 @@ public class ErpController {
 	
 	@Autowired
 	ServicioService servicioService;
+	
+	@Autowired
+	ImagenServiceImpl imagenService;
 	
 	@GetMapping(value = "names")
 	public Flux<String> getNames(){
@@ -166,8 +179,48 @@ public class ErpController {
 	}
 	
 	@PostMapping(value="servicio")
-	public ResponseEntity<Mono<Servicio>> servicioSave(@RequestBody Servicio servicio) {
+	public ResponseEntity<Mono<Servicio>> servicioSave(@RequestBody Servicio servicio){
 		return new ResponseEntity<>(servicioService.save(servicio),HttpStatus.OK);
+	}
+	
+	@PostMapping("servicio/uploadFile")
+	public ResponseEntity<?> uploadImageToFIleSystem(@RequestParam("image") MultipartFile image) {
+		System.out.println(image);
+		return null;
+		/*String uploadImage = service.uploadImageToFileSystem(file);
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(uploadImage);*/
+	}
+	
+	@PostMapping("/imagen/add")
+	public Mono<Imagen> addImagen(@RequestParam("title") String title, 
+	  @RequestParam("image") MultipartFile image, Model model) 
+	  throws IOException {
+	    return imagenService.addImagen(title, image);
+	}
+	
+	/*@GetMapping("/imagen/{id}")
+	public String getImagen(@PathVariable String id, Model model) {
+		Imagen imagen = imagenService.getImagen(id);
+	    model.addAttribute("title", imagen.getTitle());
+	    model.addAttribute("image", 
+	      Base64.getEncoder().encodeToString(imagen.getImage().getData()));
+	    return "photos";
+	}*/
+	
+	@PostMapping("/upload-files")
+	public Mono uploadFileWithoutEntity(@RequestPart("files") Flux<FilePart> filePartFlux) {
+	    return filePartFlux.flatMap(file -> file.transferTo(Paths.get(file.filename())))
+	      .then(Mono.just("OK"))
+	      .onErrorResume(error -> Mono.just("Error uploading files"+error));
+	}
+	///Users/carlosleon/requerimientos/2024/depovent/depofront/public/images
+	@PostMapping("servicio/upload-files2")
+	public Mono uploadFileWithoutEntity2(@RequestPart("files") Flux<FilePart> filePartFlux) {
+		
+		return filePartFlux.flatMap(file -> file.transferTo(Paths.get("/Users/carlosleon/requerimientos/2024/depovent/depofront/public/images/",file.filename())))
+			      .then(Mono.just("OK"))
+			      .onErrorResume(error -> Mono.just("Error uploading files"+error));
 	}
 
 	@PutMapping(value="servicio")
