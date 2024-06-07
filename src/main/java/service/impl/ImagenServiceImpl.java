@@ -1,14 +1,13 @@
 package service.impl;
 
-import java.io.IOException;
+import java.nio.file.Paths;
 
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import model.Imagen;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import repository.ImagenRepository;
 import service.ImagenService;
@@ -19,32 +18,35 @@ public class ImagenServiceImpl implements ImagenService{
 	@Autowired
     private ImagenRepository imagenRepository;
 	
-	/*public Mono<Imagen> addImagen(String title, MultipartFile file) throws IOException { 
-        return Mono.just(new Imagen()).map(p -> {
-        	p.setTitle(title);
-            p.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
-            imagenRepository.save(p); 
-            return p;
-        });
-        
-    }*/
-	
-	/*public Mono<String> addImagen(String title, MultipartFile file) throws IOException { 
-        Imagen imagen = new Imagen(); 
-        imagen.setTitle(title);
-        imagen.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
-        Mono<Imagen> image = imagenRepository.save(imagen); 
-        return imagen.getId(); 
-    }*/
 
-    public Mono<Imagen> getImagen(String id) { 
-        return imagenRepository.findById(id); 
+    public Mono<Imagen> save(Imagen imagen) { 
+        return imagenRepository.save(imagen); 
     }
 
-	@Override
-	public Mono<Imagen> addImagen(String title, MultipartFile file) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /*public Mono<String> cargarFile(Flux<FilePart> filePartFlux) { 
+    	return filePartFlux.flatMap(
+    			file -> 
+    		file.transferTo(Paths.get("/Users/carlosleon/requerimientos/2024/depovent/depofront/public/images/",file.filename())))
+			      .then(Mono.just("OK"))
+			      .onErrorResume(error -> Mono.just("Error uploading files"+error));
+			      
+    }*/
+    
+    private static String ruta = "/Users/carlosleon/requerimientos/2024/depovent/depofront/public/images/";
+    
+    public Mono<String> cargarFile(Flux<FilePart> filePart) { 
+    	Imagen img = new Imagen();
+    	return filePart.flatMap(p -> p.transferTo(Paths.get(ruta,p.filename()))
+    		      .then(Mono.just(p.filename())))
+    		      .collectList()
+    		      .flatMap(filenames -> {
+    		    	  img.setFilename(filenames.get(0));
+    		          return imagenRepository.save(img);
+    	
+    		      }).then(Mono.just("dd"))
+    		      .onErrorResume(error -> Mono.error(error));
+		      
+    }
+    
 
 }

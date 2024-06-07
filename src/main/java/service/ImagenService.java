@@ -1,16 +1,15 @@
 package service;
 
-import java.io.IOException;
-
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.codec.multipart.FilePart;
 
 import model.Imagen;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface ImagenService {
 	
-	public Mono<Imagen> addImagen(String title, MultipartFile file) throws IOException;
+	public Mono<Imagen> save(Imagen imagen);
 	
-	public Mono<Imagen> getImagen(String id);
+	public Mono<String> cargarFile(Flux<FilePart> filePart);
 
 }
