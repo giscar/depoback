@@ -34,16 +34,20 @@ public class ImagenServiceImpl implements ImagenService{
     
     private static String ruta = "/Users/carlosleon/requerimientos/2024/depovent/depofront/public/images/";
     
-    public Mono<String> cargarFile(Flux<FilePart> filePart) { 
-    	Imagen img = new Imagen();
+    public Mono<String> cargarFile(Flux<FilePart> filePart, String id, String type, String size) { 
     	return filePart.flatMap(p -> p.transferTo(Paths.get(ruta,p.filename()))
     		      .then(Mono.just(p.filename())))
     		      .collectList()
     		      .flatMap(filenames -> {
+    		    	  Imagen img = new Imagen();
+    		    	  img.setIdServicio(id);
     		    	  img.setFilename(filenames.get(0));
+    		    	  img.setEstado("1");
+    		    	  img.setType(type);
+    		    	  img.setSize(size);
     		          return imagenRepository.save(img);
     	
-    		      }).then(Mono.just("dd"))
+    		      }).then(Mono.just("ok"))
     		      .onErrorResume(error -> Mono.error(error));
 		      
     }

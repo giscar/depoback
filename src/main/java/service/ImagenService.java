@@ -10,6 +10,6 @@ public interface ImagenService {
 	
 	public Mono<Imagen> save(Imagen imagen);
 	
-	public Mono<String> cargarFile(Flux<FilePart> filePart);
+	public Mono<String> cargarFile(Flux<FilePart> filePart, String id, String type, String size);
 
 }

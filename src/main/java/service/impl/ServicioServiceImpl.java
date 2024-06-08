@@ -23,9 +23,6 @@ public class ServicioServiceImpl implements ServicioService{
 
 	@Autowired
 	private ServicioRepository servicioRepository;
-	
-	@Autowired
-	private OperadorService operadorService;
 
 	@Override
 	public Mono<Servicio> save(Servicio servicio) {

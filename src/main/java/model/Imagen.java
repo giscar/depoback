@@ -19,6 +19,11 @@ public class Imagen {
 	    private String idServicio;
 	        
 	    private String filename;
-	
+	    
+	    private String estado;
+	    
+	    private String type;
+	    
+	    private String size;
 
 }

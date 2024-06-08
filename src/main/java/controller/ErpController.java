@@ -181,8 +181,9 @@ public class ErpController {
 	}
 
 	@PostMapping("servicio/upload")
-	public Mono<String> cargarImagen(@RequestPart("file") Flux<FilePart> filePart) {
-		return imagenService.cargarFile(filePart);
+	public Mono<String> cargarImagen(@RequestPart("file") Flux<FilePart> filePart, @RequestPart("id") String id,
+			@RequestPart("type") String type, @RequestPart("size") String size) {
+		return imagenService.cargarFile(filePart, id, type, size);
 	}
 
 	@PutMapping(value="servicio")
