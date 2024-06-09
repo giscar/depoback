@@ -121,8 +121,8 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="montacarga/estado")
-	public ResponseEntity<Flux<Montacarga>> montacargaForActivo(@RequestParam(name = "estado") String estado) {
-		return new ResponseEntity<>(montacargaService.findByEstado(estado),HttpStatus.OK);
+	public ResponseEntity<Flux<Montacarga>> montacargaForActivo() {
+		return new ResponseEntity<>(montacargaService.findByEstado(),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="montacarga/all")
@@ -161,8 +161,8 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="operador/estado")
-	public ResponseEntity<Flux<Operador>> operadorForActivo(@RequestParam(name = "estado") String estado) {
-		return new ResponseEntity<>(operadorService.findByEstado(estado),HttpStatus.OK);
+	public ResponseEntity<Flux<Operador>> operadorForActivo() {
+		return new ResponseEntity<>(operadorService.findByEstado(),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio")

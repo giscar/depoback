@@ -12,6 +12,6 @@ public interface OperadorService {
 	
 	Mono<Operador> findById(String id);
 	
-	Flux<Operador> findByEstado(String estado);
+	Flux<Operador> findByEstado();
 
 }

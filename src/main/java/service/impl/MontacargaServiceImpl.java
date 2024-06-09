@@ -31,8 +31,8 @@ public class MontacargaServiceImpl implements MontacargaService{
 	}
 
 	@Override
-	public Flux<Montacarga> findByEstado(String estado) {
-		return montacargaRepository.findByEstado(estado);
+	public Flux<Montacarga> findByEstado() {
+		return montacargaRepository.findByEstado();
 	}
 	
 	

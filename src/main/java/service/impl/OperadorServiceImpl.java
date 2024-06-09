@@ -31,12 +31,8 @@ public class OperadorServiceImpl implements OperadorService{
 	}
 
 	@Override
-	public Flux<Operador> findByEstado(String estado) {
-		return operadorRepository.findByEstado(estado);
-	}
-
-	
-	
-	
+	public Flux<Operador> findByEstado() {
+		return operadorRepository.findByEstado();
+	}	
 
 }

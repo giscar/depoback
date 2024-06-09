@@ -10,7 +10,7 @@ public interface MontacargaService {
 	
 	Mono<Montacarga> findById(String id);
 	
-	Flux<Montacarga> findByEstado(String estado);
+	Flux<Montacarga> findByEstado();
 	
 	Flux<Montacarga> all();
 

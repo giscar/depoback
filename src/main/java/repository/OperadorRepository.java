@@ -12,5 +12,5 @@ public interface OperadorRepository extends ReactiveMongoRepository<Operador, St
 	
 
 	@Query("{'estado': '1'}")
-	Flux<Operador> findByEstado(String estado);
+	Flux<Operador> findByEstado();
 }
