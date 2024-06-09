@@ -33,6 +33,7 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
+			"{ $lookup: {from : 'imagenes', localField: 'stringId', foreignField: 'idServicio', as: 'imagenes' }},",
 			"{ $match: { 'stringId' : ?0, }},"
 			//"{ $replaceRoot: { newRoot: { $mergeObjects: [{$arrayElemAt: ['$innerOperadores', 0]}, '$$ROOT']}} }"
 			

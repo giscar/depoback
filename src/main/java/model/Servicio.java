@@ -40,6 +40,8 @@ public class Servicio implements Serializable {
 	
 	private Object cliente;
 	
+	private Object[] imagenes;
+	
 	private String operadorId;
 	
 	private String montacargaId;

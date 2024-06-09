@@ -27,13 +27,14 @@ public class ImagenServiceImpl implements ImagenService{
     }
     
     public Mono<String> cargarFile(Flux<FilePart> filePart, String id, String type, String size) {
-    	return filePart.flatMap(p -> p.transferTo(Paths.get(ruta,RandomStringUtils.randomAlphanumeric(20)+getFileExtension(p.filename())))
+    	String namefile = RandomStringUtils.randomAlphanumeric(20);
+    	return filePart.flatMap(p -> p.transferTo(Paths.get(ruta,namefile+getFileExtension(p.filename())))
     		      .then(Mono.just(p.filename())))
     		      .collectList()
     		      .flatMap(filenames -> {
     		    	  Imagen img = new Imagen();
     		    	  img.setIdServicio(id);
-    		    	  img.setFilename(id+getFileExtension(filenames.get(0)));
+    		    	  img.setFilename(namefile+getFileExtension(filenames.get(0)));
     		    	  img.setEstado("1");
     		    	  img.setType(type);
     		    	  img.setSize(size);
