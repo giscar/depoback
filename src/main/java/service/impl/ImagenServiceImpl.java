@@ -50,6 +50,16 @@ public class ImagenServiceImpl implements ImagenService{
         }
         return filename.substring(lastIndexOf);
     }
+
+	@Override
+	public Mono<Imagen> findById(String id) {
+		return imagenRepository.findById(id);
+	}
+
+	@Override
+	public void delete(String id) {
+		imagenRepository.deleteById(id);
+	}
     
 
 }

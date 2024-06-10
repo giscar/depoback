@@ -11,5 +11,9 @@ public interface ImagenService {
 	public Mono<Imagen> save(Imagen imagen);
 	
 	public Mono<String> cargarFile(Flux<FilePart> filePart, String id, String type, String size);
+	
+	public Mono<Imagen> findById(String id);
+	
+	public void delete(String id);
 
 }

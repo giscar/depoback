@@ -1,15 +1,15 @@
 package controller;
 
-
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.DeleteQuery;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +55,7 @@ public class ErpController {
 	ServicioService servicioService;
 	
 	@Autowired
-	ImagenServiceImpl imagenService;
+	ImagenService imagenService;
 	
 	@GetMapping(value = "names")
 	public Flux<String> getNames(){
@@ -165,11 +165,6 @@ public class ErpController {
 		return new ResponseEntity<>(operadorService.findByEstado(),HttpStatus.OK);
 	}
 	
-	@GetMapping(value="servicio")
-	public ResponseEntity<Mono<Servicio>> servicioForId(@RequestParam(name = "id") String id) {
-		return new ResponseEntity<>(servicioService.findByIdAggregate(id),HttpStatus.OK);
-	}
-	
 	@GetMapping(value="servicio/all")
 	public ResponseEntity<Flux<Servicio>> servicioFindAll() {
 		return new ResponseEntity<>(servicioService.all(),HttpStatus.OK);
@@ -185,10 +180,28 @@ public class ErpController {
 			@RequestPart("type") String type, @RequestPart("size") String size) {
 		return imagenService.cargarFile(filePart, id, type, size);
 	}
+	
+	@GetMapping(value="servicio/uploadInactive")
+	public Mono<Imagen> inactiveImagen(@RequestParam(name = "id") String id) {
+		return imagenService.findById(id).flatMap(p -> {
+			p.setEstado("0");
+			return imagenService.save(p);
+		});
+	}
+	
+	@GetMapping(value="servicio")
+	public ResponseEntity<Mono<Servicio>> servicioForId(@RequestParam(name = "id") String id) {
+		return new ResponseEntity<>(servicioService.findByIdAggregate(id),HttpStatus.OK);
+	}
 
 	@PutMapping(value="servicio")
 	public ResponseEntity<Mono<Servicio>> servicioUpdate(@RequestBody Servicio servicio) {
 		return new ResponseEntity<>(servicioService.save(servicio),HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value="servicio/imagen/eliminar")
+	public void deleteFile(@RequestParam(name = "id") String id) {
+		imagenService.delete(id); 
 	}
 	
 	@GetMapping(value="servicio/estado")
