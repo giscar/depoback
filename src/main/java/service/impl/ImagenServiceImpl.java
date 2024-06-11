@@ -20,7 +20,7 @@ public class ImagenServiceImpl implements ImagenService{
     private ImagenRepository imagenRepository;
 	
 	private static String ruta = "/Users/carlosleon/requerimientos/2024/depovent/depofront/public/images/";
-	
+	//private static String ruta = "/var/www/html/images/";
 
     public Mono<Imagen> save(Imagen imagen) { 
         return imagenRepository.save(imagen); 
