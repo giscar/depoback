@@ -75,6 +75,9 @@ public class ServicioServiceImpl implements ServicioService{
 		return servicioRepository.findByIdAggregate(id).log();
 	}
 	
-	
+	@Override
+	public Mono<Object> findMaxCodServicio(){
+		return servicioRepository.findMaxCodServicio();
+	}
 
 }

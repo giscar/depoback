@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,7 +21,7 @@ public class Servicio implements Serializable {
 	@Id
 	private String id;
 	
-	private String codServicio;
+	private Long codServicio;
 	
 	private String ruc;
 	
@@ -49,4 +50,6 @@ public class Servicio implements Serializable {
 	private Double totalHoras;
 	
 	private Double montoServicio;
+	
+	private Date fechaRegistro = new Date();
 }

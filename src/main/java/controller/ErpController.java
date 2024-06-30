@@ -219,5 +219,8 @@ public class ErpController {
 		return new ResponseEntity<>(servicioService.findByRucCodServicioAggregate(ruc, codServicio),HttpStatus.OK);
 	}
 	
-	
+	@GetMapping(value="servicio/maxCodServicio")
+	public ResponseEntity<Mono<Object>> findMaxCodServicioAggregate() {
+		return new ResponseEntity<>(servicioService.findMaxCodServicio(),HttpStatus.OK);
+	}
 }

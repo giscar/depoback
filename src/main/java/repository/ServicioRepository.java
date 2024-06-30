@@ -40,4 +40,9 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			
 	})
 	Mono<Servicio> findByIdAggregate(String id);
+	
+	@Aggregation(pipeline = {
+			"{$group: { _id: null, maxField : { $max: '$codServicio' }}}"
+	})
+	Mono<Object> findMaxCodServicio();
 }
