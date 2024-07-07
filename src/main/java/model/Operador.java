@@ -24,7 +24,7 @@ public class Operador {
 	
 	private String apellidoMat;
 
-	private String movil;
+	private String telefono;
 	
 	private String estado;
 
