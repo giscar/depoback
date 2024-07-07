@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -25,5 +27,7 @@ public class Imagen {
 	    private String type;
 	    
 	    private String size;
+	    
+	    private Date fechaRegistro = new Date();
 
 }

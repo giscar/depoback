@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -24,9 +26,9 @@ public class Montacarga {
 	private String tonelaje;
 	
 	private String tipoServicio;
-
-	private String fechaRegistro;
 	
 	private String usuarioRegistro;
+	
+	private Date fechaRegistro = new Date();
 
 }

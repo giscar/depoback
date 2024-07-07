@@ -210,12 +210,12 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="servicio/busqueda")
-	public ResponseEntity<Flux<Servicio>> servicioForRucAndCodServicio(@RequestParam(name = "codServicio") String codServicio, @RequestParam(name = "ruc") String ruc) {
+	public ResponseEntity<Flux<Servicio>> servicioForRucAndCodServicio(@RequestParam(name = "codServicio") Integer codServicio, @RequestParam(name = "ruc") String ruc) {
 		return new ResponseEntity<>(servicioService.findByRucCodServicio(ruc, codServicio),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/busquedaAggregate")
-	public ResponseEntity<Flux<Servicio>> findByRucCodServicioAggregate(@RequestParam(name = "codServicio") String codServicio, @RequestParam(name = "ruc") String ruc) {
+	public ResponseEntity<Flux<Servicio>> findByRucCodServicioAggregate(@RequestParam(name = "codServicio", required = false) Integer codServicio, @RequestParam(name = "ruc") String ruc) {
 		return new ResponseEntity<>(servicioService.findByRucCodServicioAggregate(ruc, codServicio),HttpStatus.OK);
 	}
 	

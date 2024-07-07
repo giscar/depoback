@@ -15,7 +15,7 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 	Flux<Servicio> findByEstado(String estado);
 	
 	@Query("{$or: [{'ruc': ?0}, {'codServicio': ?1}] }")
-	Flux<Servicio> findByRucCodServicio(String ruc, String estado);
+	Flux<Servicio> findByRucCodServicio(String ruc, Integer codServicio);
 	
 	@Aggregation(pipeline = {
 			"{ $addFields: { 'operadorObjId': { '$toObjectId': '$operadorId' }, 'montacargaObjId': { '$toObjectId': '$montacargaId' },}},",
@@ -26,7 +26,7 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			//"{ $replaceRoot: { newRoot: { $mergeObjects: [{$arrayElemAt: ['$innerOperadores', 0]}, '$$ROOT']}} }"
 			
 	})
-	Flux<Servicio> findByRucCodServicioAggregate(String ruc, String codServicio);
+	Flux<Servicio> findByRucCodServicioAggregate(String ruc, Integer codServicio);
 	
 	@Aggregation(pipeline = {
 			"{ $addFields: { 'operadorObjId': { '$toObjectId': '$operadorId' }, 'montacargaObjId': { '$toObjectId': '$montacargaId' }, 'stringId': { '$toString': '$_id' },}},",

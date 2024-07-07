@@ -35,6 +35,8 @@ public class Servicio implements Serializable {
 	
 	private String estado;
 	
+	private String estadoRegistro;
+	
 	private Object operador;
 	
 	private Object montacarga;

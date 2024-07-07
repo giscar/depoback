@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -26,7 +28,7 @@ public class Operador {
 
 	private String direccion;
 
-	
+	private Date fechaRegistro = new Date();
 
 
 }

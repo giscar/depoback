@@ -41,12 +41,12 @@ public class ServicioServiceImpl implements ServicioService{
 	}
 
 	@Override
-	public Flux<Servicio> findByRucCodServicio(String ruc, String codServicio) {
+	public Flux<Servicio> findByRucCodServicio(String ruc, Integer codServicio) {
 		return servicioRepository.findByRucCodServicio(ruc, codServicio);
 	}
 
 	@Override
-	public Flux<Servicio> findByRucCodServicioAggregate(String ruc, String codServicio) {
+	public Flux<Servicio> findByRucCodServicioAggregate(String ruc, Integer codServicio) {
 		return servicioRepository.findByRucCodServicioAggregate(ruc, codServicio);
 		/*return servicioRepository.findByRucCodServicioAggregate(ruc, codServicio).
 				map(p -> {

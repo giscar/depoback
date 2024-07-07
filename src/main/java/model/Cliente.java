@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,5 +23,7 @@ public class Cliente {
 	private String razonSocial;
 	
 	private String direccion;
+	
+	private Date fechaRegistro = new Date();
 
 }
