@@ -18,9 +18,11 @@ public class Operador {
 	
 	private String documento;
 
-	private String email;
-
 	private String nombre;
+	
+	private String apellidoPat;
+	
+	private String apellidoMat;
 
 	private String movil;
 	
