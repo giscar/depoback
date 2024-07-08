@@ -17,17 +17,27 @@ public class Montacarga {
 	
 	private String id;
 
-	private String nombre;
+	private String codigo;
 	
-	private String estado;
+	private String marca;
 
 	private String serie;
 
 	private String tonelaje;
 	
-	private String tipoServicio;
+	private String modelo;
 	
-	private String usuarioRegistro;
+	private String color;
+	
+	private String anhoFabricacion;
+	
+	private String ubicacion;
+	
+	private String estado;
+	
+	private String revisionOperatividad;
+	
+	private String estadoRegistro;
 	
 	private Date fechaRegistro = new Date();
 
