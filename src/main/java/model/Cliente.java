@@ -24,6 +24,8 @@ public class Cliente {
 	
 	private String direccion;
 	
+	private String email;
+	
 	private Date fechaRegistro = new Date();
 
 }
