@@ -219,6 +219,11 @@ public class ErpController {
 		return new ResponseEntity<>(servicioService.findByRucCodServicioAggregate(ruc, codServicio),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="servicio/busquedaIdOperadorAggregate")
+	public ResponseEntity<Flux<Servicio>> findByOperadorIdAggregate(@RequestParam(name = "idOperador", required = false) String idOperador) {
+		return new ResponseEntity<>(servicioService.findByOperadorIdAggregate(idOperador),HttpStatus.OK);
+	}
+	
 	@GetMapping(value="servicio/maxCodServicio")
 	public ResponseEntity<Mono<Object>> findMaxCodServicioAggregate() {
 		return new ResponseEntity<>(servicioService.findMaxCodServicio(),HttpStatus.OK);

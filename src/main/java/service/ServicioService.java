@@ -18,6 +18,8 @@ public interface ServicioService {
 	
 	Flux<Servicio> findByRucCodServicioAggregate(String ruc, Integer codServicio);
 	
+	Flux<Servicio> findByOperadorIdAggregate(String idOperador);
+	
 	Mono<Servicio> findByIdAggregate(String id);
 	
 	Mono<Object> findMaxCodServicio();

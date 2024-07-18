@@ -80,4 +80,9 @@ public class ServicioServiceImpl implements ServicioService{
 		return servicioRepository.findMaxCodServicio();
 	}
 
+	@Override
+	public Flux<Servicio> findByOperadorIdAggregate(String idOperador) {
+		return servicioRepository.findByOperadorIdAggregate(idOperador);
+	}
+
 }
