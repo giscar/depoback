@@ -85,4 +85,9 @@ public class ServicioServiceImpl implements ServicioService{
 		return servicioRepository.findByOperadorIdAggregate(idOperador);
 	}
 
+	@Override
+	public Flux<Servicio> findByServiciosPendientes() {
+		return servicioRepository.findByServiciosPendientes();
+	}
+
 }

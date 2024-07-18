@@ -20,6 +20,8 @@ public interface ServicioService {
 	
 	Flux<Servicio> findByOperadorIdAggregate(String idOperador);
 	
+	Flux<Servicio> findByServiciosPendientes();
+	
 	Mono<Servicio> findByIdAggregate(String id);
 	
 	Mono<Object> findMaxCodServicio();

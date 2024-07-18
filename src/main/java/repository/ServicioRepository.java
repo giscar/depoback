@@ -39,6 +39,16 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 	Flux<Servicio> findByOperadorIdAggregate(String idOperador);
 	
 	@Aggregation(pipeline = {
+			"{ $addFields: { 'operadorObjId': { '$toObjectId': '$operadorId' }, 'montacargaObjId': { '$toObjectId': '$montacargaId' },}},",
+			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
+			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
+			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
+			"{ $match: { 'estadoRegistro' : 'Proceso', 'estado' : '1'}},"
+			
+	})
+	Flux<Servicio> findByServiciosPendientes();
+	
+	@Aggregation(pipeline = {
 			"{ $addFields: { 'operadorObjId': { '$toObjectId': '$operadorId' }, 'montacargaObjId': { '$toObjectId': '$montacargaId' }, 'stringId': { '$toString': '$_id' },}},",
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
