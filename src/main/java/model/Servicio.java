@@ -53,5 +53,9 @@ public class Servicio implements Serializable {
 	
 	private Double montoServicio;
 	
+	private String solicitante;
+	
+	private String tipoServicio;
+	
 	private Date fechaRegistro = new Date();
 }
