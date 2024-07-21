@@ -33,6 +33,17 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
+			"{ $match:{ $or :[{'ruc' : ?0},{'codServicio' : ?1},{'operadorId' : ?2},{'montacargaId' : ?3},{'estadoRegistro' : ?4} ]}},"
+			//"{ $replaceRoot: { newRoot: { $mergeObjects: [{$arrayElemAt: ['$innerOperadores', 0]}, '$$ROOT']}} }"
+			
+	})
+	Flux<Servicio> findByRucEstadisticasAggregate(String ruc, Integer codServicio, String idOperador, String idMontacarga, String estadoRegistro);
+	
+	@Aggregation(pipeline = {
+			"{ $addFields: { 'operadorObjId': { '$toObjectId': '$operadorId' }, 'montacargaObjId': { '$toObjectId': '$montacargaId' },}},",
+			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
+			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
+			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
 			"{ $match: { 'operador.documento' : ?0,  'estadoRegistro' : 'Proceso', 'estado' : '1'}},"
 			
 	})

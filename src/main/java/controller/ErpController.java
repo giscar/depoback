@@ -219,6 +219,15 @@ public class ErpController {
 		return new ResponseEntity<>(servicioService.findByRucCodServicioAggregate(ruc, codServicio),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="servicio/busquedaEstadistica")
+	public ResponseEntity<Flux<Servicio>> findByEstdisticaAggregate(@RequestParam(name = "codServicio", required = false) Integer codServicio, 
+			@RequestParam(name = "ruc") String ruc,
+			@RequestParam(name = "idOperador") String idOperador,
+			@RequestParam(name = "idMontacarga") String idMontacarga,
+			@RequestParam(name = "estadoRegistro") String estadoRegistro) {
+		return new ResponseEntity<>(servicioService.findByRucEstadisticasAggregate(ruc, codServicio, idOperador, idMontacarga, estadoRegistro),HttpStatus.OK);
+	}
+	
 	@GetMapping(value="servicio/busquedaIdOperadorAggregate")
 	public ResponseEntity<Flux<Servicio>> findByOperadorIdAggregate(@RequestParam(name = "idOperador", required = false) String idOperador) {
 		return new ResponseEntity<>(servicioService.findByOperadorIdAggregate(idOperador),HttpStatus.OK);
