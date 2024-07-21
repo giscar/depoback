@@ -92,8 +92,8 @@ public class ServicioServiceImpl implements ServicioService{
 
 	@Override
 	public Flux<Servicio> findByRucEstadisticasAggregate(String ruc, Integer codServicio, String idOperador,
-			String idMontacarga, String estadoRegistro) {
-		return servicioRepository.findByRucEstadisticasAggregate(ruc, codServicio, idOperador, idMontacarga, estadoRegistro);
+			String idMontacarga, String estadoRegistro, String tipoServicio) {
+		return servicioRepository.findByRucEstadisticasAggregate(ruc, codServicio, idOperador, idMontacarga, estadoRegistro, tipoServicio);
 	}
 
 }

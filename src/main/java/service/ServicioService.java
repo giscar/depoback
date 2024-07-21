@@ -18,7 +18,7 @@ public interface ServicioService {
 	
 	Flux<Servicio> findByRucCodServicioAggregate(String ruc, Integer codServicio);
 	
-	Flux<Servicio> findByRucEstadisticasAggregate(String ruc, Integer codServicio, String idOperador, String idMontacarga, String estadoRegistro);
+	Flux<Servicio> findByRucEstadisticasAggregate(String ruc, Integer codServicio, String idOperador, String idMontacarga, String estadoRegistro, String tipoServicio);
 	
 	Flux<Servicio> findByOperadorIdAggregate(String idOperador);
 	
