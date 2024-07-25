@@ -58,4 +58,6 @@ public class Servicio implements Serializable {
 	private String tipoServicio;
 	
 	private Date fechaRegistro = new Date();
+	
+	private String url;
 }
