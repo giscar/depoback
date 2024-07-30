@@ -66,4 +66,6 @@ public class Servicio implements Serializable {
 	private String moneda;
 	
 	private String observaciones;
+	
+	private String tipoPago;
 }
