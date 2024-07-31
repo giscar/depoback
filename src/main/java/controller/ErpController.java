@@ -145,6 +145,11 @@ public class ErpController {
 		return new ResponseEntity<>(operadorService.findById(id),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="operador/documento")
+	public ResponseEntity<Mono<Operador>> operadorByDocumento(@RequestParam(name = "documento") String documento) {
+		return new ResponseEntity<>(operadorService.findByEstadoByDocumento(documento),HttpStatus.OK);
+	}
+	
 	@GetMapping(value="operador/all")
 	public ResponseEntity<Flux<Operador>> operadorFindAll() {
 		return new ResponseEntity<>(operadorService.all(),HttpStatus.OK);

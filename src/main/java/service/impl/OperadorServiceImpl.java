@@ -33,6 +33,11 @@ public class OperadorServiceImpl implements OperadorService{
 	@Override
 	public Flux<Operador> findByEstado() {
 		return operadorRepository.findByEstado();
+	}
+
+	@Override
+	public Mono<Operador> findByEstadoByDocumento(String documento) {
+		return operadorRepository.findByEstadoByDocumento(documento);
 	}	
 
 }
