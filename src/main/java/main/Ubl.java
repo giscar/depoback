@@ -20,17 +20,19 @@ import org.apache.xml.security.utils.Constants;
 import org.apache.xml.security.utils.ElementProxy;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Element;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ErpApplicationTests {
+
+public class Ubl {
 	
-	private static Log log = LogFactory.getLog(ErpApplicationTests.class);
+	private static Log log = LogFactory.getLog(Ubl.class);
 
-	@Test
+	public static void main(String[] args) {
+		System.out.println("hola mundo");
+		generarXMLZipiadoBoleta();
+	}
+	
 	public static String generarXMLZipiadoBoleta() {
-        log.info("generarXMLZipiadoBoleta - Inicializamos el ambiente");
+		log.info("generarXMLZipiadoBoleta - Inicializamos el ambiente");
         org.apache.xml.security.Init.init();
         String resultado = "";
         String unidadEnvio; 
