@@ -76,8 +76,8 @@ public class Ubl {
             org.w3c.dom.Document doc = db.newDocument();
             ////////////////////////////////////////////////// 
 
-            log.info("generarXMLZipiadoBoleta - cabecera XML ");
-            Element envelope = doc.createElementNS("", "Invoice");
+            log.info("generar factura paso 1 - cabecera XML ");
+            Element envelope = doc.createElementNS("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2", "Invoice");
             envelope.setAttributeNS(Constants.NamespaceSpecNS, "xmlns", "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2");
             envelope.setAttributeNS(Constants.NamespaceSpecNS, "xmlns:cac", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             envelope.setAttributeNS(Constants.NamespaceSpecNS, "xmlns:cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
@@ -93,58 +93,13 @@ public class Ubl {
 
             Element UBLExtensions = doc.createElementNS("", "ext:UBLExtensions");
             envelope.appendChild(UBLExtensions);
-            Element UBLExtension2 = doc.createElementNS("", "ext:UBLExtension");
-            UBLExtension2.appendChild(doc.createTextNode("\n"));
-            Element ExtensionContent2 = doc.createElementNS("", "ext:ExtensionContent");
-            ExtensionContent2.appendChild(doc.createTextNode("\n"));
+
             //2do grupo
             Element UBLExtension = doc.createElementNS("", "ext:UBLExtension");
             envelope.appendChild(UBLExtension);
             Element ExtensionContent = doc.createElementNS("", "ext:ExtensionContent");
             envelope.appendChild(ExtensionContent);
 
-            Element AdditionalInformation = doc.createElementNS("", "sac:AdditionalInformation");
-            envelope.appendChild(AdditionalInformation);
-            AdditionalInformation.appendChild(doc.createTextNode("\n"));
-            //agrupa1
-            //if (!items.getDocu_gravada().trim().equals("0.00")) {
-            //grabado
-            Element AdditionalMonetaryTotal1 = doc.createElementNS("", "sac:AdditionalMonetaryTotal");
-            envelope.appendChild(AdditionalMonetaryTotal1);
-            AdditionalMonetaryTotal1.appendChild(doc.createTextNode("\n"));
-
-            Element ID1 = doc.createElementNS("", "cbc:ID");
-            envelope.appendChild(ID1);
-            ID1.appendChild(doc.createTextNode("1001"));
-
-            Element PayableAmount1 = doc.createElementNS("", "cbc:PayableAmount");
-            PayableAmount1.setAttributeNS(null, "currencyID", "PEN");
-            PayableAmount1.setIdAttributeNS(null, "currencyID", true);
-            envelope.appendChild(PayableAmount1);
-            PayableAmount1.appendChild(doc.createTextNode("30782.55"));
-
-            AdditionalInformation.appendChild(AdditionalMonetaryTotal1);
-            AdditionalMonetaryTotal1.appendChild(ID1);
-            AdditionalMonetaryTotal1.appendChild(PayableAmount1);
-
-
-            Element AdditionalProperty = doc.createElementNS("", "sac:AdditionalProperty");
-            envelope.appendChild(AdditionalProperty);
-            AdditionalProperty.appendChild(doc.createTextNode("\n"));
-
-            Element ID = doc.createElementNS("", "cbc:ID");
-            envelope.appendChild(ID);
-            ID.appendChild(doc.createTextNode("1000"));
-
-            Element Value = doc.createElementNS("", "cbc:Value");
-            envelope.appendChild(Value);
-            cdata = doc.createCDATASection("TREINTISEIS MIL TRESCIENTOS VEINTITRES Y 41/100 SOLES");
-            Value.appendChild(cdata);
-
-            AdditionalInformation.appendChild(AdditionalProperty);
-            AdditionalProperty.appendChild(ID);
-            AdditionalProperty.appendChild(Value);
-            
             //El baseURI es la URI que se utiliza para anteponer a URIs relativos
             String BaseURI = signatureFile.toURI().toURL().toString();
             //Crea un XML Signature objeto desde el documento, BaseURI and signature algorithm (in this case RSA)
@@ -154,14 +109,12 @@ public class Ubl {
             ExtensionContent.appendChild(sig.getElement());
             UBLExtension.appendChild(ExtensionContent);
             UBLExtensions.appendChild(UBLExtension);
-            UBLExtensions.appendChild(UBLExtension2);
-            UBLExtension2.appendChild(ExtensionContent2);
-            ExtensionContent2.appendChild(AdditionalInformation);
 
-//bloque1
-            Element UBLVersionID = doc.createElementNS("", "cbc:UBLVersionID");
+            log.info("inicio: generar factura paso 2. Versión del UBL. ");
+            Element UBLVersionID = doc.createElement("cbc:UBLVersionID");
             envelope.appendChild(UBLVersionID);
-            UBLVersionID.appendChild(doc.createTextNode("2.0"));
+            UBLVersionID.appendChild(doc.createTextNode("2.1"));
+            log.info("fin: generar factura paso 2. Versión del UBL. ");
 
             Element CustomizationID = doc.createElementNS("", "cbc:CustomizationID");
             envelope.appendChild(CustomizationID);
@@ -183,7 +136,7 @@ public class Ubl {
             envelope.appendChild(DocumentCurrencyCode);
             DocumentCurrencyCode.appendChild(doc.createTextNode("PEN"));
 
-//bloque2 cac:Signature--------------------------------------------------------
+            log.info("inicio: generar factura paso 1. Firma Digital. ");
             Element Signature = doc.createElementNS("", "cac:Signature");
             envelope.appendChild(Signature);
             Signature.appendChild(doc.createTextNode("\n"));
@@ -207,6 +160,7 @@ public class Ubl {
             Element PartyName = doc.createElementNS("", "cac:PartyName");
             SignatoryParty.appendChild(PartyName);
             PartyName.appendChild(doc.createTextNode("\n"));
+            log.info("fin: generar factura paso 1. Firma Digital. ");
 
             Element Name = doc.createElementNS("", "cbc:Name");
             PartyName.appendChild(Name);
@@ -522,19 +476,7 @@ public class Ubl {
             }
             
           
-            log.info("generarXMLZipiadoBoleta - Prepara firma digital ");
-            sig.setId("20601491193");
-            sig.addKeyInfo(cert);
-            {
-                Transforms transforms = new Transforms(doc);
-                transforms.addTransform(Transforms.TRANSFORM_ENVELOPED_SIGNATURE);
-                sig.addDocument("", transforms, Constants.ALGO_ID_DIGEST_SHA1);
-            }
-            {
-                //Firmar el documento
-                log.info("generarXMLZipiadoBoleta - firma el XML ");
-                sig.sign(privateKey);
-            }
+        
 
             //--------------------fin de construccion del xml---------------------
             ///*combinacion de firma y construccion xml////
