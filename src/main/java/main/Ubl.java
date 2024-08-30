@@ -44,7 +44,7 @@ public class Ubl {
 
             log.info("generarXMLZipiadoBoleta - Iniciamos cabecera ");
 
-            pathXMLFile = "/Users/carlosleon/libre/20601491193-03-B001-88.xml";
+            pathXMLFile = "/Users/carlosleon/libre/20601491193-01-BF006-00004733.xml";
             ElementProxy.setDefaultPrefix(Constants.SignatureSpecNS, "ds");
             //Parametros del keystore
             String keystoreType = "JKS";
@@ -110,31 +110,58 @@ public class Ubl {
             UBLExtension.appendChild(ExtensionContent);
             UBLExtensions.appendChild(UBLExtension);
 
-            log.info("inicio: generar factura paso 2. Versión del UBL. ");
+            log.info("inicio: generar factura paso 2. Versión del UBL.");
             Element UBLVersionID = doc.createElement("cbc:UBLVersionID");
             envelope.appendChild(UBLVersionID);
             UBLVersionID.appendChild(doc.createTextNode("2.1"));
-            log.info("fin: generar factura paso 2. Versión del UBL. ");
 
-            Element CustomizationID = doc.createElementNS("", "cbc:CustomizationID");
+            log.info("inicio: generar factura paso 3. Versión de la estructura del documento.");
+            Element CustomizationID = doc.createElement("cbc:CustomizationID");
             envelope.appendChild(CustomizationID);
-            CustomizationID.appendChild(doc.createTextNode("1.0"));
+            CustomizationID.appendChild(doc.createTextNode("2.0"));
 
-            Element ID5 = doc.createElementNS("", "cbc:ID");
+            log.info("inicio: generar factura paso 5. Numeración, conformada por serie y número correlativo.");
+            Element ID5 = doc.createElement("cbc:ID");
             envelope.appendChild(ID5);
-            ID5.appendChild(doc.createTextNode("B001-1"));
+            ID5.appendChild(doc.createTextNode("BF006-00004733"));
 
-            Element IssueDate = doc.createElementNS("", "cbc:IssueDate");
+            log.info("inicio: generar factura paso 6. Fecha de emisión."); 
+            Element IssueDate = doc.createElement("cbc:IssueDate");
             envelope.appendChild(IssueDate);
-            IssueDate.appendChild(doc.createTextNode("2017-10-15"));
-
-            Element InvoiceTypeCode = doc.createElementNS("", "cbc:InvoiceTypeCode");
+            IssueDate.appendChild(doc.createTextNode("2024-08-15"));
+            
+            log.info("inicio: generar factura paso 7. Hora de emisión."); 
+            Element IssueTime = doc.createElement("cbc:IssueTime");
+            envelope.appendChild(IssueTime);
+            IssueTime.appendChild(doc.createTextNode("14:39:17"));
+            
+            log.info("inicio: generar factura paso 9 Código de Tipo de documento."); 
+            Element InvoiceTypeCode = doc.createElement("cbc:InvoiceTypeCode");
+            InvoiceTypeCode.setAttribute("listAgencyName", "PE:SUNAT");
+            InvoiceTypeCode.setAttribute("listName", "SUNAT:Identificador de Tipo de Documento");
+            InvoiceTypeCode.setAttribute("listURI", "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01");
             envelope.appendChild(InvoiceTypeCode);
-            InvoiceTypeCode.appendChild(doc.createTextNode("03"));
-
-            Element DocumentCurrencyCode = doc.createElementNS("", "cbc:DocumentCurrencyCode");
-            envelope.appendChild(DocumentCurrencyCode);
-            DocumentCurrencyCode.appendChild(doc.createTextNode("PEN"));
+            InvoiceTypeCode.appendChild(doc.createTextNode("01"));
+            
+            log.info("inicio: generar factura paso legend1. Monto expresado en letras."); 
+            Element LegendMonto = doc.createElement("cbc:Note");
+            LegendMonto.setAttribute("languageLocaleID", "1000");
+            envelope.appendChild(LegendMonto);
+            LegendMonto.appendChild(doc.createTextNode("MIL OCHOCIENTOS CINCUENTA Y OCHO CON 59/100 Soles"));
+            
+            log.info("inicio: generar factura paso legend2. Código interno generado por el software de Facturación."); 
+            Element LegendIdSW = doc.createElement("cbc:Note");
+            LegendIdSW.setAttribute("languageLocaleID", "3000");
+            envelope.appendChild(LegendIdSW);
+            LegendIdSW.appendChild(doc.createTextNode("05010020170428000005"));
+            
+            log.info("inicio: generar factura paso 11 Tipo de moneda."); 
+            Element CurrencyCode = doc.createElement("cbc:DocumentCurrencyCode");
+            CurrencyCode.setAttribute("listID", "ISO 4217 Alpha");
+            CurrencyCode.setAttribute("listName", "Currency");
+            CurrencyCode.setAttribute("listAgencyName", "United Nations Economic Commission for Europe");
+            envelope.appendChild(CurrencyCode);
+            CurrencyCode.appendChild(doc.createTextNode("PEN"));
 
             log.info("inicio: generar factura paso 1. Firma Digital. ");
             Element Signature = doc.createElementNS("", "cac:Signature");
