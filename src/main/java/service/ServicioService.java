@@ -24,6 +24,8 @@ public interface ServicioService {
 	
 	Flux<Servicio> findByServiciosPendientes();
 	
+	Flux<Servicio> findByServiciosConcluidos();
+	
 	Mono<Servicio> findByIdAggregate(String id);
 	
 	Mono<Object> findMaxCodServicio();

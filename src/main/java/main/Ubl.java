@@ -147,7 +147,7 @@ public class Ubl {
             Element LegendMonto = doc.createElement("cbc:Note");
             LegendMonto.setAttribute("languageLocaleID", "1000");
             envelope.appendChild(LegendMonto);
-            LegendMonto.appendChild(doc.createTextNode("MIL CIENTO OCHENTA CON 00/100 Soles"));
+            LegendMonto.appendChild(doc.createTextNode("QUINIENTETOS NOVENTA Soles"));
             
             log.info("inicio: generar factura paso legend2. Código interno generado por el software de Facturación."); 
             Element LegendIdSW = doc.createElement("cbc:Note");
@@ -233,12 +233,12 @@ public class Ubl {
             CompanyIDCustomer.setAttribute("schemeAgencyName", "PE:SUNAT");
             CompanyIDCustomer.setAttribute("schemeURI", "urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06");
             PartyTaxSchemeCustomer.appendChild(CompanyIDCustomer);
-            CompanyIDCustomer.appendChild(doc.createTextNode("20100113612"));
+            CompanyIDCustomer.appendChild(doc.createTextNode("20503801575"));
             
             log.info("inicio: generar factura paso 19 Apellidos y nombres o denominación o razón social del adquirente o usuario");
             Element RegistrationName = doc.createElement("cbc:RegistrationName");
             PartyTaxSchemeCustomer.appendChild(RegistrationName);
-            cdata = doc.createCDATASection("INVERSIONES HERMANOS DAVILA E.I.R.L.");
+            cdata = doc.createCDATASection("RECTIFICACIONES Y FABRICACIONES MECANICAS BUDGE SOCIEDAD ANONIMA CERRADA - R.BUDGE S.A.C.");
             RegistrationName.appendChild(cdata);
             
             log.info("inicio: generar factura paso 22 Monto Total de Impuestos.");
@@ -249,7 +249,7 @@ public class Ubl {
             Element TaxAmount = doc.createElement("cbc:TaxAmount");
             TaxAmount.setAttribute("currencyID", "PEN");
             TaxTotal.appendChild(TaxAmount);
-            TaxAmount.appendChild(doc.createTextNode("180.00"));
+            TaxAmount.appendChild(doc.createTextNode("90.00"));
    
             log.info("inicio: generar factura paso 23 Total valor de venta - operaciones gravadas.");
             Element TaxSubtotal = doc.createElement("cac:TaxSubtotal");
@@ -259,12 +259,12 @@ public class Ubl {
             Element TaxableAmount = doc.createElement("cbc:TaxableAmount");
             TaxableAmount.setAttribute("currencyID", "PEN");
             TaxSubtotal.appendChild(TaxableAmount);
-            TaxableAmount.appendChild(doc.createTextNode("1000.00"));
+            TaxableAmount.appendChild(doc.createTextNode("500.00"));
             
             Element TaxAmount1 = doc.createElement("cbc:TaxAmount");
             TaxAmount1.setAttribute("currencyID", "PEN");
             TaxSubtotal.appendChild(TaxAmount1);
-            TaxAmount1.appendChild(doc.createTextNode("180.00"));
+            TaxAmount1.appendChild(doc.createTextNode("90.00"));
             
             Element TaxCategory = doc.createElement("cbc:TaxCategory");
             TaxSubtotal.appendChild(TaxCategory);
@@ -285,7 +285,7 @@ public class Ubl {
             IDTaxScheme.setAttribute("schemeID", "UN/ECE 5153");
             IDTaxScheme.setAttribute("schemeAgencyID", "6");
             TaxSchemeTaxCategory.appendChild(IDTaxScheme);
-            IDTaxScheme.appendChild(doc.createTextNode("1000"));
+            IDTaxScheme.appendChild(doc.createTextNode("500"));
             
             Element NameTaxScheme= doc.createElement("cbc:Name");
             TaxSchemeTaxCategory.appendChild(NameTaxScheme);
@@ -303,19 +303,19 @@ public class Ubl {
             Element LineExtensionAmount= doc.createElement("cbc:LineExtensionAmount");
             LineExtensionAmount.setAttribute("currencyID", "PEN");
             LegalMonetaryTotal.appendChild(LineExtensionAmount);
-            LineExtensionAmount.appendChild(doc.createTextNode("1000"));
+            LineExtensionAmount.appendChild(doc.createTextNode("500"));
            
             log.info("inicio: generar factura paso 31 Total Precio de Venta.");
             Element TaxInclusiveAmount= doc.createElement("cbc:TaxInclusiveAmount");
             TaxInclusiveAmount.setAttribute("currencyID", "PEN");
             LegalMonetaryTotal.appendChild(TaxInclusiveAmount);
-            TaxInclusiveAmount.appendChild(doc.createTextNode("1180"));
+            TaxInclusiveAmount.appendChild(doc.createTextNode("590"));
             
             log.info("inicio: generar factura paso 34 Importe total de la venta, de la cesión en uso o del servicio prestado."); 
             Element PayableAmount= doc.createElement("cbc:PayableAmount");
             PayableAmount.setAttribute("currencyID", "PEN");
             LegalMonetaryTotal.appendChild(PayableAmount);
-            PayableAmount.appendChild(doc.createTextNode("1180"));
+            PayableAmount.appendChild(doc.createTextNode("590"));
             
             log.info("inicio: generar factura paso 35 Número de orden del Ítem."); 
             Element InvoiceLine = doc.createElement("cac:InvoiceLine");
@@ -339,7 +339,7 @@ public class Ubl {
             Element LineExtensionAmount1= doc.createElement("cbc:LineExtensionAmount");
             LineExtensionAmount1.setAttribute("currencyID", "PEN");
             InvoiceLine.appendChild(LineExtensionAmount1);
-            LineExtensionAmount1.appendChild(doc.createTextNode("1000.00"));
+            LineExtensionAmount1.appendChild(doc.createTextNode("500.00"));
             
             log.info("inicio: generar factura paso 38 Precio de venta unitario por ítem y código."); 
             Element PricingReference = doc.createElement("cac:PricingReference");
@@ -353,7 +353,7 @@ public class Ubl {
             Element PriceAmount= doc.createElement("cbc:PriceAmount");
             PriceAmount.setAttribute("currencyID", "PEN");
             AlternativeConditionPrice.appendChild(PriceAmount);
-            PriceAmount.appendChild(doc.createTextNode("1180.00"));
+            PriceAmount.appendChild(doc.createTextNode("590.00"));
          
             Element PriceTypeCode= doc.createElement("cbc:PriceTypeCode");
             PriceTypeCode.setAttribute("listName", "SUNAT:Indicador de Tipo de Precio");
@@ -371,7 +371,7 @@ public class Ubl {
             Element TaxAmount2 = doc.createElement("cbc:TaxAmount");
             TaxAmount2.setAttribute("currencyID", "PEN");
             TaxTotal1.appendChild(TaxAmount2);
-            TaxAmount2.appendChild(doc.createTextNode("180.00"));
+            TaxAmount2.appendChild(doc.createTextNode("90.00"));
             
             Element TaxSubtotal1 = doc.createElement("cac:TaxSubtotal");
             TaxTotal1.appendChild(TaxSubtotal1);
@@ -380,12 +380,12 @@ public class Ubl {
             Element TaxableAmount1 = doc.createElement("cbc:TaxableAmount");
             TaxableAmount1.setAttribute("currencyID", "PEN");
             TaxSubtotal1.appendChild(TaxableAmount1);
-            TaxableAmount1.appendChild(doc.createTextNode("1000.00"));
+            TaxableAmount1.appendChild(doc.createTextNode("500.00"));
 
             Element TaxAmount4 = doc.createElement("cbc:TaxAmount");
             TaxAmount4.setAttribute("currencyID", "PEN");
             TaxSubtotal1.appendChild(TaxAmount4);
-            TaxAmount4.appendChild(doc.createTextNode("180.00"));
+            TaxAmount4.appendChild(doc.createTextNode("90.00"));
 
             Element TaxCategory1 = doc.createElement("cac:TaxCategory");
             TaxSubtotal1.appendChild(TaxCategory1);
@@ -432,7 +432,7 @@ public class Ubl {
 
             Element Description = doc.createElement("cbc:Description");
             Item.appendChild(Description);
-            cdata = doc.createCDATASection("CAPTOPRIL 25mg X 30");
+            cdata = doc.createCDATASection("SERVICIO DE MONTACARGA DE 2.5 TONELADAS");
             Description.appendChild(cdata);
             
             log.info("inicio: generar factura paso 48 Valor unitario por ítem. "); 
@@ -442,7 +442,7 @@ public class Ubl {
             
             Element PriceAmount1 = doc.createElement("cbc:PriceAmount");
             Price.appendChild(PriceAmount1);
-            PriceAmount1.appendChild(doc.createTextNode("1000.00"));
+            PriceAmount1.appendChild(doc.createTextNode("500.00"));
             
 
             log.info("generarXMLZipiadoBoleta - Prepara firma digital ");

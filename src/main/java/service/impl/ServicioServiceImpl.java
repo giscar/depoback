@@ -89,6 +89,11 @@ public class ServicioServiceImpl implements ServicioService{
 	public Flux<Servicio> findByServiciosPendientes() {
 		return servicioRepository.findByServiciosPendientes();
 	}
+	
+	@Override
+	public Flux<Servicio> findByServiciosConcluidos() {
+		return servicioRepository.findByServiciosConcluidos();
+	}
 
 	@Override
 	public Flux<Servicio> findByRucEstadisticasAggregate(String ruc, Integer codServicio, String idOperador,
