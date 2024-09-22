@@ -1,5 +1,7 @@
 package repository;
 
+import java.util.ArrayList;
+
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
@@ -81,6 +83,16 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			
 	})
 	Mono<Servicio> findByIdAggregate(String id);
+	
+	@Aggregation(pipeline = {
+			"{ $addFields: { 'operadorObjId': { '$toObjectId': '$operadorId' }, 'montacargaObjId': { '$toObjectId': '$montacargaId' },}},",
+			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
+			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
+			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
+			"{ $match: { 'estadoRegistro' : 'Concluido', 'estado' : '1', 'codServicio' :  ?0 }},"
+			
+	})
+	Flux<Servicio> findByServiciosConcluidosInServicios(Long idServicio);
 	
 	@Aggregation(pipeline = {
 			"{$group: { _id: null, maxField : { $max: '$codServicio' }}}"

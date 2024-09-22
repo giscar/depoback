@@ -1,5 +1,7 @@
 package service.impl;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +101,13 @@ public class ServicioServiceImpl implements ServicioService{
 	public Flux<Servicio> findByRucEstadisticasAggregate(String ruc, Integer codServicio, String idOperador,
 			String idMontacarga, String estadoRegistro, String tipoServicio) {
 		return servicioRepository.findByRucEstadisticasAggregate(ruc, codServicio, idOperador, idMontacarga, estadoRegistro, tipoServicio);
+	}
+
+	@Override
+	public Flux<Servicio> findByServiciosConcluidosInServicios(String[] idServicios) {
+		return Flux.just(idServicios).flatMap(p -> {
+			return Flux.concat(servicioRepository.findByServiciosConcluidosInServicios(Long.parseLong(p)));
+		}); 
 	}
 
 }

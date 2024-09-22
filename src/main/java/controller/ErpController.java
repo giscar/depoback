@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.DeleteQuery;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
@@ -33,7 +32,6 @@ import service.ImagenService;
 import service.MontacargaService;
 import service.OperadorService;
 import service.ServicioService;
-import service.impl.ImagenServiceImpl;
 
 @CrossOrigin("*")
 @RestController
@@ -243,6 +241,12 @@ public class ErpController {
 	@GetMapping(value="servicio/busquedaServiciosPendientes")
 	public ResponseEntity<Flux<Servicio>> findByOperadorIdAggregate() {
 		return new ResponseEntity<>(servicioService.findByServiciosPendientes(),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="servicio/busquedaServiciosParaFacturar")
+	public ResponseEntity<Flux<Servicio>> findByServiciosFactura(@RequestParam(name = "idServicios", required = false) String idServicios) {
+		String[] arrayIdServicios = idServicios.split(",");
+		return new ResponseEntity<>(servicioService.findByServiciosConcluidosInServicios(arrayIdServicios),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/busquedaServiciosConcluidos")

@@ -1,5 +1,7 @@
 package service;
 
+import java.util.ArrayList;
+
 import model.Servicio;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,6 +27,8 @@ public interface ServicioService {
 	Flux<Servicio> findByServiciosPendientes();
 	
 	Flux<Servicio> findByServiciosConcluidos();
+	
+	Flux<Servicio> findByServiciosConcluidosInServicios(String[] idServicios);
 	
 	Mono<Servicio> findByIdAggregate(String id);
 	
