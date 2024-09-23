@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,11 +19,31 @@ public class Factura{
 	@Id
 	private String id;
 	
+	private String codigoFactura;
+	
 	private String ruc;
+	
+	private String razonSocial;
+	
+	private String direccion;
+	
+	private String rucClinte;
+	
+	private String razonSocialCliente;
+	
+	private String direccionCliente;
+	
+	private String fechaEmision;
+	
+	private String tipoDocumento;
+	
+	private String tipoPago;
 	
 	private Double monto;
 	
 	private int moneda;
+	
+	private List<Servicio> serviciosFacturados;
 	
 
 }
