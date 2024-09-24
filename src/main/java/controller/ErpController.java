@@ -73,10 +73,10 @@ public class ErpController {
 		return new ResponseEntity<>(facturaService.facturaForId(id),HttpStatus.OK);
 	}
 	
-	@PostMapping(value="factura")
+	/*@PostMapping(value="factura")
 	public ResponseEntity<Mono<Factura>> createfactura(@RequestBody Factura factura) {
 		return new ResponseEntity<>(facturaService.setFactura(factura),HttpStatus.OK);
-	}
+	}*/
 	
 	@PutMapping(value="factura")
 	public ResponseEntity<Mono<Factura>> editfactura(@RequestBody Factura factura) {
@@ -257,5 +257,15 @@ public class ErpController {
 	@GetMapping(value="servicio/maxCodServicio")
 	public ResponseEntity<Mono<Object>> findMaxCodServicioAggregate() {
 		return new ResponseEntity<>(servicioService.findMaxCodServicio(),HttpStatus.OK);
+	}
+	
+	@PostMapping("factura")
+	public ResponseEntity<Mono<Factura>> generarFactura(@RequestBody Factura factura) {
+		return new ResponseEntity<>(facturaService.save(factura),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="factura/maxCodFactura")
+	public ResponseEntity<Mono<Object>> findMaxCodFactura() {
+		return new ResponseEntity<>(facturaService.findCodigoFactura(),HttpStatus.OK);
 	}
 }

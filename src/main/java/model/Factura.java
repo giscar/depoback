@@ -19,7 +19,9 @@ public class Factura{
 	@Id
 	private String id;
 	
-	private String codigoFactura;
+	private Long codigoFactura;
+	
+	private String serie;
 	
 	private String ruc;
 	

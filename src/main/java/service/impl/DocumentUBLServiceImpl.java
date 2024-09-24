@@ -19,12 +19,14 @@ import org.apache.xml.security.signature.XMLSignature;
 import org.apache.xml.security.transforms.Transforms;
 import org.apache.xml.security.utils.Constants;
 import org.apache.xml.security.utils.ElementProxy;
+import org.springframework.stereotype.Service;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Element;
 
 import model.Factura;
 import service.DocumentUBLService;
 
+@Service
 public class DocumentUBLServiceImpl implements DocumentUBLService{
 	
 	private static Log log = LogFactory.getLog(DocumentUBLServiceImpl.class);

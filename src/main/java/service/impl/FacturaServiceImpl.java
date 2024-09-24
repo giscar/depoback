@@ -8,6 +8,7 @@ import model.Factura;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import repository.FacturaRepository;
+import service.DocumentUBLService;
 import service.FacturaService;
 
 @Service
@@ -15,6 +16,9 @@ public class FacturaServiceImpl implements FacturaService{
 	
 	@Autowired
 	private FacturaRepository facturaRepository;
+	
+	@Autowired
+	private DocumentUBLService UBLService;
 	
 
 	@Override
@@ -55,6 +59,17 @@ public class FacturaServiceImpl implements FacturaService{
 	@Override
 	public Mono<Factura> facturaForId(String id) {
 		return facturaRepository.findById(id);
+	}
+
+	@Override
+	public Mono<Factura> save(Factura factura) {
+		//return Mono.just(UBLService.clienteForRuc(factura));
+		return facturaRepository.save(factura);
+	}
+
+	@Override
+	public Mono<Object> findCodigoFactura() {
+		return facturaRepository.findMaxCodFactura();
 	}
 
 }

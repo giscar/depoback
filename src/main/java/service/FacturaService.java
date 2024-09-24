@@ -15,5 +15,9 @@ public interface FacturaService {
 	Mono<Factura> updateFactura(Factura factura);
 	
 	Mono<Factura> facturaForId(String id);
+	
+	Mono<Factura> save(Factura factura);
+	
+	Mono<Object> findCodigoFactura();
 
 }
