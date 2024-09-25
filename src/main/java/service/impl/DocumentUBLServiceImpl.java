@@ -32,7 +32,7 @@ public class DocumentUBLServiceImpl implements DocumentUBLService{
 	private static Log log = LogFactory.getLog(DocumentUBLServiceImpl.class);
 
 	@Override
-	public String clienteForRuc(Factura factura) {
+	public String generarFormatoFactura(Factura factura) {
 		log.info("generarXMLZipiadoBoleta - Inicializamos el ambiente");
         org.apache.xml.security.Init.init();
         String resultado = "";
@@ -45,7 +45,7 @@ public class DocumentUBLServiceImpl implements DocumentUBLService{
 
             log.info("generarXMLZipiadoBoleta - Iniciamos cabecera ");
 
-            pathXMLFile = "/Users/carlosleon/libre/20601491193-03-B001-88.xml";
+            pathXMLFile = "/Users/carlosleon/libre/"+factura.getNroDocumento()+".xml";
             ElementProxy.setDefaultPrefix(Constants.SignatureSpecNS, "ds");
             //Parametros del keystore
             String keystoreType = "JKS";

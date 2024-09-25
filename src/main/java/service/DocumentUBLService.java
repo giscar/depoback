@@ -4,6 +4,6 @@ import model.Factura;
 
 public interface DocumentUBLService {
 	
-	String clienteForRuc(Factura factura);
+	String generarFormatoFactura(Factura factura);
 
 }

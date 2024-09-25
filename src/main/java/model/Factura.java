@@ -19,6 +19,8 @@ public class Factura{
 	@Id
 	private String id;
 	
+	private String nroDocumento;
+	
 	private Long codigoFactura;
 	
 	private String serie;

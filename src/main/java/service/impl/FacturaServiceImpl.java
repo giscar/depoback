@@ -64,7 +64,10 @@ public class FacturaServiceImpl implements FacturaService{
 	@Override
 	public Mono<Factura> save(Factura factura) {
 		//return Mono.just(UBLService.clienteForRuc(factura));
-		return facturaRepository.save(factura);
+		return facturaRepository.save(factura).flatMap(p -> {
+			UBLService.generarFormatoFactura(p);
+			return Mono.just(p);
+		});
 	}
 
 	@Override
