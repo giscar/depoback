@@ -31,13 +31,15 @@ public class Factura{
 	
 	private String direccion;
 	
-	private String rucClinte;
+	private String rucCliente;
 	
 	private String razonSocialCliente;
 	
 	private String direccionCliente;
 	
 	private String fechaEmision;
+	
+	private String horaEmision;
 	
 	private String tipoDocumento;
 	

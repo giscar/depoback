@@ -1,5 +1,9 @@
 package service.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +68,9 @@ public class FacturaServiceImpl implements FacturaService{
 	@Override
 	public Mono<Factura> save(Factura factura) {
 		//return Mono.just(UBLService.clienteForRuc(factura));
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date();
+		factura.setHoraEmision(dateFormat.format(date));
 		return facturaRepository.save(factura).flatMap(p -> {
 			UBLService.generarFormatoFactura(p);
 			return Mono.just(p);
