@@ -222,6 +222,11 @@ public class ErpController {
 		return new ResponseEntity<>(servicioService.findByRucCodServicioAggregate(ruc, codServicio),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="servicio/busquedaAggregateEstadoConcluido")
+	public ResponseEntity<Flux<Servicio>> findByRucCodServicioAggregateEstadoRegistro(@RequestParam(name = "codServicio", required = false) Integer codServicio, @RequestParam(name = "ruc", required = false) String ruc) {
+		return new ResponseEntity<>(servicioService.findByRucCodServicioAggregateConcluido(ruc, codServicio),HttpStatus.OK);
+	}
+	
 	@GetMapping(value="servicio/busquedaEstadistica")
 	public ResponseEntity<Flux<Servicio>> findByEstdisticaAggregate(
 			@RequestParam(name = "codServicio", required = false) Integer codServicio, 

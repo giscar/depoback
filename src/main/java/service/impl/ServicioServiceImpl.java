@@ -110,4 +110,9 @@ public class ServicioServiceImpl implements ServicioService{
 		}); 
 	}
 
+	@Override
+	public Flux<Servicio> findByRucCodServicioAggregateConcluido(String ruc, Integer codServicio) {
+		return servicioRepository.findByRucCodServicioAggregateConcluido(ruc, codServicio);
+	}
+
 }
