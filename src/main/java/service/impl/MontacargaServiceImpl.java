@@ -19,6 +19,10 @@ public class MontacargaServiceImpl implements MontacargaService{
 	public Mono<Montacarga> save(Montacarga montacarga) {
 		return montacargaRepository.save(montacarga);
 	}
+	
+	public Mono<Montacarga> inactivar(Montacarga montacarga) {
+		return montacargaRepository.save(montacarga);
+	}
 
 	@Override
 	public Mono<Montacarga> findById(String id) {
@@ -33,6 +37,34 @@ public class MontacargaServiceImpl implements MontacargaService{
 	@Override
 	public Flux<Montacarga> findByEstado() {
 		return montacargaRepository.findByEstado();
+	}
+
+	@Override
+	public Mono<Montacarga> edit(Montacarga montacarga) {
+		return montacargaRepository.findById(montacarga.getId()).map(p -> {
+			p.setEstadoRegistro("0");
+			return p;
+		}).doOnNext(q -> {
+			montacargaRepository.save(q).subscribe();
+		}).doOnNext(p -> {
+			montacarga.setId(null);
+			montacarga.setEstadoRegistro("1");
+			montacargaRepository.save(montacarga).subscribe();
+		});
+	}
+
+	@Override
+	public Mono<Montacarga> inactiva(Montacarga montacarga) {
+		return Mono.just(montacarga).map(p -> {
+			p.setEstadoRegistro("0");
+			montacargaRepository.save(p).subscribe();
+			return p;
+		}).doOnNext(p -> {
+			p.setId(null);
+			p.setEstadoRegistro("0");
+			p.setIndInactivo("1");
+			montacargaRepository.save(p).subscribe();
+		});
 	}
 	
 	

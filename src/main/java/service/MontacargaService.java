@@ -8,6 +8,10 @@ public interface MontacargaService {
 	
 	Mono<Montacarga> save(Montacarga montacarga);
 	
+	Mono<Montacarga> edit(Montacarga montacarga);
+	
+	Mono<Montacarga> inactiva(Montacarga montacarga);
+	
 	Mono<Montacarga> findById(String id);
 	
 	Flux<Montacarga> findByEstado();

@@ -40,5 +40,9 @@ public class Montacarga {
 	private String estadoRegistro;
 	
 	private Date fechaRegistro = new Date();
+	
+	private String usuarioRegistro;
+	
+	private String indInactivo;
 
 }

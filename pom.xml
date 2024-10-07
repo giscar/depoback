@@ -43,12 +43,6 @@
 		</dependency>
 		
 
-<dependency>
-    <groupId>com.helger.ubl</groupId>
-    <artifactId>ph-ubl21</artifactId>
-    <version>9.0.2</version>
-</dependency>
-
 <!-- https://mvnrepository.com/artifact/junit/junit -->
 <dependency>
     <groupId>junit</groupId>
@@ -62,12 +56,22 @@
       <scope>test</scope>
     </dependency>
 
+
+
 		
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-devtools</artifactId>
 </dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.xml.security/xml-security -->
+<dependency>
+    <groupId>org.apache.santuario</groupId>
+    <artifactId>xmlsec</artifactId>
+    <version>4.0.2</version>
+</dependency>
+
 
 
 <dependency>

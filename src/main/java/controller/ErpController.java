@@ -135,7 +135,12 @@ public class ErpController {
 
 	@PutMapping(value="montacarga")
 	public ResponseEntity<Mono<Montacarga>> montacargaUpdate(@RequestBody Montacarga montacarga) {
-		return new ResponseEntity<>(montacargaService.save(montacarga),HttpStatus.OK);
+		return new ResponseEntity<>(montacargaService.edit(montacarga),HttpStatus.OK);
+	}
+	
+	@PutMapping(value="montacarga/inactiva")
+	public ResponseEntity<Mono<Montacarga>> montacargaInactiva(@RequestBody Montacarga montacarga) {
+		return new ResponseEntity<>(montacargaService.inactiva(montacarga),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="operador")
