@@ -10,6 +10,10 @@ public interface OperadorService {
 	
 	Mono<Operador> save(Operador operador);
 	
+	Mono<Operador> edit(Operador operador);
+	
+	Mono<Operador> inactiva(Operador operador);
+	
 	Mono<Operador> findById(String id);
 	
 	Mono<Operador> findByEstadoByDocumento(String documento);

@@ -31,6 +31,10 @@ public class Operador {
 	private String direccion;
 
 	private Date fechaRegistro = new Date();
+	
+	private String usuarioRegistro;
+	
+	private String indInactivo;
 
 
 }

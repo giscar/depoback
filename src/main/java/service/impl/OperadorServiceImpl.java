@@ -38,6 +38,35 @@ public class OperadorServiceImpl implements OperadorService{
 	@Override
 	public Mono<Operador> findByEstadoByDocumento(String documento) {
 		return operadorRepository.findByEstadoByDocumento(documento);
+	}
+
+	@Override
+	public Mono<Operador> edit(Operador operador) {
+		return operadorRepository.findById(operador.getId()).map(p -> {
+			p.setEstado("0");
+			return p;
+		}).doOnNext(q -> {
+			operadorRepository.save(q).subscribe();
+		}).doOnNext(p -> {
+			operador.setId(null);
+			operador.setEstado("1");
+			operadorRepository.save(operador).subscribe();
+		});
+	}
+
+	@Override
+	public Mono<Operador> inactiva(Operador operador) {
+		return operadorRepository.findById(operador.getId()).map(p -> {
+			p.setEstado("0");
+			return p;
+		}).doOnNext(q -> {
+			operadorRepository.save(q).subscribe();
+		}).doOnNext(p -> {
+			operador.setId(null);
+			operador.setEstado("0");
+			operador.setIndInactivo("1");
+			operadorRepository.save(operador).subscribe();
+		});
 	}	
 
 }

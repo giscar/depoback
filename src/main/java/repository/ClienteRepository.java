@@ -14,7 +14,7 @@ public interface ClienteRepository extends ReactiveMongoRepository<Cliente, Stri
 	@Query("{'razonSocial': {$regex: ?0 }}")
 	Flux<Cliente> clienteForDescripcion(String descripcion);
 	
-	@Query("{$or: [{'ruc': ?0}, {'razonSocial': {$regex: ?1 }}] }")
+	@Query("{$or: [{'ruc': ?0}, {'razonSocial': /.*?1.*/ }] }")
 	Flux<Cliente> findByRucOrName(String ruc, String razonSocial);
 
 }

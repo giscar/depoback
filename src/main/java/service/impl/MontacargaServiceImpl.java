@@ -55,15 +55,16 @@ public class MontacargaServiceImpl implements MontacargaService{
 
 	@Override
 	public Mono<Montacarga> inactiva(Montacarga montacarga) {
-		return Mono.just(montacarga).map(p -> {
+		return montacargaRepository.findById(montacarga.getId()).map(p -> {
 			p.setEstadoRegistro("0");
-			montacargaRepository.save(p).subscribe();
 			return p;
+		}).doOnNext(q -> {
+			montacargaRepository.save(q).subscribe();
 		}).doOnNext(p -> {
-			p.setId(null);
-			p.setEstadoRegistro("0");
-			p.setIndInactivo("1");
-			montacargaRepository.save(p).subscribe();
+			montacarga.setId(null);
+			montacarga.setEstadoRegistro("1");
+			montacarga.setIndInactivo("1");
+			montacargaRepository.save(montacarga).subscribe();
 		});
 	}
 	

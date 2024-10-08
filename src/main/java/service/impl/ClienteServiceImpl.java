@@ -43,6 +43,8 @@ public class ClienteServiceImpl implements ClienteService{
 
 	@Override
 	public Flux<Cliente> findByRucOrName(String ruc, String razonSocial) {
+		if(razonSocial.equalsIgnoreCase(""))
+				razonSocial = ruc;
 		return clienteRepository.findByRucOrName(ruc, razonSocial);
 	}
 
