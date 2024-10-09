@@ -12,7 +12,9 @@ public interface ClienteService {
 	
 	Flux<Cliente> findByRucOrName(String ruc, String razonSocial);
 	
-	Mono<Cliente> setCliente(Cliente cliente);
+	Mono<Cliente> save(Cliente cliente);
+	
+	Mono<Cliente> edit(Cliente cliente);
 	
 	Mono<Cliente> clienteForID(String id);
 

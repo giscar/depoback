@@ -26,6 +26,10 @@ public class Cliente {
 	
 	private String email;
 	
+	private String estado;
+	
 	private Date fechaRegistro = new Date();
+	
+	private String usuarioRegistro;
 
 }

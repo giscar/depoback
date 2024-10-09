@@ -105,12 +105,12 @@ public class ErpController {
 	
 	@PostMapping(value="cliente")
 	public ResponseEntity<Mono<Cliente>> createCliente(@RequestBody Cliente cliente) {
-		return new ResponseEntity<>(clienteService.setCliente(cliente),HttpStatus.OK);
+		return new ResponseEntity<>(clienteService.save(cliente),HttpStatus.OK);
 	}
 
 	@PutMapping(value="cliente")
 	public ResponseEntity<Mono<Cliente>> editCliente(@RequestBody Cliente cliente) {
-		return new ResponseEntity<>(clienteService.setCliente(cliente),HttpStatus.OK);
+		return new ResponseEntity<>(clienteService.edit(cliente),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="montacarga")
