@@ -24,6 +24,7 @@ import model.Imagen;
 import model.Montacarga;
 import model.Operador;
 import model.Servicio;
+import model.Usuario;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import service.ClienteService;
@@ -32,6 +33,7 @@ import service.ImagenService;
 import service.MontacargaService;
 import service.OperadorService;
 import service.ServicioService;
+import service.UsuarioService;
 
 @CrossOrigin("*")
 @RestController
@@ -54,6 +56,10 @@ public class ErpController {
 	
 	@Autowired
 	ImagenService imagenService;
+	
+	@Autowired
+	UsuarioService usuarioService;
+	
 	
 	@GetMapping(value = "names")
 	public Flux<String> getNames(){
@@ -171,6 +177,36 @@ public class ErpController {
 	@GetMapping(value="operador/estado")
 	public ResponseEntity<Flux<Operador>> operadorForActivo() {
 		return new ResponseEntity<>(operadorService.findByEstado(),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="usuario")
+	public ResponseEntity<Mono<Usuario>> usuarioForId(@RequestParam(name = "id") String id) {
+		return new ResponseEntity<>(usuarioService.findById(id),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="usuario/documento")
+	public ResponseEntity<Mono<Usuario>> usuarioByDocumento(@RequestParam(name = "documento") String documento) {
+		return new ResponseEntity<>(usuarioService.findByEstadoByDocumento(documento),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="usuario/all")
+	public ResponseEntity<Flux<Usuario>> usuarioFindAll() {
+		return new ResponseEntity<>(usuarioService.all(),HttpStatus.OK);
+	}
+	
+	@PostMapping(value="usuario")
+	public ResponseEntity<Mono<Usuario>> usuarioSave(@RequestBody Usuario usuario) {
+		return new ResponseEntity<>(usuarioService.save(usuario),HttpStatus.OK);
+	}
+
+	@PutMapping(value="usuario")
+	public ResponseEntity<Mono<Usuario>> usuarioUpdate(@RequestBody Usuario usuario) {
+		return new ResponseEntity<>(usuarioService.save(usuario),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="usuario/estado")
+	public ResponseEntity<Flux<Usuario>> usuarioForActivo() {
+		return new ResponseEntity<>(usuarioService.findByEstado(),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/all")

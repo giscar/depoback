@@ -62,7 +62,7 @@ public class MontacargaServiceImpl implements MontacargaService{
 			montacargaRepository.save(q).subscribe();
 		}).doOnNext(p -> {
 			montacarga.setId(null);
-			montacarga.setEstadoRegistro("1");
+			montacarga.setEstadoRegistro("0");
 			montacarga.setIndInactivo("1");
 			montacargaRepository.save(montacarga).subscribe();
 		});
