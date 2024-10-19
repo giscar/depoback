@@ -23,6 +23,8 @@ import model.Factura;
 import model.Imagen;
 import model.Montacarga;
 import model.Operador;
+import model.Perfil;
+import model.Rol;
 import model.Servicio;
 import model.Usuario;
 import reactor.core.publisher.Flux;
@@ -32,6 +34,8 @@ import service.FacturaService;
 import service.ImagenService;
 import service.MontacargaService;
 import service.OperadorService;
+import service.PerfilService;
+import service.RolService;
 import service.ServicioService;
 import service.UsuarioService;
 
@@ -59,6 +63,12 @@ public class ErpController {
 	
 	@Autowired
 	UsuarioService usuarioService;
+	
+	@Autowired
+	PerfilService perfilService;
+	
+	@Autowired
+	RolService rolService;
 	
 	
 	@GetMapping(value = "names")
@@ -171,12 +181,17 @@ public class ErpController {
 
 	@PutMapping(value="operador")
 	public ResponseEntity<Mono<Operador>> operadorUpdate(@RequestBody Operador operador) {
-		return new ResponseEntity<>(operadorService.save(operador),HttpStatus.OK);
+		return new ResponseEntity<>(operadorService.edit(operador),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="operador/estado")
 	public ResponseEntity<Flux<Operador>> operadorForActivo() {
 		return new ResponseEntity<>(operadorService.findByEstado(),HttpStatus.OK);
+	}
+	
+	@PutMapping(value="operador/inactiva")
+	public ResponseEntity<Mono<Operador>> operadorInactiva(@RequestBody Operador operador) {
+		return new ResponseEntity<>(operadorService.inactiva(operador),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="usuario")
@@ -201,12 +216,87 @@ public class ErpController {
 
 	@PutMapping(value="usuario")
 	public ResponseEntity<Mono<Usuario>> usuarioUpdate(@RequestBody Usuario usuario) {
-		return new ResponseEntity<>(usuarioService.save(usuario),HttpStatus.OK);
+		return new ResponseEntity<>(usuarioService.edit(usuario),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="usuario/estado")
 	public ResponseEntity<Flux<Usuario>> usuarioForActivo() {
 		return new ResponseEntity<>(usuarioService.findByEstado(),HttpStatus.OK);
+	}
+	
+	@PutMapping(value="usuario/inactiva")
+	public ResponseEntity<Mono<Usuario>> usuarioInactiva(@RequestBody Usuario usuario) {
+		return new ResponseEntity<>(usuarioService.inactiva(usuario),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="rol")
+	public ResponseEntity<Mono<Rol>> rolForId(@RequestParam(name = "id") String id) {
+		return new ResponseEntity<>(rolService.findById(id),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="rol/codigo")
+	public ResponseEntity<Mono<Rol>> rolByCodigo(@RequestParam(name = "codigo") String codigo) {
+		return new ResponseEntity<>(rolService.findByEstadoByCodigo(codigo),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="rol/all")
+	public ResponseEntity<Flux<Rol>> rolFindAll() {
+		return new ResponseEntity<>(rolService.all(),HttpStatus.OK);
+	}
+	
+	@PostMapping(value="rol")
+	public ResponseEntity<Mono<Rol>> rolSave(@RequestBody Rol rol) {
+		return new ResponseEntity<>(rolService.save(rol),HttpStatus.OK);
+	}
+
+	@PutMapping(value="rol")
+	public ResponseEntity<Mono<Rol>> rolUpdate(@RequestBody Rol rol) {
+		return new ResponseEntity<>(rolService.edit(rol),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="rol/estado")
+	public ResponseEntity<Flux<Rol>> rolForActivo() {
+		return new ResponseEntity<>(rolService.findByEstado(),HttpStatus.OK);
+	}
+	
+	@PutMapping(value="rol/inactiva")
+	public ResponseEntity<Mono<Rol>> rolInactiva(@RequestBody Rol rol) {
+		return new ResponseEntity<>(rolService.inactiva(rol),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="perfil")
+	public ResponseEntity<Mono<Perfil>> perfilForId(@RequestParam(name = "id") String id) {
+		return new ResponseEntity<>(perfilService.findById(id),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="perfil/codigo")
+	public ResponseEntity<Mono<Perfil>> perfilByCodigo(@RequestParam(name = "codigo") String codigo) {
+		return new ResponseEntity<>(perfilService.findByEstadoByCodigo(codigo),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="perfil/all")
+	public ResponseEntity<Flux<Perfil>> perfilFindAll() {
+		return new ResponseEntity<>(perfilService.all(),HttpStatus.OK);
+	}
+	
+	@PostMapping(value="perfil")
+	public ResponseEntity<Mono<Perfil>> perfilSave(@RequestBody Perfil perfil) {
+		return new ResponseEntity<>(perfilService.save(perfil),HttpStatus.OK);
+	}
+
+	@PutMapping(value="perfil")
+	public ResponseEntity<Mono<Perfil>> perfilUpdate(@RequestBody Perfil perfil) {
+		return new ResponseEntity<>(perfilService.edit(perfil),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="perfil/estado")
+	public ResponseEntity<Flux<Perfil>> perfilForActivo() {
+		return new ResponseEntity<>(perfilService.findByEstado(),HttpStatus.OK);
+	}
+	
+	@PutMapping(value="perfil/inactiva")
+	public ResponseEntity<Mono<Perfil>> perfilInactiva(@RequestBody Perfil perfil) {
+		return new ResponseEntity<>(perfilService.inactiva(perfil),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/all")
