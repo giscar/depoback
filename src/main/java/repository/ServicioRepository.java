@@ -1,12 +1,9 @@
 package repository;
 
-import java.util.ArrayList;
-
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-import model.Montacarga;
 import model.Servicio;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -88,10 +85,7 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
 			"{ $lookup: {from : 'imagenes', localField: 'stringId', foreignField: 'idServicio', as: 'imagenes' }},",
-			//"{ $unwind: '$imagenes' },",
-			"{ $match: { 'stringId' : ?0 }},"
-			//"{ $replaceRoot: { newRoot: { $mergeObjects: [{$arrayElemAt: ['$innerOperadores', 0]}, '$$ROOT']}} }"
-			
+			"{ $match: { 'stringId' : ?0 }},"			
 	})
 	Mono<Servicio> findByIdAggregate(String id);
 	

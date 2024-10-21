@@ -31,6 +31,8 @@ public class Usuario implements Serializable {
 	
 	private String passwd;
 	
+	private Object[] perfiles;
+	
 	private Date fechaRegistro = new Date();
 	
 	private String usuarioRegistro;
