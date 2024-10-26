@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import model.Perfil;
+import model.Rol;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import repository.PerfilRepository;
+import repository.RolRepository;
 import service.PerfilService;
 
 @Service
@@ -14,6 +16,9 @@ public class PerfilServiceImpl implements PerfilService{
 	
 	@Autowired
 	private PerfilRepository perfilRepository;
+	
+	@Autowired
+	private RolRepository rolRepository;
 
 	@Override
 	public Flux<Perfil> all() {
@@ -66,6 +71,16 @@ public class PerfilServiceImpl implements PerfilService{
 			perfil.setEstado("0");
 			perfil.setIndInactivo("1");
 			perfilRepository.save(perfil).subscribe();
+		});
+	}
+
+	@Override
+	public Mono<Perfil> findByIdAggregate(String id) {
+		//Mono<Perfil> mono = perfilRepository.findByIdAggregate(id); 
+		Mono<Perfil> mono = perfilRepository.findById(id); 
+
+		return mono.map(p -> {
+			return p;
 		});
 	}	
 

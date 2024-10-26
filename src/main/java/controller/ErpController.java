@@ -266,7 +266,7 @@ public class ErpController {
 	
 	@GetMapping(value="perfil")
 	public ResponseEntity<Mono<Perfil>> perfilForId(@RequestParam(name = "id") String id) {
-		return new ResponseEntity<>(perfilService.findById(id),HttpStatus.OK);
+		return new ResponseEntity<>(perfilService.findByIdAggregate(id),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="perfil/codigo")

@@ -19,5 +19,7 @@ public interface PerfilService {
 	Mono<Perfil> findByEstadoByCodigo(String codigo);
 	
 	Flux<Perfil> findByEstado();
+	
+	Mono<Perfil> findByIdAggregate(String id);
 
 }
