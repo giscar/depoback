@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -31,7 +32,7 @@ public class Usuario implements Serializable {
 	
 	private String passwd;
 	
-	private Object[] perfiles;
+	private List<Perfil> perfiles;
 	
 	private Date fechaRegistro = new Date();
 	
