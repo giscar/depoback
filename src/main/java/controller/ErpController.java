@@ -229,6 +229,11 @@ public class ErpController {
 		return new ResponseEntity<>(usuarioService.inactiva(usuario),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="usuario/roles")
+	public ResponseEntity<Mono<Usuario>> usuarioForRoles(@RequestParam(name = "documento") String documento, @RequestParam(name = "passwd") String passwd) {
+		return new ResponseEntity<>(usuarioService.findByRolesForUser(documento, passwd),HttpStatus.OK);
+	}
+	
 	@GetMapping(value="rol")
 	public ResponseEntity<Mono<Rol>> rolForId(@RequestParam(name = "id") String id) {
 		return new ResponseEntity<>(rolService.findById(id),HttpStatus.OK);

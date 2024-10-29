@@ -3,13 +3,10 @@ package service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import model.Operador;
 import model.Usuario;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import repository.OperadorRepository;
 import repository.UsuarioRepository;
-import service.OperadorService;
 import service.UsuarioService;
 
 @Service
@@ -17,7 +14,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-
+	
 	@Override
 	public Flux<Usuario> all() {
 		return usuarioRepository.findAll();
@@ -25,7 +22,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public Mono<Usuario> save(Usuario usuario) {
-		return usuarioRepository.save(usuario);
+		return Mono.just(usuario).map(p -> {
+			p.setPasswd(p.getDocumento());
+			usuarioRepository.save(p).subscribe();
+			return p;
+		});
 	}
 
 	@Override
@@ -70,6 +71,12 @@ public class UsuarioServiceImpl implements UsuarioService{
 			usuario.setIndInactivo("1");
 			usuarioRepository.save(usuario).subscribe();
 		});
-	}	
+	}
+
+	@Override
+	public Mono<Usuario> findByRolesForUser(String documento, String passwd) {
+		return usuarioRepository.findByRolesForUser(documento, passwd);
+	}		
+
 
 }

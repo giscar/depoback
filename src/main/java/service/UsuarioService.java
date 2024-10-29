@@ -19,5 +19,7 @@ public interface UsuarioService {
 	Mono<Usuario> findByEstadoByDocumento(String documento);
 	
 	Flux<Usuario> findByEstado();
+	
+	Mono<Usuario> findByRolesForUser(String documento, String passwd);
 
 }
