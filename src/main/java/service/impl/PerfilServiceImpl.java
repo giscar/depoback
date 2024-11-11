@@ -7,7 +7,6 @@ import model.Perfil;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import repository.PerfilRepository;
-import repository.RolRepository;
 import service.PerfilService;
 
 @Service
@@ -15,9 +14,6 @@ public class PerfilServiceImpl implements PerfilService{
 	
 	@Autowired
 	private PerfilRepository perfilRepository;
-	
-	@Autowired
-	private RolRepository rolRepository;
 
 	@Override
 	public Flux<Perfil> all() {
