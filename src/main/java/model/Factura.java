@@ -47,9 +47,9 @@ public class Factura{
 	
 	private Double monto;
 	
-	private int moneda;
+	private String moneda;
 	
-	private List<Servicio> serviciosFacturados;
+	private List<Servicio> servicios;
 	
 
 }

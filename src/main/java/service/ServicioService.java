@@ -33,5 +33,7 @@ public interface ServicioService {
 	Mono<Servicio> findByIdAggregate(String id);
 	
 	Mono<Object> findMaxCodServicio();
+	
+	Mono<Servicio> facturarServicio(Servicio servicio);
 
 }

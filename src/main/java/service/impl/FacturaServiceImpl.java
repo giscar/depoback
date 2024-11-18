@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import model.Factura;
-
+import model.Servicio;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import repository.FacturaRepository;
 import service.DocumentUBLService;
 import service.FacturaService;
+import service.ServicioService;
 
 @Service
 public class FacturaServiceImpl implements FacturaService{
@@ -23,6 +24,9 @@ public class FacturaServiceImpl implements FacturaService{
 	
 	@Autowired
 	private DocumentUBLService UBLService;
+	
+	@Autowired
+	private ServicioService servicioService;
 	
 
 	@Override
@@ -71,6 +75,9 @@ public class FacturaServiceImpl implements FacturaService{
 		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 		Date date = new Date();
 		factura.setHoraEmision(dateFormat.format(date));
+		for (Servicio serv : factura.getServicios()) {
+				servicioService.facturarServicio(serv);
+		}
 		return facturaRepository.save(factura).flatMap(p -> {
 			UBLService.generarFormatoFactura(p);
 			return Mono.just(p);

@@ -1,5 +1,7 @@
 package service.impl;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,6 +113,13 @@ public class ServicioServiceImpl implements ServicioService{
 	@Override
 	public Flux<Servicio> findByRucCodServicioAggregateConcluido(String ruc, Integer codServicio) {
 		return servicioRepository.findByRucCodServicioAggregateConcluido(ruc, codServicio);
+	}
+
+	@Override
+	public Mono<Servicio> facturarServicio(Servicio servicio) {
+		servicio.setEstadoRegistro("Facturado");
+		servicio.setFechaFacturacion(new Date());
+		return servicioRepository.save(servicio);
 	}
 
 }

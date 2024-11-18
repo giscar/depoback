@@ -338,6 +338,11 @@ public class ErpController {
 		return new ResponseEntity<>(servicioService.save(servicio),HttpStatus.OK);
 	}
 	
+	@PutMapping(value="servicio/facturado")
+	public ResponseEntity<Mono<Servicio>> facturarServicio(@RequestBody Servicio servicio) {
+		return new ResponseEntity<>(servicioService.facturarServicio(servicio),HttpStatus.OK);
+	}
+	
 	@DeleteMapping(value="servicio/imagen/eliminar")
 	public void deleteFile(@RequestParam(name = "id") String id) {
 		imagenService.delete(id); 
