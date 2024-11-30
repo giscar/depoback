@@ -1,12 +1,15 @@
 package main;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -14,17 +17,19 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.xml.security.c14n.Canonicalizer;
 import org.apache.xml.security.signature.XMLSignature;
 import org.apache.xml.security.transforms.Transforms;
 import org.apache.xml.security.utils.Constants;
 import org.apache.xml.security.utils.ElementProxy;
 import org.w3c.dom.CDATASection;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 
-public class Ubl {
+public class Ubl3 {
 	
-	private static Log log = LogFactory.getLog(Ubl.class);
+	private static Log log = LogFactory.getLog(Ubl3.class);
 
 	public static void main(String[] args) {
 		System.out.println("hola mundo");
@@ -47,30 +52,16 @@ public class Ubl {
             pathXMLFile = unidadEnvio+"\\20100014476-01-B006-0000001.xml";
             ElementProxy.setDefaultPrefix(Constants.SignatureSpecNS, "ds");
             //Parametros del keystore
-            String keystoreType = "JKS";
-            String keystoreFile = unidadEnvio+"\\MiAlmacen.jks";
-            String keystorePass = "miAlmacen";
-            String privateKeyAlias = "miAlmacen";
-            String privateKeyPass = "miAlmacen";
-            String certificateAlias = "miAlmacen";
+            String keystoreType = "PKCS12";
+            String keystoreFile = unidadEnvio+"\\depo.pfx";
+            String keystorePass = "abcd1234.";
+            String privateKeyAlias = "abcd1234.";
+            String privateKeyPass = "abcd1234.";
+            String certificateAlias = "abcd1234.";
             
             log.info("generarXMLZipiadoBoleta - Lectura de cerificado ");
             CDATASection cdata;
             log.info("generarXMLZipiadoBoleta - Iniciamos la generacion del XML");
-            File signatureFile = new File(pathXMLFile);
-            ///////////////////Creación del certificado//////////////////////////////
-            KeyStore ks = KeyStore.getInstance(keystoreType);
-            FileInputStream fis = new FileInputStream(keystoreFile);
-            ks.load(fis, keystorePass.toCharArray());
-            //obtener la clave privada para firmar
-            PrivateKey privateKey = (PrivateKey) ks.getKey(privateKeyAlias, privateKeyPass.toCharArray());
-            if (privateKey == null) {
-                throw new RuntimeException("Private key is null");
-            }
-            X509Certificate cert = (X509Certificate) ks.getCertificate(certificateAlias);
-            System.err.println(cert.getNotAfter());
-            System.err.println(cert.getNotBefore());
-            System.err.println(cert.toString());
             
             javax.xml.parsers.DocumentBuilderFactory dbf = javax.xml.parsers.DocumentBuilderFactory.newInstance();
             //Firma XML genera espacio para los nombres o tag
@@ -94,7 +85,7 @@ public class Ubl {
             envelope.appendChild(doc.createTextNode("\n"));
             doc.appendChild(envelope);
 
-            Element UBLExtensions = doc.createElementNS("", "ext:UBLExtensions");
+            Element UBLExtensions = doc.createElement("ext:UBLExtensions");
             envelope.appendChild(UBLExtensions);
 
             //2do grupo
@@ -103,13 +94,7 @@ public class Ubl {
             Element ExtensionContent = doc.createElementNS("", "ext:ExtensionContent");
             envelope.appendChild(ExtensionContent);
 
-            //El baseURI es la URI que se utiliza para anteponer a URIs relativos
-            String BaseURI = signatureFile.toURI().toURL().toString();
-            //Crea un XML Signature objeto desde el documento, BaseURI and signature algorithm (in this case RSA)
-            //XMLSignature sig = new XMLSignature(doc, BaseURI, XMLSignature.ALGO_ID_SIGNATURE_RSA); Cadena URI que se ajusta a la sintaxis URI y representa el archivo XML de entrada
-            XMLSignature sig = new XMLSignature(doc, BaseURI, XMLSignature.ALGO_ID_SIGNATURE_RSA);
-
-            ExtensionContent.appendChild(sig.getElement());
+            
             UBLExtension.appendChild(ExtensionContent);
             UBLExtensions.appendChild(UBLExtension);
 
@@ -447,20 +432,28 @@ public class Ubl {
             Price.appendChild(PriceAmount1);
             PriceAmount1.appendChild(doc.createTextNode("500.00"));
             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            File signatureFile = new File(pathXMLFile);
+            ///////////////////Creación del certificado//////////////////////////////
 
-            log.info("generarXMLZipiadoBoleta - Prepara firma digital ");
-            sig.setId("20100014476");
-            sig.addKeyInfo(cert);
-            {
-                Transforms transforms = new Transforms(doc);
-                transforms.addTransform(Transforms.TRANSFORM_ENVELOPED_SIGNATURE);
-                sig.addDocument("", transforms, Constants.ALGO_ID_DIGEST_SHA1);
-            }
-            {
-                //Firmar el documento
-                log.info("generarXMLZipiadoBoleta - firma el XML ");
-                sig.sign(privateKey);
-            }
+          
+            
+     
             
           
         
@@ -474,7 +467,7 @@ public class Ubl {
             StreamResult sr = new StreamResult(f);
             tf.transform(new DOMSource(doc), sr);
             sr.getOutputStream().close();
-            
+           
             
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -483,8 +476,5 @@ public class Ubl {
         }
         return resultado;
     }  
-	
-	
-	
 
 }

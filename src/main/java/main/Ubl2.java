@@ -22,9 +22,9 @@ import org.w3c.dom.CDATASection;
 import org.w3c.dom.Element;
 
 
-public class Ubl {
+public class Ubl2 {
 	
-	private static Log log = LogFactory.getLog(Ubl.class);
+	private static Log log = LogFactory.getLog(Ubl2.class);
 
 	public static void main(String[] args) {
 		System.out.println("hola mundo");
@@ -48,29 +48,15 @@ public class Ubl {
             ElementProxy.setDefaultPrefix(Constants.SignatureSpecNS, "ds");
             //Parametros del keystore
             String keystoreType = "JKS";
-            String keystoreFile = unidadEnvio+"\\MiAlmacen.jks";
-            String keystorePass = "miAlmacen";
-            String privateKeyAlias = "miAlmacen";
-            String privateKeyPass = "miAlmacen";
-            String certificateAlias = "miAlmacen";
+            String keystoreFile = unidadEnvio+"\\depov.jks";
+            String keystorePass = "abcd1234.";
+            String privateKeyAlias = "abcd1234.";
+            String privateKeyPass = "abcd1234.";
+            String certificateAlias = "abcd1234.";
             
             log.info("generarXMLZipiadoBoleta - Lectura de cerificado ");
             CDATASection cdata;
             log.info("generarXMLZipiadoBoleta - Iniciamos la generacion del XML");
-            File signatureFile = new File(pathXMLFile);
-            ///////////////////Creación del certificado//////////////////////////////
-            KeyStore ks = KeyStore.getInstance(keystoreType);
-            FileInputStream fis = new FileInputStream(keystoreFile);
-            ks.load(fis, keystorePass.toCharArray());
-            //obtener la clave privada para firmar
-            PrivateKey privateKey = (PrivateKey) ks.getKey(privateKeyAlias, privateKeyPass.toCharArray());
-            if (privateKey == null) {
-                throw new RuntimeException("Private key is null");
-            }
-            X509Certificate cert = (X509Certificate) ks.getCertificate(certificateAlias);
-            System.err.println(cert.getNotAfter());
-            System.err.println(cert.getNotBefore());
-            System.err.println(cert.toString());
             
             javax.xml.parsers.DocumentBuilderFactory dbf = javax.xml.parsers.DocumentBuilderFactory.newInstance();
             //Firma XML genera espacio para los nombres o tag
@@ -94,7 +80,7 @@ public class Ubl {
             envelope.appendChild(doc.createTextNode("\n"));
             doc.appendChild(envelope);
 
-            Element UBLExtensions = doc.createElementNS("", "ext:UBLExtensions");
+            Element UBLExtensions = doc.createElement("ext:UBLExtensions");
             envelope.appendChild(UBLExtensions);
 
             //2do grupo
@@ -103,13 +89,7 @@ public class Ubl {
             Element ExtensionContent = doc.createElementNS("", "ext:ExtensionContent");
             envelope.appendChild(ExtensionContent);
 
-            //El baseURI es la URI que se utiliza para anteponer a URIs relativos
-            String BaseURI = signatureFile.toURI().toURL().toString();
-            //Crea un XML Signature objeto desde el documento, BaseURI and signature algorithm (in this case RSA)
-            //XMLSignature sig = new XMLSignature(doc, BaseURI, XMLSignature.ALGO_ID_SIGNATURE_RSA); Cadena URI que se ajusta a la sintaxis URI y representa el archivo XML de entrada
-            XMLSignature sig = new XMLSignature(doc, BaseURI, XMLSignature.ALGO_ID_SIGNATURE_RSA);
-
-            ExtensionContent.appendChild(sig.getElement());
+            
             UBLExtension.appendChild(ExtensionContent);
             UBLExtensions.appendChild(UBLExtension);
 
@@ -447,6 +427,51 @@ public class Ubl {
             Price.appendChild(PriceAmount1);
             PriceAmount1.appendChild(doc.createTextNode("500.00"));
             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            File signatureFile = new File(pathXMLFile);
+            ///////////////////Creación del certificado//////////////////////////////
+            KeyStore ks = KeyStore.getInstance(keystoreType);
+            FileInputStream fis = new FileInputStream(keystoreFile);
+            ks.load(fis, keystorePass.toCharArray());
+            //obtener la clave privada para firmar
+            PrivateKey privateKey = (PrivateKey) ks.getKey(privateKeyAlias, privateKeyPass.toCharArray());
+            if (privateKey == null) {
+                throw new RuntimeException("Private key is null");
+            }
+            
+          //El baseURI es la URI que se utiliza para anteponer a URIs relativos
+            String BaseURI = signatureFile.toURI().toURL().toString();
+            //Crea un XML Signature objeto desde el documento, BaseURI and signature algorithm (in this case RSA)
+            //XMLSignature sig = new XMLSignature(doc, BaseURI, XMLSignature.ALGO_ID_SIGNATURE_RSA); Cadena URI que se ajusta a la sintaxis URI y representa el archivo XML de entrada
+            XMLSignature sig = new XMLSignature(doc, BaseURI, XMLSignature.ALGO_ID_SIGNATURE_RSA);
+
+            ExtensionContent.appendChild(sig.getElement());
+            	
+            		
+            		
+            X509Certificate cert = (X509Certificate) ks.getCertificate(certificateAlias);
+
+            System.err.println(cert.getNotAfter());
+            System.err.println(cert.getNotBefore());
+            System.err.println(cert.toString());
+            
+            
+            
 
             log.info("generarXMLZipiadoBoleta - Prepara firma digital ");
             sig.setId("20100014476");
@@ -469,7 +494,7 @@ public class Ubl {
             ///*combinacion de firma y construccion xml////
             FileOutputStream f = new FileOutputStream(signatureFile);
             Transformer tf = TransformerFactory.newInstance().newTransformer();
-            tf.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
+            tf.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             tf.setOutputProperty(OutputKeys.STANDALONE, "no");
             StreamResult sr = new StreamResult(f);
             tf.transform(new DOMSource(doc), sr);
@@ -483,8 +508,5 @@ public class Ubl {
         }
         return resultado;
     }  
-	
-	
-	
 
 }

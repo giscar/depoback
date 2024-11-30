@@ -1,0 +1,132 @@
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:sac="urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ext:UBLExtensions><ext:UBLExtension xmlns=""><ext:ExtensionContent><ds:Signature Id="20100014476">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+<ds:Reference URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>aVKB+WrimOiNhIn6vBiGWe+zTYs=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+SdvpMi5/6HphEHWOeUwRYMoV7VfGHkhwJ+/rgTmvjHYMulNX4sUlw4RgKN9og+vZlmBDgevhutS9&#xD;
+I8gP2gJ/ForE3zQyM/Ae5qfVnjLs/e5TiUqOw0Gos1BYn9b35IOfThoGgvCbROR8MOPYdxm7yjK/&#xD;
+ml4Lu/CXN5dqlwzKfBaBIr6IKUCHcFM6K+wYQWKkc6iQqfH5NFzDz3M/xjD7Ex32+owXUv7b1GES&#xD;
+2W+MRgK2/7C30Pmx7xP5Jt2YiEMqEtmkCKGfCDZ2Qi+AIBlf+zEMRroRIi+vFK7ar5+EOhOlqCs9&#xD;
+VWt8FEl4A/qO320TSgvPgnttiag68MtmOyO4yg==
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:X509Data>
+<ds:X509Certificate>
+MIIFBzCCA++gAwIBAgIIQ3Z6GY39TIMwDQYJKoZIhvcNAQELBQAwggENMRswGQYKCZImiZPyLGQB&#xD;
+GRYLTExBTUEuUEUgU0ExCzAJBgNVBAYTAlBFMQ0wCwYDVQQIDARMSU1BMQ0wCwYDVQQHDARMSU1B&#xD;
+MRgwFgYDVQQKDA9UVSBFTVBSRVNBIFMuQS4xRTBDBgNVBAsMPEROSSA5OTk5OTk5IFJVQyAyMDEw&#xD;
+MDAxNDQ3NiAtIENFUlRJRklDQURPIFBBUkEgREVNT1NUUkFDScOTTjFEMEIGA1UEAww7Tk9NQlJF&#xD;
+IFJFUFJFU0VOVEFOVEUgTEVHQUwgLSBDRVJUSUZJQ0FETyBQQVJBIERFTU9TVFJBQ0nDk04xHDAa&#xD;
+BgkqhkiG9w0BCQEWDWRlbW9AbGxhbWEucGUwHhcNMjQxMTE5MTc1NTQ4WhcNMjYxMTE5MTc1NTQ4&#xD;
+WjCCAQ0xGzAZBgoJkiaJk/IsZAEZFgtMTEFNQS5QRSBTQTELMAkGA1UEBhMCUEUxDTALBgNVBAgM&#xD;
+BExJTUExDTALBgNVBAcMBExJTUExGDAWBgNVBAoMD1RVIEVNUFJFU0EgUy5BLjFFMEMGA1UECww8&#xD;
+RE5JIDk5OTk5OTkgUlVDIDIwMTAwMDE0NDc2IC0gQ0VSVElGSUNBRE8gUEFSQSBERU1PU1RSQUNJ&#xD;
+w5NOMUQwQgYDVQQDDDtOT01CUkUgUkVQUkVTRU5UQU5URSBMRUdBTCAtIENFUlRJRklDQURPIFBB&#xD;
+UkEgREVNT1NUUkFDScOTTjEcMBoGCSqGSIb3DQEJARYNZGVtb0BsbGFtYS5wZTCCASIwDQYJKoZI&#xD;
+hvcNAQEBBQADggEPADCCAQoCggEBALtjiaOVnsW2cxXcZdwbs6Hi4pN9D/E7A5x8f+H0ziFK8k08&#xD;
+1q8ULLQQgGEgV8nyP6hC3RRKZb+tigafFx2wOYvhls7Sc5WpzU/aPF8VdgSMpWQgdTbsA4EnPr1Y&#xD;
+MNlSAuSfey85FluqGQ4Mmr3/CTs0ONJaJhEC9xHjfnxACUxwhEtwOhfwdWgB6oMHeEuL99QNUdXI&#xD;
+S7EPNt5pnG+TxaDi7oP/oQ/HhjBUYenliZEhYbQiqEA4aL51d98NAbsIyq/4xNAhmw0yRav1ymwE&#xD;
+Zegp0rFre5j9jD2Gj7iD4zLs4i4mXhHskk/Lzei2m6/Y1xHhUCy4XWvgE8VmvvhlQI8CAwEAAaNn&#xD;
+MGUwHQYDVR0OBBYEFKCUHfWeZ1gWIVRT7cO1Iwm69I6iMB8GA1UdIwQYMBaAFKCUHfWeZ1gWIVRT&#xD;
+7cO1Iwm69I6iMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA4GA1UdDwEB/wQEAwIHgDANBgkqhkiG9w0B&#xD;
+AQsFAAOCAQEAfibc0Co6HBIsMslPl7DntKRNdhpGh1F4blgiPAaTP3UKd7ujfiY0DGI9qBfZ8z7G&#xD;
+tA8p0ix3NPvYUIC3nZNAEV7PK0zpzKcNnAoH9ViroalgMavEo4BNbpdw5MZiqGF/VW07lTf4WF6U&#xD;
+aqishNWMk07BmindM5+qcNNsCDLOQ4lU7qHj2oU0IWnnXfQKGJR29+PmMgcFnY+nOy9a7UqBjpct&#xD;
+f01CQkC9T6XnlSusTBBUknacLFEwRLoO/G+dkpW4Tszuhl4YcKfMP9ACWaOSmj2MSUbx7Vvug+aU&#xD;
+PFdOpoWGt1oOceIIcMSxBPF/RtV+uM/UHeYPwqcHa0joB9Tfng==
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><cbc:UBLVersionID>2.1</cbc:UBLVersionID><cbc:CustomizationID>2.0</cbc:CustomizationID><cbc:ID>BF006-00004733</cbc:ID><cbc:IssueDate>2024-08-15</cbc:IssueDate><cbc:IssueTime>14:39:17</cbc:IssueTime><cbc:InvoiceTypeCode listAgencyName="PE:SUNAT" listName="SUNAT:Identificador de Tipo de Documento" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01">01</cbc:InvoiceTypeCode><cbc:Note languageLocaleID="1000">QUINIENTETOS NOVENTA Soles</cbc:Note><cbc:Note languageLocaleID="3000">05010020170428000005</cbc:Note><cbc:DocumentCurrencyCode listAgencyName="United Nations Economic Commission for Europe" listID="ISO 4217 Alpha" listName="Currency">PEN</cbc:DocumentCurrencyCode><cac:AccountingSupplierParty>
+<cac:Party>
+<cac:PartyName>
+<cbc:Name>DEPOSITOS Y VENTAS S.A.</cbc:Name><cbc:PartyTaxScheme>
+<cbc:Name>DEPOSITOS Y VENTAS S.A.</cbc:Name><cbc:CompanyID schemeAgencyName="PE:SUNAT" schemeID="6" schemeName="SUNAT:Identificador de Documento de Identidad" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">20100014476</cbc:CompanyID><cac:ID>--</cac:ID><cbc:RegistrationAddress>
+<cac:AddressTypeCode>0000</cac:AddressTypeCode></cbc:RegistrationAddress></cbc:PartyTaxScheme></cac:PartyName></cac:Party></cac:AccountingSupplierParty><cac:AccountingCustomerParty>
+<cac:Party>
+<cac:PartyTaxScheme>
+<cbc:CompanyID schemeAgencyName="PE:SUNAT" schemeID="6" schemeName="SUNAT:Identificador de Documento de Identidad" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">20503801575</cbc:CompanyID><cbc:RegistrationName>RECTIFICACIONES Y FABRICACIONES MECANICAS BUDGE SOCIEDAD ANONIMA CERRADA - R.BUDGE S.A.C.</cbc:RegistrationName></cac:PartyTaxScheme></cac:Party></cac:AccountingCustomerParty><cac:TaxTotal>
+<cbc:TaxAmount currencyID="PEN">90.00</cbc:TaxAmount><cac:TaxSubtotal>
+<cbc:TaxableAmount currencyID="PEN">500.00</cbc:TaxableAmount><cbc:TaxAmount currencyID="PEN">90.00</cbc:TaxAmount><cbc:TaxCategory>
+<cbc:ID schemeAgencyName="United Nations Economic Commission for Europe" schemeID="UN/ECE 5305" schemeName="Tax Category Identifier">S</cbc:ID><cac:TaxScheme>
+<cbc:ID schemeAgencyID="6" schemeID="UN/ECE 5153">500</cbc:ID><cbc:Name>IGV</cbc:Name><cbc:TaxTypeCode>VAT</cbc:TaxTypeCode></cac:TaxScheme></cbc:TaxCategory></cac:TaxSubtotal></cac:TaxTotal><cac:LegalMonetaryTotal>
+<cbc:LineExtensionAmount currencyID="PEN">500</cbc:LineExtensionAmount><cbc:TaxInclusiveAmount currencyID="PEN">590</cbc:TaxInclusiveAmount><cbc:PayableAmount currencyID="PEN">590</cbc:PayableAmount></cac:LegalMonetaryTotal><cac:InvoiceLine>
+<cbc:ID>1</cbc:ID><cbc:InvoicedQuantity unitCode="ZZ" unitCodeListAgencyName="United Nations Economic Commission for Europe" unitCodeListID="UN/ECE rec 20">1</cbc:InvoicedQuantity><cbc:LineExtensionAmount currencyID="PEN">500.00</cbc:LineExtensionAmount></cac:InvoiceLine><cac:PricingReference>
+</cac:PricingReference><cac:AlternativeConditionPrice>
+<cbc:PriceAmount currencyID="PEN">590.00</cbc:PriceAmount><cbc:PriceTypeCode listAgencyName="PE:SUNAT" listName="SUNAT:Indicador de Tipo de Precio" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01</cbc:PriceTypeCode></cac:AlternativeConditionPrice><cac:TaxTotal>
+<cbc:TaxAmount currencyID="PEN">90.00</cbc:TaxAmount><cac:TaxSubtotal>
+<cbc:TaxableAmount currencyID="PEN">500.00</cbc:TaxableAmount><cbc:TaxAmount currencyID="PEN">90.00</cbc:TaxAmount><cac:TaxCategory>
+<cbc:ID schemeAgencyName="United Nations Economic Commission for Europe" schemeID="UN/ECE 5305" schemeName="Tax Category Identifier">S</cbc:ID><cbc:Percent>18.00</cbc:Percent><cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT" listName="SUNAT:Codigo de Tipo de Afectación del IGV" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">10</cbc:TaxExemptionReasonCode><cac:TaxScheme>
+<cbc:ID>1000</cbc:ID><cbc:Name>IGV</cbc:Name><cbc:TaxTypeCode>VAT</cbc:TaxTypeCode></cac:TaxScheme></cac:TaxCategory></cac:TaxSubtotal></cac:TaxTotal><cac:Item>
+<cbc:Description>SERVICIO DE MONTACARGA DE 2.5 TONELADAS</cbc:Description></cac:Item><cac:Price>
+<cbc:PriceAmount>500.00</cbc:PriceAmount></cac:Price><Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></CanonicalizationMethod>
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></SignatureMethod>
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></Transform>
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></DigestMethod>
+<DigestValue>xO8AGo6ff8mlrDLxBkfhW+eiXFQ=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>
+FqMZ2cc6ilCV0Cu3ZyI8iA0I0n2bcViQXUg/F6VMwCsgwXP2CqfAxbvoDS/trwNBbrIGH/TOYfqa
+Rlt9/+rrbHFjoYkv6Q9xOuCYwoiiJX7DQTdR5pzxURS09CWmCgoTtqG6abGNG2SVn4utp5/A8xTv
+t9zHNJKpxIXSp6EHce5k/7udfM6ZDoV/3Ai48bkTqN1YkBsAEsZPrthQY7vdwFskWvRxkRLhbO96
+UhpLxwxy7l/EEbj2PPaI4Z+8RaHOABcO/IbLy/St4Lo7aiDcOoDTccqPcjaE+cac4qKk2HoQzrdk
+gM1PBfHGJ0PpflBgmp9c0C6ByZrr5YEYwfbfYQ==
+</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509Certificate>
+MIIFBzCCA++gAwIBAgIIQ3Z6GY39TIMwDQYJKoZIhvcNAQELBQAwggENMRswGQYKCZImiZPyLGQB
+GRYLTExBTUEuUEUgU0ExCzAJBgNVBAYTAlBFMQ0wCwYDVQQIDARMSU1BMQ0wCwYDVQQHDARMSU1B
+MRgwFgYDVQQKDA9UVSBFTVBSRVNBIFMuQS4xRTBDBgNVBAsMPEROSSA5OTk5OTk5IFJVQyAyMDEw
+MDAxNDQ3NiAtIENFUlRJRklDQURPIFBBUkEgREVNT1NUUkFDScOTTjFEMEIGA1UEAww7Tk9NQlJF
+IFJFUFJFU0VOVEFOVEUgTEVHQUwgLSBDRVJUSUZJQ0FETyBQQVJBIERFTU9TVFJBQ0nDk04xHDAa
+BgkqhkiG9w0BCQEWDWRlbW9AbGxhbWEucGUwHhcNMjQxMTE5MTc1NTQ4WhcNMjYxMTE5MTc1NTQ4
+WjCCAQ0xGzAZBgoJkiaJk/IsZAEZFgtMTEFNQS5QRSBTQTELMAkGA1UEBhMCUEUxDTALBgNVBAgM
+BExJTUExDTALBgNVBAcMBExJTUExGDAWBgNVBAoMD1RVIEVNUFJFU0EgUy5BLjFFMEMGA1UECww8
+RE5JIDk5OTk5OTkgUlVDIDIwMTAwMDE0NDc2IC0gQ0VSVElGSUNBRE8gUEFSQSBERU1PU1RSQUNJ
+w5NOMUQwQgYDVQQDDDtOT01CUkUgUkVQUkVTRU5UQU5URSBMRUdBTCAtIENFUlRJRklDQURPIFBB
+UkEgREVNT1NUUkFDScOTTjEcMBoGCSqGSIb3DQEJARYNZGVtb0BsbGFtYS5wZTCCASIwDQYJKoZI
+hvcNAQEBBQADggEPADCCAQoCggEBALtjiaOVnsW2cxXcZdwbs6Hi4pN9D/E7A5x8f+H0ziFK8k08
+1q8ULLQQgGEgV8nyP6hC3RRKZb+tigafFx2wOYvhls7Sc5WpzU/aPF8VdgSMpWQgdTbsA4EnPr1Y
+MNlSAuSfey85FluqGQ4Mmr3/CTs0ONJaJhEC9xHjfnxACUxwhEtwOhfwdWgB6oMHeEuL99QNUdXI
+S7EPNt5pnG+TxaDi7oP/oQ/HhjBUYenliZEhYbQiqEA4aL51d98NAbsIyq/4xNAhmw0yRav1ymwE
+Zegp0rFre5j9jD2Gj7iD4zLs4i4mXhHskk/Lzei2m6/Y1xHhUCy4XWvgE8VmvvhlQI8CAwEAAaNn
+MGUwHQYDVR0OBBYEFKCUHfWeZ1gWIVRT7cO1Iwm69I6iMB8GA1UdIwQYMBaAFKCUHfWeZ1gWIVRT
+7cO1Iwm69I6iMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA4GA1UdDwEB/wQEAwIHgDANBgkqhkiG9w0B
+AQsFAAOCAQEAfibc0Co6HBIsMslPl7DntKRNdhpGh1F4blgiPAaTP3UKd7ujfiY0DGI9qBfZ8z7G
+tA8p0ix3NPvYUIC3nZNAEV7PK0zpzKcNnAoH9ViroalgMavEo4BNbpdw5MZiqGF/VW07lTf4WF6U
+aqishNWMk07BmindM5+qcNNsCDLOQ4lU7qHj2oU0IWnnXfQKGJR29+PmMgcFnY+nOy9a7UqBjpct
+f01CQkC9T6XnlSusTBBUknacLFEwRLoO/G+dkpW4Tszuhl4YcKfMP9ACWaOSmj2MSUbx7Vvug+aU
+PFdOpoWGt1oOceIIcMSxBPF/RtV+uM/UHeYPwqcHa0joB9Tfng==
+</X509Certificate>
+</X509Data>
+<KeyValue>
+<RSAKeyValue>
+<Modulus>
+u2OJo5WexbZzFdxl3BuzoeLik30P8TsDnHx/4fTOIUryTTzWrxQstBCAYSBXyfI/qELdFEplv62K
+Bp8XHbA5i+GWztJzlanNT9o8XxV2BIylZCB1NuwDgSc+vVgw2VIC5J97LzkWW6oZDgyavf8JOzQ4
+0lomEQL3EeN+fEAJTHCES3A6F/B1aAHqgwd4S4v31A1R1chLsQ823mmcb5PFoOLug/+hD8eGMFRh
+6eWJkSFhtCKoQDhovnV33w0BuwjKr/jE0CGbDTJFq/XKbARl6CnSsWt7mP2MPYaPuIPjMuziLiZe
+EeyST8vN6Labr9jXEeFQLLhda+ATxWa++GVAjw==
+</Modulus>
+<Exponent>AQAB</Exponent>
+</RSAKeyValue>
+</KeyValue>
+</KeyInfo>
+</Signature></Invoice>

@@ -4,6 +4,6 @@ import model.Factura;
 
 public interface DocumentUBLService {
 	
-	String generarFormatoFactura(Factura factura);
+	public String generarFormatoFactura(Factura factura);
 
 }
