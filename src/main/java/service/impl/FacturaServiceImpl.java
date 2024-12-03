@@ -78,10 +78,11 @@ public class FacturaServiceImpl implements FacturaService{
 		for (Servicio serv : factura.getServicios()) {
 				servicioService.facturarServicio(serv);
 		}
-		return facturaRepository.save(factura).flatMap(p -> {
-			UBLService.generarFormatoFactura(p);
+		UBLService.generarFormatoFactura(factura);
+		return facturaRepository.save(factura).map(p -> {
+			
 			//BolElectronica.generarXMLZipiadoBoleta();
-			return Mono.just(p);
+			return p;
 		});
 	}
 

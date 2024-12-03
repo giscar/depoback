@@ -1,12 +1,19 @@
 package service.impl;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -28,8 +35,12 @@ import org.w3c.dom.Element;
 
 
 import model.Factura;
+import pe.gob.sunat.servicio.registro.comppago.factura.gem.service_bta.BillService;
+import pe.gob.sunat.servicio.registro.comppago.factura.gem.service_bta.BillService_Service_fe;
 import service.DocumentUBLService;
 import util.GeneralFunctions;
+import util.HeaderHandlerResolver;
+import util.LecturaXML;
 
 @Service
 public class DocumentUBLServiceImpl implements DocumentUBLService{
@@ -43,7 +54,7 @@ public class DocumentUBLServiceImpl implements DocumentUBLService{
         String resultado = "";
         String unidadEnvio; 
         String pathXMLFile;
-        String nameFile = factura.getRuc()+"-"+"01"+"-"+factura.getNroDocumento()+".xml";
+        String nameFile = factura.getRuc()+"-"+"01"+"-"+factura.getNroDocumento();
         try {
             log.info("generarXMLZipiadoBoleta - Extraemos datos para preparar XML ");
             unidadEnvio = "C:\\Users\\carel\\Desktop\\depovent\\libre\\";
@@ -51,7 +62,7 @@ public class DocumentUBLServiceImpl implements DocumentUBLService{
 
             log.info("generarXMLZipiadoBoleta - Iniciamos cabecera ");
 
-            pathXMLFile = "C:\\Users\\carel\\Desktop\\depovent\\libre\\"+nameFile;
+            pathXMLFile = "C:\\Users\\carel\\Desktop\\depovent\\libre\\"+nameFile+".xml";
             ElementProxy.setDefaultPrefix(Constants.SignatureSpecNS, "ds");
             //Parametros del keystore
             String keystoreType = "JKS";
@@ -538,7 +549,9 @@ public class DocumentUBLServiceImpl implements DocumentUBLService{
             tf.transform(new DOMSource(doc), sr);
             sr.getOutputStream().close();
             
-            //resultado = GeneralFunctions.crearZip(items, unidadEnvio, signatureFile);
+            resultado = GeneralFunctions.crearZip(nameFile, unidadEnvio, signatureFile);
+            
+            resultado = enviarZipASunat(unidadEnvio, nameFile + ".zip", factura.getRuc());
             
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -548,5 +561,80 @@ public class DocumentUBLServiceImpl implements DocumentUBLService{
         
         return resultado;
 	}
+	
+	private static String enviarZipASunat(String path, String zipFileName, String vruc) {
+        String resultado = "";
+        String sws = "1";
+        log.info("enviarASunat - Prepara ambiente: " + sws);
+        try {
+
+            FileDataSource fileDataSource = new FileDataSource(path + zipFileName);
+            DataHandler dataHandler = new DataHandler(fileDataSource);
+            byte[] respuestaSunat = null;
+            //================Enviando a sunat
+            switch (sws) {
+                case "1":
+                    BillService_Service_fe ws1 = new BillService_Service_fe();
+                    HeaderHandlerResolver handlerResolver1 = new HeaderHandlerResolver();
+                    handlerResolver1.setVruc(vruc);
+                    ws1.setHandlerResolver(handlerResolver1);
+                    BillService port1 = ws1.getBillServicePort();
+                    respuestaSunat = port1.sendBill(zipFileName, dataHandler);
+                    log.info("enviarASunat - Ambiente Beta: " + sws);
+                    break;
+                
+                
+            }
+
+//            javax.activation.FileDataSource fileDataSource = new javax.activation.FileDataSource(path + zipFileName);
+//            javax.activation.DataHandler dataHandler = new javax.activation.DataHandler(fileDataSource);
+            //================Grabando la respuesta de sunat en archivo ZIP solo si es nulo
+            String pathRecepcion = "d:\\envio\\";
+            FileOutputStream fos = new FileOutputStream(pathRecepcion + "R-" + zipFileName);
+            fos.write(respuestaSunat);
+            fos.close();
+            //================Descompremiendo el zip de Sunat
+            log.info("enviarASunat - Descomprimiendo CDR " + pathRecepcion + "R-" + zipFileName);
+            ZipFile archive = new ZipFile(pathRecepcion + "R-" + zipFileName);
+            Enumeration e = archive.entries();
+            while (e.hasMoreElements()) {
+                ZipEntry entry = (ZipEntry) e.nextElement();
+                File file = new File(pathRecepcion, entry.getName());
+                if (!file.isDirectory()) {
+                    if (entry.isDirectory() && !file.exists()) {
+                        file.mkdirs();
+                    } else {
+                        if (!file.getParentFile().exists()) {
+                            file.getParentFile().mkdirs();
+                        }
+                        InputStream in = archive.getInputStream(entry);
+                        BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file));
+
+                        byte[] buffer = new byte[8192];
+                        int read;
+                        while (-1 != (read = in.read(buffer))) {
+                            out.write(buffer, 0, read);
+                        }
+                        in.close();
+                        out.close();
+                    }
+                }
+            }
+            archive.close();
+            //================leeyendo la resuesta de Sunat
+            zipFileName = zipFileName.substring(0, zipFileName.indexOf(".zip"));
+            log.info("enviarASunat - Lectura del contenido del CDR ");
+            resultado = LecturaXML.getRespuestaSunat(pathRecepcion + "R-" + zipFileName + ".xml");
+            System.out.println("==>El envio del Zip a sunat fue exitoso");
+            log.info("enviarASunat - Envio a Sunat Exitoso ");
+        } catch (javax.xml.ws.soap.SOAPFaultException ex) {
+            System.out.println(ex.toString());
+            //log.error("enviarASunat - Error " + ex.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("enviarASunat - Error " + e.toString());
+        }
+        return resultado;
+    }
 
 }
