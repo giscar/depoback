@@ -30,6 +30,7 @@ import model.Usuario;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import service.ClienteService;
+import service.DocumentUBLService;
 import service.FacturaService;
 import service.ImagenService;
 import service.MontacargaService;
@@ -69,6 +70,9 @@ public class ErpController {
 	
 	@Autowired
 	RolService rolService;
+	
+	@Autowired
+	DocumentUBLService documentUBLService;
 	
 	
 	@GetMapping(value = "names")
@@ -408,6 +412,11 @@ public class ErpController {
 	@PostMapping("factura")
 	public ResponseEntity<Mono<Factura>> generarFactura(@RequestBody Factura factura) {
 		return new ResponseEntity<>(facturaService.save(factura),HttpStatus.OK);
+	}
+	
+	@PostMapping("test")
+	public ResponseEntity<Object> generarFacturaTest(@RequestBody String trama) {
+		return new ResponseEntity<>(documentUBLService.testFactura(trama),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="factura/maxCodFactura")

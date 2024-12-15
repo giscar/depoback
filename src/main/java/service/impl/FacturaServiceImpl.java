@@ -6,6 +6,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 import model.Factura;
 import model.Servicio;
@@ -76,12 +77,12 @@ public class FacturaServiceImpl implements FacturaService{
 		Date date = new Date();
 		factura.setHoraEmision(dateFormat.format(date));
 		for (Servicio serv : factura.getServicios()) {
-				servicioService.facturarServicio(serv);
+				//servicioService.facturarServicio(serv);
 		}
 		UBLService.generarFormatoFactura(factura);
-		return facturaRepository.save(factura).map(p -> {
+		return facturaRepository.save(null).map(p -> {
 			
-			//BolElectronica.generarXMLZipiadoBoleta();
+			BolElectronica.generarXMLZipiadoBoleta();
 			return p;
 		});
 	}

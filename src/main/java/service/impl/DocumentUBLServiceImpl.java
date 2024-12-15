@@ -21,19 +21,21 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.xml.security.Init;
 import org.apache.xml.security.signature.XMLSignature;
 import org.apache.xml.security.transforms.Transforms;
 import org.apache.xml.security.utils.Constants;
 import org.apache.xml.security.utils.ElementProxy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import model.Factura;
 import pe.gob.sunat.servicio.registro.comppago.factura.gem.service_bta.BillService;
 import pe.gob.sunat.servicio.registro.comppago.factura.gem.service_bta.BillService_Service_fe;
@@ -43,9 +45,23 @@ import util.HeaderHandlerResolver;
 import util.LecturaXML;
 
 @Service
+@AllArgsConstructor
+@Slf4j
 public class DocumentUBLServiceImpl implements DocumentUBLService{
 	
-	private static Log log = LogFactory.getLog(DocumentUBLServiceImpl.class);
+	private final RestClient restClient;
+	
+	@Override
+	public ResponseEntity<String> testFactura(String trama) {
+		ResponseEntity<String> o = restClient.post().
+				uri("/ol-ti-itcpfegem-beta/billService").
+				body(trama).
+				retrieve().
+				toEntity(String.class);
+		log.info("dsdsdds");
+		return o;
+	}
+	
 
 	@Override
 	public  String generarFormatoFactura(Factura factura) {
@@ -636,5 +652,7 @@ public class DocumentUBLServiceImpl implements DocumentUBLService{
         }
         return resultado;
     }
+
+	
 
 }
