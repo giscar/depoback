@@ -384,8 +384,8 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="servicio/busquedaIdOperadorAggregate")
-	public ResponseEntity<Flux<Servicio>> findByOperadorIdAggregate(@RequestParam(name = "idOperador", required = false) String idOperador) {
-		return new ResponseEntity<>(servicioService.findByOperadorIdAggregate(idOperador),HttpStatus.OK);
+	public ResponseEntity<Flux<Servicio>> findByOperadorIdAggregate(@RequestParam(name = "documento", required = false) String documento) {
+		return new ResponseEntity<>(servicioService.findByOperadorIdAggregate(documento),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/busquedaServiciosPendientes")

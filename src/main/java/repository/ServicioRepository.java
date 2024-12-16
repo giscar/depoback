@@ -57,7 +57,7 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $match: { 'operador.documento' : ?0,  'estadoRegistro' : 'Proceso', 'estado' : '1'}},"
 			
 	})
-	Flux<Servicio> findByOperadorIdAggregate(String idOperador);
+	Flux<Servicio> findByOperadorIdAggregate(String documento);
 	
 	@Aggregation(pipeline = {
 			"{ $addFields: { 'operadorObjId': { '$toObjectId': '$operadorId' }, 'montacargaObjId': { '$toObjectId': '$montacargaId' },}},",
