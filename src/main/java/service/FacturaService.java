@@ -8,6 +8,8 @@ public interface FacturaService {
 	
 	Flux<Factura> listFactura();
 	
+	Flux<Factura> buscarFactura();
+	
 	Flux<Factura> searchFactura(String rucCliente);
 	
 	Mono<Factura> setFactura(Factura factura);

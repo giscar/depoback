@@ -34,6 +34,12 @@ public class FacturaServiceImpl implements FacturaService{
 	public Flux<Factura> listFactura() {
 		return facturaRepository.findAll();
 	}
+	
+	@Override
+	public Flux<Factura> buscarFactura() {
+		// TODO Auto-generated method stub
+		return facturaRepository.findAll();
+	}
 
 	/*@Override
 	public Mono<Void> createFactura(Factura factura) {
@@ -77,10 +83,10 @@ public class FacturaServiceImpl implements FacturaService{
 		Date date = new Date();
 		factura.setHoraEmision(dateFormat.format(date));
 		for (Servicio serv : factura.getServicios()) {
-				//servicioService.facturarServicio(serv);
+				servicioService.facturarServicio(serv);
 		}
 		UBLService.generarFormatoFactura(factura);
-		return facturaRepository.save(null).map(p -> {
+		return facturaRepository.save(factura).map(p -> {
 			
 			BolElectronica.generarXMLZipiadoBoleta();
 			return p;
@@ -91,5 +97,7 @@ public class FacturaServiceImpl implements FacturaService{
 	public Mono<Object> findCodigoFactura() {
 		return facturaRepository.findMaxCodFactura();
 	}
+
+	
 
 }

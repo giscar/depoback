@@ -423,4 +423,9 @@ public class ErpController {
 	public ResponseEntity<Mono<Object>> findMaxCodFactura() {
 		return new ResponseEntity<>(facturaService.findCodigoFactura(),HttpStatus.OK);
 	}
+	
+	@GetMapping(value="factura/busquedaFactura")
+	public ResponseEntity<Flux<Factura>> findFactura() {
+		return new ResponseEntity<>(facturaService.buscarFactura(),HttpStatus.OK);
+	}
 }
