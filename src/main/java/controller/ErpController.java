@@ -428,4 +428,5 @@ public class ErpController {
 	public ResponseEntity<Flux<Factura>> findFactura() {
 		return new ResponseEntity<>(facturaService.buscarFactura(),HttpStatus.OK);
 	}
+	
 }
