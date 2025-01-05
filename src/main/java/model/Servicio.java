@@ -23,6 +23,8 @@ public class Servicio implements Serializable {
 	
 	private Long codServicio;
 	
+	private String numeroServicio;
+	
 	private String ruc;
 	
 	private String horaSalidaLocal;
