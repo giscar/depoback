@@ -1,0 +1,41 @@
+package service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import model.Mercaderia;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import repository.MercaderiaRepository;
+import service.MercaderiaService;
+
+@Service
+public class MercaderiaServiceImpl implements MercaderiaService{
+	
+	@Autowired
+	private MercaderiaRepository mercaderiaRepository;
+
+	@Override
+	public Flux<Mercaderia> mercaderiaByRuc(String ruc) {
+		return mercaderiaRepository.findAll();
+	}
+
+	@Override
+	public Mono<Mercaderia> save(Mercaderia mercaderia) {
+		return mercaderiaRepository.save(mercaderia);
+	}
+
+	@Override
+	public Mono<Mercaderia> edit(Mercaderia mercaderia) {
+		return mercaderiaRepository.save(mercaderia);
+	}
+
+	@Override
+	public Mono<Mercaderia> mercaderiaByID(String id) {
+		return mercaderiaRepository.findById(id);
+	}
+
+
+	
+
+}

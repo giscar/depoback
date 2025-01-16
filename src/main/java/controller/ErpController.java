@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import model.Cliente;
 import model.Factura;
 import model.Imagen;
+import model.Mercaderia;
 import model.Montacarga;
 import model.Operador;
 import model.Perfil;
@@ -33,6 +34,7 @@ import service.ClienteService;
 import service.DocumentUBLService;
 import service.FacturaService;
 import service.ImagenService;
+import service.MercaderiaService;
 import service.MontacargaService;
 import service.OperadorService;
 import service.PerfilService;
@@ -73,6 +75,9 @@ public class ErpController {
 	
 	@Autowired
 	DocumentUBLService documentUBLService;
+	
+	@Autowired
+	MercaderiaService mercaderiaService;
 	
 	
 	@GetMapping(value = "names")
@@ -427,6 +432,26 @@ public class ErpController {
 	@GetMapping(value="factura/busquedaFactura")
 	public ResponseEntity<Flux<Factura>> findFactura() {
 		return new ResponseEntity<>(facturaService.buscarFactura(),HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "mercaderia/all")
+	public ResponseEntity<Flux<Mercaderia>> getMercaderias(){
+		return new ResponseEntity<>(mercaderiaService.mercaderiaByRuc(null), HttpStatus.OK) ;
+	}
+	
+	@GetMapping(value="mercaderia/{id}")
+	public ResponseEntity<Mono<Mercaderia>> mercaderiaForId(@PathVariable("id") String id) {
+		return new ResponseEntity<>(mercaderiaService.mercaderiaByID(id),HttpStatus.OK);
+	}
+	
+	@PostMapping(value="mercaderia")
+	public ResponseEntity<Mono<Mercaderia>> saveMercaderia(@RequestBody Mercaderia mercaderia) {
+		return new ResponseEntity<>(mercaderiaService.save(mercaderia),HttpStatus.OK);
+	}
+	
+	@PutMapping(value="mercaderia")
+	public ResponseEntity<Mono<Mercaderia>> editMercaderia(@RequestBody Mercaderia mercaderia) {
+		return new ResponseEntity<>(mercaderiaService.edit(mercaderia),HttpStatus.OK);
 	}
 	
 }
