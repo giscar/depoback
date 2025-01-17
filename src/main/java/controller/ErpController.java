@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
+import model.Catalogo;
 import model.Cliente;
 import model.Factura;
 import model.Imagen;
@@ -30,6 +31,7 @@ import model.Servicio;
 import model.Usuario;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import service.CatalogoService;
 import service.ClienteService;
 import service.DocumentUBLService;
 import service.FacturaService;
@@ -79,6 +81,8 @@ public class ErpController {
 	@Autowired
 	MercaderiaService mercaderiaService;
 	
+	@Autowired
+	CatalogoService catalogoService;
 	
 	@GetMapping(value = "names")
 	public Flux<String> getNames(){
@@ -86,6 +90,11 @@ public class ErpController {
 		return Flux.fromIterable(lista)
 				.delayElements(Duration.ofSeconds(2));
 				
+	}
+	
+	@GetMapping(value="catalogo/{tipo}")
+	public ResponseEntity<Flux<Catalogo>> catalogoByTipo(@PathVariable("tipo") String tipo) {
+		return new ResponseEntity<>(catalogoService.findByTipo(tipo),HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "factura/all")
@@ -452,6 +461,11 @@ public class ErpController {
 	@PutMapping(value="mercaderia")
 	public ResponseEntity<Mono<Mercaderia>> editMercaderia(@RequestBody Mercaderia mercaderia) {
 		return new ResponseEntity<>(mercaderiaService.edit(mercaderia),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="mercaderia/maxCodServicio")
+	public ResponseEntity<Mono<Object>> findMaxCodServicioMercaderia() {
+		return new ResponseEntity<>(mercaderiaService.findMaxCodServicio(),HttpStatus.OK);
 	}
 	
 }

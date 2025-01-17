@@ -13,5 +13,7 @@ public interface MercaderiaService {
 	Mono<Mercaderia> edit(Mercaderia mercaderia);
 	
 	Mono<Mercaderia> mercaderiaByID(String id);
+	
+	Mono<Object> findMaxCodServicio();
 
 }
