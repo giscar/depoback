@@ -22,6 +22,7 @@ import model.Catalogo;
 import model.Cliente;
 import model.Factura;
 import model.Imagen;
+import model.Ingreso;
 import model.Mercaderia;
 import model.Montacarga;
 import model.Operador;
@@ -36,6 +37,7 @@ import service.ClienteService;
 import service.DocumentUBLService;
 import service.FacturaService;
 import service.ImagenService;
+import service.IngresoService;
 import service.MercaderiaService;
 import service.MontacargaService;
 import service.OperadorService;
@@ -83,6 +85,9 @@ public class ErpController {
 	
 	@Autowired
 	CatalogoService catalogoService;
+	
+	@Autowired
+	IngresoService ingresoService;
 	
 	@GetMapping(value = "names")
 	public Flux<String> getNames(){
@@ -466,6 +471,31 @@ public class ErpController {
 	@GetMapping(value="mercaderia/maxCodServicio")
 	public ResponseEntity<Mono<Object>> findMaxCodServicioMercaderia() {
 		return new ResponseEntity<>(mercaderiaService.findMaxCodServicio(),HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "ingreso/all")
+	public ResponseEntity<Flux<Ingreso>> getIngresos(){
+		return new ResponseEntity<>(ingresoService.ingresoAll(), HttpStatus.OK) ;
+	}
+	
+	@GetMapping(value="ingreso/{id}")
+	public ResponseEntity<Mono<Ingreso>> ingresoForId(@PathVariable("id") String id) {
+		return new ResponseEntity<>(ingresoService.ingresoByID(id),HttpStatus.OK);
+	}
+	
+	@PostMapping(value="ingreso")
+	public ResponseEntity<Mono<Ingreso>> saveIngreso(@RequestBody Ingreso ingreso) {
+		return new ResponseEntity<>(ingresoService.save(ingreso),HttpStatus.OK);
+	}
+	
+	@PutMapping(value="ingreso")
+	public ResponseEntity<Mono<Ingreso>> editIngreso(@RequestBody Ingreso ingreso) {
+		return new ResponseEntity<>(ingresoService.edit(ingreso),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="ingreso/maxCodServicio")
+	public ResponseEntity<Mono<Object>> findMaxCodServicioIngreso() {
+		return new ResponseEntity<>(ingresoService.findMaxCodServicio(),HttpStatus.OK);
 	}
 	
 }

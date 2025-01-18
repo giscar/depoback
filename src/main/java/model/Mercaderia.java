@@ -18,16 +18,6 @@ public class Mercaderia {
 	@Id
 	private String id;
 	
-	private Long codServicio;
-	
-	private String numeroServicio;
-	
-	private String dua;
-	
-	private String razonSocial;
-	
-	private String ruc;
-	
 	private String productoCodigo;
 	
 	private String descripcion;
