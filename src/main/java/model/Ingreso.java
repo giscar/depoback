@@ -32,9 +32,11 @@ public class Ingreso implements Serializable {
 	
 	private String estadoRegistro;
 	
+	private String ruc;
+	
 	private String razonSocial;
 	
-	private String ruc;
+	private String direccion;
 	
 	private List<Mercaderia> mercaderias;
 	

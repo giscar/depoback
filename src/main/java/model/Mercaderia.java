@@ -18,9 +18,11 @@ public class Mercaderia {
 	@Id
 	private String id;
 	
+	private String idIngreso;
+	
 	private String productoCodigo;
 	
-	private String descripcion;
+	private String descripcionProducto;
 	
 	private String unidadMedida;
 	

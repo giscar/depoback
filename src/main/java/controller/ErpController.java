@@ -478,8 +478,8 @@ public class ErpController {
 		return new ResponseEntity<>(ingresoService.ingresoAll(), HttpStatus.OK) ;
 	}
 	
-	@GetMapping(value="ingreso/{id}")
-	public ResponseEntity<Mono<Ingreso>> ingresoForId(@PathVariable("id") String id) {
+	@GetMapping(value="ingreso")
+	public ResponseEntity<Mono<Ingreso>> ingresoForId(@RequestParam("id") String id) {
 		return new ResponseEntity<>(ingresoService.ingresoByID(id),HttpStatus.OK);
 	}
 	
