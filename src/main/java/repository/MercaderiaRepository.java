@@ -15,4 +15,7 @@ public interface MercaderiaRepository extends ReactiveMongoRepository<Mercaderia
 	})
 	Mono<Object> findMaxCodServicio();
 	
+	@Query("{'idIngreso': ?0})")
+	Flux<Mercaderia> findByIngreso(String idIngreso);
+	
 }

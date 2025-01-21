@@ -40,6 +40,11 @@ public class MercaderiaServiceImpl implements MercaderiaService{
 		return mercaderiaRepository.findMaxCodServicio();
 	}
 
+	@Override
+	public Flux<Mercaderia> findByIngreso(String idIngreso) {
+		return mercaderiaRepository.findByIngreso(idIngreso);
+	}
+
 
 	
 

@@ -473,6 +473,11 @@ public class ErpController {
 		return new ResponseEntity<>(mercaderiaService.findMaxCodServicio(),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="mercaderia/findByIngreso")
+	public ResponseEntity<Flux<Mercaderia>> findByIngreso(@RequestParam("idIngreso") String idIngreso) {
+		return new ResponseEntity<>(mercaderiaService.findByIngreso(idIngreso),HttpStatus.OK);
+	}
+	
 	@GetMapping(value = "ingreso/all")
 	public ResponseEntity<Flux<Ingreso>> getIngresos(){
 		return new ResponseEntity<>(ingresoService.ingresoAll(), HttpStatus.OK) ;
