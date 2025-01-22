@@ -474,8 +474,8 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="mercaderia/findByIngreso")
-	public ResponseEntity<Flux<Mercaderia>> findByIngreso(@RequestParam("idIngreso") String idIngreso) {
-		return new ResponseEntity<>(mercaderiaService.findByIngreso(idIngreso),HttpStatus.OK);
+	public ResponseEntity<Flux<Mercaderia>> findByIngreso(@RequestParam("id") String id) {
+		return new ResponseEntity<>(mercaderiaService.findByIngreso(id),HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "ingreso/all")

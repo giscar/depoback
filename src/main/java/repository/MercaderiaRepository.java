@@ -15,7 +15,14 @@ public interface MercaderiaRepository extends ReactiveMongoRepository<Mercaderia
 	})
 	Mono<Object> findMaxCodServicio();
 	
-	@Query("{'idIngreso': ?0})")
+	@Aggregation(pipeline = {
+			"{ $lookup:{ from : 'catalogos', localField: 'unidadMedida', foreignField: 'codigo', as: 'um'}}, ",
+		    "{ $match: { 'um.tipo' : '1',  'idIngreso' : ?0}} "
+			
+	})
 	Flux<Mercaderia> findByIngreso(String idIngreso);
+	
+	
+	
 	
 }

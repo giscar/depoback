@@ -38,6 +38,8 @@ public class Ingreso implements Serializable {
 	
 	private String direccion;
 	
+	private String descripcion;
+	
 	private List<Mercaderia> mercaderias;
 	
 	private Date fechaRegistro = new Date();
