@@ -17,7 +17,8 @@ public interface MercaderiaRepository extends ReactiveMongoRepository<Mercaderia
 	
 	@Aggregation(pipeline = {
 			"{ $lookup:{ from : 'catalogos', localField: 'unidadMedida', foreignField: 'codigo', as: 'um'}}, ",
-		    "{ $match: { 'um.tipo' : '1',  'idIngreso' : ?0}} "
+			"{ $lookup:{ from : 'catalogos', localField: 'codigoAlmacen', foreignField: 'codigo', as: 'almacen'}},",
+		    "{ $match: { 'um.tipo' : '1', 'almacen.tipo' : '2',  'idIngreso' : ?0}} "
 			
 	})
 	Flux<Mercaderia> findByIngreso(String idIngreso);

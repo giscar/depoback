@@ -40,7 +40,7 @@ public class Ingreso implements Serializable {
 	
 	private String descripcion;
 	
-	private List<Mercaderia> mercaderias;
+	//private List<Mercaderia> mercaderias;
 	
 	private Date fechaRegistro = new Date();
 	

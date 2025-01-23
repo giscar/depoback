@@ -26,7 +26,9 @@ public class Mercaderia {
 	
 	private String unidadMedida;
 	
-	private Catalogo um;
+	private Object um;
+	
+	private Object almacen;
 	
 	private Integer cantidad;
 	
