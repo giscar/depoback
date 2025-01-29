@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,11 +21,17 @@ public class Ingreso implements Serializable {
 	@Id
 	private String id;
 	
-	private Long codServicio;
+	private Long codIngreso;
 	
-	private String numeroServicio;
+	private String numeroIngreso;
+	
+	private String tipoMercaderia;
+	
+	private String pedidoDeposito;
 	
 	private String codigoDua;
+	
+	private String serie;
 	
 	private String estado;
 	
@@ -41,6 +46,8 @@ public class Ingreso implements Serializable {
 	private String descripcion;
 	
 	//private List<Mercaderia> mercaderias;
+	
+	private Date fechaIngreso;
 	
 	private Date fechaRegistro = new Date();
 	
