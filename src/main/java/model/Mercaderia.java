@@ -20,6 +20,8 @@ public class Mercaderia {
 	
 	private String idIngreso;
 	
+	private String serie;
+	
 	private String productoCodigo;
 	
 	private String descripcionProducto;
