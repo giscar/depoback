@@ -39,5 +39,10 @@ public class IngresoServiceImpl implements IngresoService{
 	public Mono<Ingreso> ingresoByID(String id) {
 		return ingresoRepository.findById(id);
 	}
+
+	@Override
+	public Flux<Ingreso> findByFiltrer(String pedidoDeposito, String codigoDua, String ruc, String tipoMercaderia) {
+		return ingresoRepository.findByFiltrer(pedidoDeposito, codigoDua, ruc, tipoMercaderia);
+	}
 	
 }

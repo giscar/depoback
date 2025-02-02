@@ -14,4 +14,12 @@ public interface IngresoRepository extends ReactiveMongoRepository<Ingreso, Stri
 	})
 	Mono<Object> findMaxCodServicio();
 	
+	@Aggregation(pipeline = {
+			"{ $match:{ $or :[ {'pedidoDeposito' : ?0},{'codigoDua' : ?1},{'ruc' : ?2},{'tipoMercaderia' : ?3} ]}},"
+			//"{ $match:{ $or :[{'ruc' : ?0},{'codServicio' : ?1},{'operadorId' : ?2},{'montacargaId' : ?3},{'estadoRegistro' : ?4},{'tipoServicio' : ?5} ]}},"
+			
+	})
+	Flux<Ingreso> findByFiltrer(String pedidoDeposito, String codigoDua, String ruc, String tipoMercaderia);
+	
+	
 }

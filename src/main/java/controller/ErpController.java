@@ -503,4 +503,13 @@ public class ErpController {
 		return new ResponseEntity<>(ingresoService.findMaxCodServicio(),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="ingreso/busquedaPorFiltros")
+	public ResponseEntity<Flux<Ingreso>> findByFilterIngresos(
+			@RequestParam(name = "pedidoDeposito", required = false) String pedidoDeposito, 
+			@RequestParam(name = "codigoDua") String codigoDua,
+			@RequestParam(name = "ruc") String ruc,
+			@RequestParam(name = "tipoMercaderia") String tipoMercaderia) {
+		return new ResponseEntity<>(ingresoService.findByFiltrer(pedidoDeposito, codigoDua, ruc, tipoMercaderia),HttpStatus.OK);
+	}
+	
 }
