@@ -36,8 +36,8 @@ public class MercaderiaServiceImpl implements MercaderiaService{
 	}
 
 	@Override
-	public Mono<Object> findMaxCodServicio() {
-		return mercaderiaRepository.findMaxCodServicio();
+	public Mono<Object> findMaxCodMercaderia() {
+		return mercaderiaRepository.findMaxCodMercaderia();
 	}
 
 	@Override

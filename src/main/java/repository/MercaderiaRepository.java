@@ -11,9 +11,9 @@ import reactor.core.publisher.Mono;
 public interface MercaderiaRepository extends ReactiveMongoRepository<Mercaderia, String> {
 	
 	@Aggregation(pipeline = {
-			"{$group: { _id: null, maxField : { $max: '$codServicio' }}}"
+			"{$group: { _id: null, maxField : { $max: '$codMercaderia' }}}"
 	})
-	Mono<Object> findMaxCodServicio();
+	Mono<Object> findMaxCodMercaderia();
 	
 	@Aggregation(pipeline = {
 			"{ $lookup:{ from : 'catalogos', localField: 'unidadMedida', foreignField: 'codigo', as: 'um'}}, ",
@@ -22,7 +22,6 @@ public interface MercaderiaRepository extends ReactiveMongoRepository<Mercaderia
 			
 	})
 	Flux<Mercaderia> findByIngreso(String idIngreso);
-	
 	
 	
 	

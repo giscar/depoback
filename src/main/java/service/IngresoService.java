@@ -17,6 +17,6 @@ public interface IngresoService {
 	Mono<Object> findMaxCodServicio();
 	
 	Flux<Ingreso> findByFiltrer(String pedidoDeposito, 
-			String codigoDua, String ruc, String tipoMercaderia);
+			String codigoDua, String ruc, String tipoMercaderia, String estadoRegistro);
 
 }

@@ -28,6 +28,7 @@ import model.Montacarga;
 import model.Operador;
 import model.Perfil;
 import model.Rol;
+import model.Salida;
 import model.Servicio;
 import model.Usuario;
 import reactor.core.publisher.Flux;
@@ -43,6 +44,7 @@ import service.MontacargaService;
 import service.OperadorService;
 import service.PerfilService;
 import service.RolService;
+import service.SalidaService;
 import service.ServicioService;
 import service.UsuarioService;
 
@@ -88,6 +90,9 @@ public class ErpController {
 	
 	@Autowired
 	IngresoService ingresoService;
+	
+	@Autowired
+	SalidaService salidaService;
 	
 	@GetMapping(value = "names")
 	public Flux<String> getNames(){
@@ -468,9 +473,9 @@ public class ErpController {
 		return new ResponseEntity<>(mercaderiaService.edit(mercaderia),HttpStatus.OK);
 	}
 	
-	@GetMapping(value="mercaderia/maxCodServicio")
+	@GetMapping(value="mercaderia/maxCodMercaderia")
 	public ResponseEntity<Mono<Object>> findMaxCodServicioMercaderia() {
-		return new ResponseEntity<>(mercaderiaService.findMaxCodServicio(),HttpStatus.OK);
+		return new ResponseEntity<>(mercaderiaService.findMaxCodMercaderia(),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="mercaderia/findByIngreso")
@@ -508,8 +513,24 @@ public class ErpController {
 			@RequestParam(name = "pedidoDeposito", required = false) String pedidoDeposito, 
 			@RequestParam(name = "codigoDua") String codigoDua,
 			@RequestParam(name = "ruc") String ruc,
-			@RequestParam(name = "tipoMercaderia") String tipoMercaderia) {
-		return new ResponseEntity<>(ingresoService.findByFiltrer(pedidoDeposito, codigoDua, ruc, tipoMercaderia),HttpStatus.OK);
+			@RequestParam(name = "tipoMercaderia") String tipoMercaderia,
+			@RequestParam(name = "estadoRegistro") String estadoRegistro) {
+		return new ResponseEntity<>(ingresoService.findByFiltrer(pedidoDeposito, codigoDua, ruc, tipoMercaderia, estadoRegistro),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="salida")
+	public ResponseEntity<Mono<Salida>> salidaForId(@RequestParam("id") String id) {
+		return new ResponseEntity<>(salidaService.salidaByID(id),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="salida/numeroMercaderia")
+	public ResponseEntity<Flux<Salida>> salidaForNumeroMercaderia(@RequestParam("numeroMercaderia") String numeroMercaderia) {
+		return new ResponseEntity<>(salidaService.findByNumeroMercaderia(numeroMercaderia),HttpStatus.OK);
+	}
+	
+	@PostMapping(value="salida")
+	public ResponseEntity<Mono<Salida>> saveSalida(@RequestBody Salida salida) {
+		return new ResponseEntity<>(salidaService.save(salida),HttpStatus.OK);
 	}
 	
 }

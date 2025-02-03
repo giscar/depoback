@@ -14,7 +14,7 @@ public interface MercaderiaService {
 	
 	Mono<Mercaderia> mercaderiaByID(String id);
 	
-	Mono<Object> findMaxCodServicio();
+	Mono<Object> findMaxCodMercaderia();
 	
 	Flux<Mercaderia> findByIngreso(String idIngreso);
 

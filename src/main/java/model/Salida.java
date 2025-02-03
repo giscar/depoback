@@ -12,39 +12,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(collection = "mercaderias")
-public class Mercaderia {
+@Document(collection = "salidas")
+public class Salida {
 	
 	@Id
 	private String id;
 	
-	private String idIngreso;
+	private String idMercaderia;
 	
 	private String numeroMercaderia;
 	
-	private Long codMercaderia;
+	private Long cantidadSalida;
 	
-	private String serie;
+	private Long saldoRestante;
 	
-	private String productoCodigo;
-	
-	private String descripcionProducto;
-	
-	private String unidadMedida;
-	
-	private Object um;
-	
-	private Object almacen;
-	
-	private Integer cantidad;
-	
-	private String codigoAlmacen;
-	
-	private Integer saldo;
-	
-	private Integer nroOrden;
-	
-	private Date fechaIngreso;
+	private String descripcionSalida;
 	
 	private Date fechaSalida;
 	
