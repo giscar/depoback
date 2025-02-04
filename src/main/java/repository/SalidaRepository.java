@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 
 public interface SalidaRepository extends ReactiveMongoRepository<Salida, String> {
 	
-	@Query("{'numeroMercaderia': '?1'})")
+	@Query("{'numeroMercaderia': ?0 }")
 	Flux<Salida> findByNumeroMercaderia(String numeroMercaderia);
 	
 }
