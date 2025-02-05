@@ -24,5 +24,6 @@ public interface MercaderiaRepository extends ReactiveMongoRepository<Mercaderia
 	Flux<Mercaderia> findByIngreso(String idIngreso);
 	
 	
-	
+	@Query("{'numeroMercaderia': ?0 }")
+	Mono<Mercaderia> findByNumeroMercaderia(String numeroMercaderia);
 }

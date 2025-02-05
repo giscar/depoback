@@ -45,6 +45,11 @@ public class MercaderiaServiceImpl implements MercaderiaService{
 		return mercaderiaRepository.findByIngreso(idIngreso);
 	}
 
+	@Override
+	public Mono<Mercaderia> findByNumeroMercaderia(String numeroMercaderia) {
+		return mercaderiaRepository.findByNumeroMercaderia(numeroMercaderia);
+	}
+
 
 	
 

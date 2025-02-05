@@ -483,6 +483,11 @@ public class ErpController {
 		return new ResponseEntity<>(mercaderiaService.findByIngreso(id),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="mercaderia/findByNumeroMercaderia")
+	public ResponseEntity<Mono<Mercaderia>> findByNumeroMercaderia(@RequestParam("numeroMercaderia") String numeroMercaderia) {
+		return new ResponseEntity<>(mercaderiaService.findByNumeroMercaderia(numeroMercaderia),HttpStatus.OK);
+	}
+	
 	@GetMapping(value = "ingreso/all")
 	public ResponseEntity<Flux<Ingreso>> getIngresos(){
 		return new ResponseEntity<>(ingresoService.ingresoAll(), HttpStatus.OK) ;

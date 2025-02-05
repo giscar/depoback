@@ -38,11 +38,15 @@ public class Mercaderia {
 	
 	private Integer cantidad;
 	
+	private Integer cantidadOrignal;
+	
 	private String codigoAlmacen;
 	
 	private Integer saldo;
 	
 	private Integer nroOrden;
+	
+	private String estadoMercaderia;
 	
 	private Date fechaIngreso;
 	
