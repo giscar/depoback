@@ -26,6 +26,8 @@ public class Cliente {
 	
 	private String email;
 	
+	private String ubigeo;
+	
 	private String estado;
 	
 	private Date fechaRegistro = new Date();

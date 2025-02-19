@@ -1,5 +1,6 @@
 package repository;
 
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
@@ -9,8 +10,11 @@ import reactor.core.publisher.Mono;
 
 public interface OperadorRepository extends ReactiveMongoRepository<Operador, String> {
 	
-
-	@Query("{'estado': '1'}")
+	
+	@Aggregation(pipeline = {
+			"{ $match:{ 'estado': '1'} },",
+			"{ $sort:{ 'nombre': 1} },"
+	})
 	Flux<Operador> findByEstado();
 	
 	@Query("{'estado': '1', 'documento' :  ?0 }")
