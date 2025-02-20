@@ -67,7 +67,9 @@ public class Servicio implements Serializable {
 	
 	private String fechaConclusion;
 	
-	private String url;
+	private String urlSolicitante;
+	
+	private String urlOperador;
 	
 	private String moneda;
 	
