@@ -21,7 +21,8 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
-			"{ $match:{ $or :[{'ruc' : ?0},{'codServicio' : ?1}]}},"
+			"{ $match:{ $or :[{'ruc' : ?0},{'codServicio' : ?1}]}},",
+			"{ $sort:{ 'codServicio': -1} },"
 			//"{ $replaceRoot: { newRoot: { $mergeObjects: [{$arrayElemAt: ['$innerOperadores', 0]}, '$$ROOT']}} }"
 			
 	})
@@ -32,8 +33,8 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
-			"{ $match:{ $or :[{'ruc' : ?0},{'codServicio' : ?1}], $and: [{'estadoRegistro' : 'Concluido'}]}},"
-			//"{ $replaceRoot: { newRoot: { $mergeObjects: [{$arrayElemAt: ['$innerOperadores', 0]}, '$$ROOT']}} }"
+			"{ $match:{ $or :[{'ruc' : ?0},{'codServicio' : ?1}], $and: [{'estadoRegistro' : 'Concluido'}]}},",
+			"{ $sort:{ 'codServicio': -1} },"
 			
 	})
 	Flux<Servicio> findByRucCodServicioAggregateConcluido(String ruc, Integer codServicio);
@@ -43,9 +44,8 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
-			"{ $match:{ $or :[{'ruc' : ?0},{'codServicio' : ?1},{'operadorId' : ?2},{'montacargaId' : ?3},{'estadoRegistro' : ?4},{'tipoServicio' : ?5} ]}},"
-			//"{ $replaceRoot: { newRoot: { $mergeObjects: [{$arrayElemAt: ['$innerOperadores', 0]}, '$$ROOT']}} }"
-			
+			"{ $match:{ $or :[{'ruc' : ?0},{'codServicio' : ?1},{'operadorId' : ?2},{'montacargaId' : ?3},{'estadoRegistro' : ?4},{'tipoServicio' : ?5} ]}},",
+			"{ $sort:{ 'codServicio': -1} },"			
 	})
 	Flux<Servicio> findByRucEstadisticasAggregate(String ruc, Integer codServicio, String idOperador, String idMontacarga, String estadoRegistro, String tipoServicio);
 	
@@ -54,7 +54,8 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
-			"{ $match: { 'operador.documento' : ?0,  'estadoRegistro' : 'Proceso', 'estado' : '1'}},"
+			"{ $match: { 'operador.documento' : ?0,  'estadoRegistro' : 'Proceso', 'estado' : '1'}},",
+			"{ $sort:{ 'codServicio': -1} },"
 			
 	})
 	Flux<Servicio> findByOperadorIdAggregate(String documento);
@@ -64,7 +65,8 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
-			"{ $match: { 'estadoRegistro' : 'Proceso', 'estado' : '1'}},"
+			"{ $match: { 'estadoRegistro' : 'Proceso', 'estado' : '1'}},",
+			"{ $sort:{ 'codServicio': -1} },"
 			
 	})
 	Flux<Servicio> findByServiciosPendientes();
@@ -74,7 +76,8 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
-			"{ $match: { 'estadoRegistro' : 'Concluido', 'estado' : '1'}},"
+			"{ $match: { 'estadoRegistro' : 'Concluido', 'estado' : '1'}},",
+			"{ $sort:{ 'codServicio': -1} },"
 			
 	})
 	Flux<Servicio> findByServiciosConcluidos();
@@ -94,7 +97,8 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 			"{ $lookup:{ from : 'operadores', localField: 'operadorObjId', foreignField: '_id', as: 'operador'}},",
 			"{ $lookup:{ from : 'montacargas', localField: 'montacargaObjId', foreignField: '_id', as: 'montacarga'}},",
 			"{ $lookup:{ from : 'clientes', localField: 'ruc', foreignField: 'ruc', as: 'cliente'}},",
-			"{ $match: { 'estadoRegistro' : 'Concluido', 'estado' : '1', 'codServicio' :  ?0 }},"
+			"{ $match: { 'estadoRegistro' : 'Concluido', 'estado' : '1', 'codServicio' :  ?0 }},",
+			"{ $sort:{ 'codServicio': -1} },"
 			
 	})
 	Flux<Servicio> findByServiciosConcluidosInServicios(Long idServicio);
