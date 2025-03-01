@@ -12,6 +12,8 @@ public interface ServicioService {
 	
 	Flux<Servicio> findByEstado(String estado);
 	
+	Mono<Servicio> findByCodigoServicio(Long codServicio);
+	
 	Flux<Servicio> all();
 	
 	Flux<Servicio> findByRucCodServicio(String ruc, Integer codServicio);

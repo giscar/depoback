@@ -122,4 +122,9 @@ public class ServicioServiceImpl implements ServicioService{
 		return servicioRepository.save(servicio);
 	}
 
+	@Override
+	public Mono<Servicio> findByCodigoServicio(Long codServicio) {
+		return servicioRepository.findByCodigoServicio(codServicio);
+	}
+
 }

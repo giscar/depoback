@@ -13,6 +13,9 @@ public interface ServicioRepository extends ReactiveMongoRepository<Servicio, St
 	@Query("{'estado': '1'})")
 	Flux<Servicio> findByEstado(String estado);
 	
+	@Query("{'codServicio': ?0 }")
+	Mono<Servicio> findByCodigoServicio(Long codServicio);
+	
 	@Query("{$or: [{'ruc': ?0}, {'codServicio': ?1}] }")
 	Flux<Servicio> findByRucCodServicio(String ruc, Integer codServicio);
 	

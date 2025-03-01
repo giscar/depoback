@@ -103,7 +103,7 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="catalogo/{tipo}")
-	public ResponseEntity<Flux<Catalogo>> catalogoByTipo(@PathVariable("tipo") String tipo) {
+	public ResponseEntity<Flux<Catalogo>> catalogoByTipo(@PathVariable String tipo) {
 		return new ResponseEntity<>(catalogoService.findByTipo(tipo),HttpStatus.OK);
 	}
 	
@@ -113,14 +113,9 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="factura/{id}")
-	public ResponseEntity<Mono<Factura>> facturaForId(@PathVariable("id") String id) {
+	public ResponseEntity<Mono<Factura>> facturaForId(@PathVariable String id) {
 		return new ResponseEntity<>(facturaService.facturaForId(id),HttpStatus.OK);
 	}
-	
-	/*@PostMapping(value="factura")
-	public ResponseEntity<Mono<Factura>> createfactura(@RequestBody Factura factura) {
-		return new ResponseEntity<>(facturaService.setFactura(factura),HttpStatus.OK);
-	}*/
 	
 	@PutMapping(value="factura")
 	public ResponseEntity<Mono<Factura>> editfactura(@RequestBody Factura factura) {
@@ -128,22 +123,22 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="cliente/{ruc}")
-	public ResponseEntity<Flux<Cliente>> clienteForRuc(@PathVariable("ruc") String ruc) {
+	public ResponseEntity<Flux<Cliente>> clienteForRuc(@PathVariable String ruc) {
 		return new ResponseEntity<>(clienteService.clienteForRuc(ruc),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="cliente")
-	public ResponseEntity<Mono<Cliente>> clienteForId(@RequestParam(name = "id") String id) {
+	public ResponseEntity<Mono<Cliente>> clienteForId(@RequestParam String id) {
 		return new ResponseEntity<>(clienteService.clienteForID(id),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="cliente/descrip")
-	public ResponseEntity<Flux<Cliente>> clienteForDescripcion(@RequestParam(name = "descripcion") String descripcion) {
+	public ResponseEntity<Flux<Cliente>> clienteForDescripcion(@RequestParam String descripcion) {
 		return new ResponseEntity<>(clienteService.clienteForDescripcion(descripcion),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="cliente/busqueda")
-	public ResponseEntity<Flux<Cliente>> clienteForRucAndName(@RequestParam(name = "ruc") String ruc, @RequestParam(name = "razonSocial") String razonSocial) {
+	public ResponseEntity<Flux<Cliente>> clienteForRucAndName(@RequestParam String ruc, @RequestParam String razonSocial) {
 		return new ResponseEntity<>(clienteService.findByRucOrName(ruc, razonSocial),HttpStatus.OK);
 	}
 	
@@ -158,7 +153,7 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="montacarga")
-	public ResponseEntity<Mono<Montacarga>> montacargaForId(@RequestParam(name = "id") String id) {
+	public ResponseEntity<Mono<Montacarga>> montacargaForId(@RequestParam String id) {
 		return new ResponseEntity<>(montacargaService.findById(id),HttpStatus.OK);
 	}
 	
@@ -188,12 +183,12 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="operador")
-	public ResponseEntity<Mono<Operador>> operadorForId(@RequestParam(name = "id") String id) {
+	public ResponseEntity<Mono<Operador>> operadorForId(@RequestParam String id) {
 		return new ResponseEntity<>(operadorService.findById(id),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="operador/documento")
-	public ResponseEntity<Mono<Operador>> operadorByDocumento(@RequestParam(name = "documento") String documento) {
+	public ResponseEntity<Mono<Operador>> operadorByDocumento(@RequestParam String documento) {
 		return new ResponseEntity<>(operadorService.findByEstadoByDocumento(documento),HttpStatus.OK);
 	}
 	
@@ -223,12 +218,12 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="usuario")
-	public ResponseEntity<Mono<Usuario>> usuarioForId(@RequestParam(name = "id") String id) {
+	public ResponseEntity<Mono<Usuario>> usuarioForId(@RequestParam String id) {
 		return new ResponseEntity<>(usuarioService.findById(id),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="usuario/documento")
-	public ResponseEntity<Mono<Usuario>> usuarioByDocumento(@RequestParam(name = "documento") String documento) {
+	public ResponseEntity<Mono<Usuario>> usuarioByDocumento(@RequestParam String documento) {
 		return new ResponseEntity<>(usuarioService.findByEstadoByDocumento(documento),HttpStatus.OK);
 	}
 	
@@ -258,17 +253,17 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="usuario/roles")
-	public ResponseEntity<Mono<Usuario>> usuarioForRoles(@RequestParam(name = "documento") String documento, @RequestParam(name = "passwd") String passwd) {
+	public ResponseEntity<Mono<Usuario>> usuarioForRoles(@RequestParam String documento, @RequestParam String passwd) {
 		return new ResponseEntity<>(usuarioService.findByRolesForUser(documento, passwd),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="rol")
-	public ResponseEntity<Mono<Rol>> rolForId(@RequestParam(name = "id") String id) {
+	public ResponseEntity<Mono<Rol>> rolForId(@RequestParam String id) {
 		return new ResponseEntity<>(rolService.findById(id),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="rol/codigo")
-	public ResponseEntity<Mono<Rol>> rolByCodigo(@RequestParam(name = "codigo") String codigo) {
+	public ResponseEntity<Mono<Rol>> rolByCodigo(@RequestParam String codigo) {
 		return new ResponseEntity<>(rolService.findByEstadoByCodigo(codigo),HttpStatus.OK);
 	}
 	
@@ -298,12 +293,12 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="perfil")
-	public ResponseEntity<Mono<Perfil>> perfilForId(@RequestParam(name = "id") String id) {
+	public ResponseEntity<Mono<Perfil>> perfilForId(@RequestParam String id) {
 		return new ResponseEntity<>(perfilService.findByIdAggregate(id),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="perfil/codigo")
-	public ResponseEntity<Mono<Perfil>> perfilByCodigo(@RequestParam(name = "codigo") String codigo) {
+	public ResponseEntity<Mono<Perfil>> perfilByCodigo(@RequestParam String codigo) {
 		return new ResponseEntity<>(perfilService.findByEstadoByCodigo(codigo),HttpStatus.OK);
 	}
 	
@@ -349,7 +344,7 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="servicio/uploadInactive")
-	public Mono<Imagen> inactiveImagen(@RequestParam(name = "id") String id) {
+	public Mono<Imagen> inactiveImagen(@RequestParam String id) {
 		return imagenService.findById(id).flatMap(p -> {
 			p.setEstado("0");
 			return imagenService.save(p);
@@ -357,7 +352,7 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="servicio")
-	public ResponseEntity<Mono<Servicio>> servicioForId(@RequestParam(name = "id") String id) {
+	public ResponseEntity<Mono<Servicio>> servicioForId(@RequestParam String id) {
 		return new ResponseEntity<>(servicioService.findByIdAggregate(id),HttpStatus.OK);
 	}
 
@@ -372,44 +367,49 @@ public class ErpController {
 	}
 	
 	@DeleteMapping(value="servicio/imagen/eliminar")
-	public void deleteFile(@RequestParam(name = "id") String id) {
+	public void deleteFile(@RequestParam String id) {
 		imagenService.delete(id); 
 	}
 	
 	@GetMapping(value="servicio/estado")
-	public ResponseEntity<Flux<Servicio>> servicioForActivo(@RequestParam(name = "estado") String estado) {
+	public ResponseEntity<Flux<Servicio>> servicioForActivo(@RequestParam String estado) {
 		return new ResponseEntity<>(servicioService.findByEstado(estado),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/busqueda")
-	public ResponseEntity<Flux<Servicio>> servicioForRucAndCodServicio(@RequestParam(name = "codServicio") Integer codServicio, @RequestParam(name = "ruc") String ruc) {
+	public ResponseEntity<Flux<Servicio>> servicioForRucAndCodServicio(@RequestParam Integer codServicio, @RequestParam String ruc) {
 		return new ResponseEntity<>(servicioService.findByRucCodServicio(ruc, codServicio),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/busquedaAggregate")
-	public ResponseEntity<Flux<Servicio>> findByRucCodServicioAggregate(@RequestParam(name = "codServicio", required = false) Integer codServicio, @RequestParam(name = "ruc") String ruc) {
+	public ResponseEntity<Flux<Servicio>> findByRucCodServicioAggregate(@RequestParam(required = false) Integer codServicio, @RequestParam String ruc) {
 		return new ResponseEntity<>(servicioService.findByRucCodServicioAggregate(ruc, codServicio),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/busquedaAggregateEstadoConcluido")
-	public ResponseEntity<Flux<Servicio>> findByRucCodServicioAggregateEstadoRegistro(@RequestParam(name = "codServicio", required = false) Integer codServicio, @RequestParam(name = "ruc", required = false) String ruc) {
+	public ResponseEntity<Flux<Servicio>> findByRucCodServicioAggregateEstadoRegistro(@RequestParam(required = false) Integer codServicio, @RequestParam(required = false) String ruc) {
 		return new ResponseEntity<>(servicioService.findByRucCodServicioAggregateConcluido(ruc, codServicio),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/busquedaEstadistica")
 	public ResponseEntity<Flux<Servicio>> findByEstdisticaAggregate(
-			@RequestParam(name = "codServicio", required = false) Integer codServicio, 
-			@RequestParam(name = "ruc") String ruc,
-			@RequestParam(name = "idOperador") String idOperador,
-			@RequestParam(name = "idMontacarga") String idMontacarga,
-			@RequestParam(name = "estadoRegistro") String estadoRegistro,
-			@RequestParam(name = "tipoServicio") String tipoServicio) {
+			@RequestParam(required = false) Integer codServicio, 
+			@RequestParam String ruc,
+			@RequestParam String idOperador,
+			@RequestParam String idMontacarga,
+			@RequestParam String estadoRegistro,
+			@RequestParam String tipoServicio) {
 		return new ResponseEntity<>(servicioService.findByRucEstadisticasAggregate(ruc, codServicio, idOperador, idMontacarga, estadoRegistro, tipoServicio),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/busquedaIdOperadorAggregate")
-	public ResponseEntity<Flux<Servicio>> findByOperadorIdAggregate(@RequestParam(name = "documento", required = false) String documento) {
+	public ResponseEntity<Flux<Servicio>> findByOperadorIdAggregate(@RequestParam(required = false) String documento) {
 		return new ResponseEntity<>(servicioService.findByOperadorIdAggregate(documento),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="servicio/findByCodigoServicio")
+	public ResponseEntity<Mono<Servicio>> findByCodigoServicio(@RequestParam(required = false) Long codServicio) {
+		return new ResponseEntity<>(servicioService.findByCodigoServicio(codServicio),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="servicio/busquedaServiciosPendientes")
@@ -418,7 +418,7 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="servicio/busquedaServiciosParaFacturar")
-	public ResponseEntity<Flux<Servicio>> findByServiciosFactura(@RequestParam(name = "idServicios", required = false) String idServicios) {
+	public ResponseEntity<Flux<Servicio>> findByServiciosFactura(@RequestParam(required = false) String idServicios) {
 		String[] arrayIdServicios = idServicios.split(",");
 		return new ResponseEntity<>(servicioService.findByServiciosConcluidosInServicios(arrayIdServicios),HttpStatus.OK);
 	}
@@ -459,7 +459,7 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="mercaderia/{id}")
-	public ResponseEntity<Mono<Mercaderia>> mercaderiaForId(@PathVariable("id") String id) {
+	public ResponseEntity<Mono<Mercaderia>> mercaderiaForId(@PathVariable String id) {
 		return new ResponseEntity<>(mercaderiaService.mercaderiaByID(id),HttpStatus.OK);
 	}
 	
@@ -479,12 +479,12 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="mercaderia/findByIngreso")
-	public ResponseEntity<Flux<Mercaderia>> findByIngreso(@RequestParam("id") String id) {
+	public ResponseEntity<Flux<Mercaderia>> findByIngreso(@RequestParam String id) {
 		return new ResponseEntity<>(mercaderiaService.findByIngreso(id),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="mercaderia/findByNumeroMercaderia")
-	public ResponseEntity<Mono<Mercaderia>> findByNumeroMercaderia(@RequestParam("numeroMercaderia") String numeroMercaderia) {
+	public ResponseEntity<Mono<Mercaderia>> findByNumeroMercaderia(@RequestParam String numeroMercaderia) {
 		return new ResponseEntity<>(mercaderiaService.findByNumeroMercaderia(numeroMercaderia),HttpStatus.OK);
 	}
 	
@@ -494,7 +494,7 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="ingreso")
-	public ResponseEntity<Mono<Ingreso>> ingresoForId(@RequestParam("id") String id) {
+	public ResponseEntity<Mono<Ingreso>> ingresoForId(@RequestParam String id) {
 		return new ResponseEntity<>(ingresoService.ingresoByID(id),HttpStatus.OK);
 	}
 	
@@ -515,16 +515,16 @@ public class ErpController {
 	
 	@GetMapping(value="ingreso/busquedaPorFiltros")
 	public ResponseEntity<Flux<Ingreso>> findByFilterIngresos(
-			@RequestParam(name = "pedidoDeposito", required = false) String pedidoDeposito, 
-			@RequestParam(name = "codigoDua") String codigoDua,
-			@RequestParam(name = "ruc") String ruc,
-			@RequestParam(name = "tipoMercaderia") String tipoMercaderia,
-			@RequestParam(name = "estadoRegistro") String estadoRegistro) {
+			@RequestParam(required = false) String pedidoDeposito, 
+			@RequestParam String codigoDua,
+			@RequestParam String ruc,
+			@RequestParam String tipoMercaderia,
+			@RequestParam String estadoRegistro) {
 		return new ResponseEntity<>(ingresoService.findByFiltrer(pedidoDeposito, codigoDua, ruc, tipoMercaderia, estadoRegistro),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="salida")
-	public ResponseEntity<Mono<Salida>> salidaForId(@RequestParam("id") String id) {
+	public ResponseEntity<Mono<Salida>> salidaForId(@RequestParam String id) {
 		return new ResponseEntity<>(salidaService.salidaByID(id),HttpStatus.OK);
 	}
 	
