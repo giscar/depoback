@@ -25,7 +25,9 @@ import model.Imagen;
 import model.Ingreso;
 import model.Mercaderia;
 import model.Montacarga;
+import model.NotaRecepcion;
 import model.Operador;
+import model.OrdenSalida;
 import model.Perfil;
 import model.Rol;
 import model.Salida;
@@ -41,7 +43,9 @@ import service.ImagenService;
 import service.IngresoService;
 import service.MercaderiaService;
 import service.MontacargaService;
+import service.NotaRecepcionService;
 import service.OperadorService;
+import service.OrdenSalidaService;
 import service.PerfilService;
 import service.RolService;
 import service.SalidaService;
@@ -93,6 +97,12 @@ public class ErpController {
 	
 	@Autowired
 	SalidaService salidaService;
+	
+	@Autowired
+	NotaRecepcionService notaRecepcionService;
+	
+	@Autowired
+	OrdenSalidaService ordenSalidaService;
 	
 	@GetMapping(value = "names")
 	public Flux<String> getNames(){
@@ -529,13 +539,33 @@ public class ErpController {
 	}
 	
 	@GetMapping(value="salida/numeroMercaderia")
-	public ResponseEntity<Flux<Salida>> salidaForNumeroMercaderia(@RequestParam("numeroMercaderia") String numeroMercaderia) {
+	public ResponseEntity<Flux<Salida>> salidaForNumeroMercaderia(@RequestParam String numeroMercaderia) {
 		return new ResponseEntity<>(salidaService.findByNumeroMercaderia(numeroMercaderia),HttpStatus.OK);
 	}
 	
 	@PostMapping(value="salida")
 	public ResponseEntity<Mono<Salida>> saveSalida(@RequestBody Salida salida) {
 		return new ResponseEntity<>(salidaService.save(salida),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="notaRecepcion")
+	public ResponseEntity<Mono<NotaRecepcion>> notaRecepcionById(@RequestParam String id) {
+		return new ResponseEntity<>(notaRecepcionService.findNotaRecepcionById(id),HttpStatus.OK);
+	}
+	
+	@PostMapping(value="notaRecepcion")
+	public ResponseEntity<Mono<NotaRecepcion>> saveNotaRecepcion(@RequestBody NotaRecepcion notaRecepcion) {
+		return new ResponseEntity<>(notaRecepcionService.saveNotaRecepcion(notaRecepcion),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="ordenSalida")
+	public ResponseEntity<Mono<OrdenSalida>> ordenSalidaById(@RequestParam String id) {
+		return new ResponseEntity<>(ordenSalidaService.findOrdenSalidaById(id),HttpStatus.OK);
+	}
+	
+	@PostMapping(value="ordenSalida")
+	public ResponseEntity<Mono<OrdenSalida>> saveOrdenSalida(@RequestBody OrdenSalida ordenSalida) {
+		return new ResponseEntity<>(ordenSalidaService.saveOrdenSalida(ordenSalida),HttpStatus.OK);
 	}
 	
 }

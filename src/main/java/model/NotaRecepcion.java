@@ -22,13 +22,13 @@ public class NotaRecepcion {
 	
 	private Long numeroRecepcion;
 	
-	private String rucRecibido;
+	private String rucAgenciaAduanera;
 	
-	private String razonSocialRecibido;
+	private String razonSociaAgenciaAduanera;
 	
-	private String rucPorCuenta;
+	private String rucCliente;
 	
-	private String razonSocialPorCuenta;
+	private String razonSocialCliente;
 	
 	private String vehiculo;
 	
