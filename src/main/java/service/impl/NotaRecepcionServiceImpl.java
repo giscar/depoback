@@ -24,6 +24,11 @@ public class NotaRecepcionServiceImpl implements NotaRecepcionService{
 		return notaRecepcionRepository.findById(id);
 	}
 
+	@Override
+	public Mono<Object> findMaxNumeroRecepcion() {
+		return notaRecepcionRepository.findMaxNumeroRecepcion();
+	}
+
 	
 
 }

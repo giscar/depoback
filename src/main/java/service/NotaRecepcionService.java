@@ -8,5 +8,7 @@ public interface NotaRecepcionService {
 	Mono<NotaRecepcion> saveNotaRecepcion(NotaRecepcion notaRecepcion);
 	
 	Mono<NotaRecepcion> findNotaRecepcionById(String id);
+	
+	Mono<Object> findMaxNumeroRecepcion();
 
 }

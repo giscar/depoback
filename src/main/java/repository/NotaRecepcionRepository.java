@@ -1,15 +1,17 @@
 package repository;
 
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-import model.Catalogo;
 import model.NotaRecepcion;
-import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface NotaRecepcionRepository extends ReactiveMongoRepository<NotaRecepcion, String> {
 	
-	@Query("{'tipo' :  ?0 }")
-	Flux<Catalogo> findByTipo(String tipo);
+	
+	@Aggregation(pipeline = {
+			"{$group: { _id: null, maxField : { $max: '$numeroRecepcion' }}}"
+	})
+	Mono<Object> findMaxNumeroRecepcion();
 	
 }

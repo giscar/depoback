@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -26,9 +27,13 @@ public class NotaRecepcion {
 	
 	private String razonSociaAgenciaAduanera;
 	
+	private String direccionAgencia;
+	
 	private String rucCliente;
 	
 	private String razonSocialCliente;
+	
+	private String direccionCliente;
 	
 	private String vehiculo;
 	
@@ -39,5 +44,7 @@ public class NotaRecepcion {
 	private String observaciones;
 	
 	private String almacenado;
+	
+	private List<Mercaderia> mercaderias;
 
 }

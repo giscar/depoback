@@ -558,6 +558,11 @@ public class ErpController {
 		return new ResponseEntity<>(notaRecepcionService.saveNotaRecepcion(notaRecepcion),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="notaRecepcion/maxNotaRecepcion")
+	public ResponseEntity<Mono<Object>> findMaxNumeroRecepcion() {
+		return new ResponseEntity<>(notaRecepcionService.findMaxNumeroRecepcion(),HttpStatus.OK);
+	}
+	
 	@GetMapping(value="ordenSalida")
 	public ResponseEntity<Mono<OrdenSalida>> ordenSalidaById(@RequestParam String id) {
 		return new ResponseEntity<>(ordenSalidaService.findOrdenSalidaById(id),HttpStatus.OK);
