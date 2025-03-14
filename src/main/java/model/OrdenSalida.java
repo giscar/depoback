@@ -22,9 +22,11 @@ public class OrdenSalida {
 	
 	private String idMercaderiaSalida;
 	
-	private String rucRemitente;
+	private String rucDestinatario;
 	
-	private String razonSocialRemitente;
+	private String razonSocialDestinatario;
+	
+	private String direccionDestinatario;
 	
 	private Date fechaEmision;
 	

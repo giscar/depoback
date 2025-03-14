@@ -36,9 +36,9 @@ public class NotaRecepcion {
 	private String direccionCliente;
 	
 	private String vehiculo;
-	
+
 	private String chofer;
-	
+
 	private Date fechaRecepcion;
 	
 	private String observaciones;

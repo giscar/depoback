@@ -16,12 +16,19 @@ public class OrdenSalidaServiceImpl implements OrdenSalidaService{
 
 	@Override
 	public Mono<OrdenSalida> saveOrdenSalida(OrdenSalida ordenSalida) {
+		// TODO Auto-generated method stub
 		return ordenSalidaRepository.save(ordenSalida);
 	}
 
 	@Override
 	public Mono<OrdenSalida> findOrdenSalidaById(String id) {
 		return ordenSalidaRepository.findById(id);
+	}
+
+	@Override
+	public Mono<Object> findMaxOrdenSalida() {
+		// TODO Auto-generated method stub
+		return ordenSalidaRepository.findMaxOrdenSalida();
 	}
 
 	

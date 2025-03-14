@@ -573,4 +573,11 @@ public class ErpController {
 		return new ResponseEntity<>(ordenSalidaService.saveOrdenSalida(ordenSalida),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="ordenSalida/maxOrdenSalida")
+	public ResponseEntity<Mono<Object>> findMaxNumeroOrdenSalida() {
+		return new ResponseEntity<>(ordenSalidaService.findMaxOrdenSalida(),HttpStatus.OK);
+	}
+	
+	
+	
 }
