@@ -28,6 +28,12 @@ public class OrdenSalida {
 	
 	private String direccionDestinatario;
 	
+	private String rucDepovent;
+	
+	private String razonSocialDepovent;
+	
+	private String direccionDepovent;
+	
 	private Date fechaEmision;
 	
 	private Date fechaInicioTranslado;
