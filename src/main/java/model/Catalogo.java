@@ -25,5 +25,9 @@ public class Catalogo implements Serializable {
 	private String codigo;
 	
 	private String descripcion;
+	
+	private String value;
+	
+	private String label;
 
 }

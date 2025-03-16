@@ -20,6 +20,8 @@ public class Mercaderia {
 	
 	private String idIngreso;
 	
+	private Long codIngreso;
+	
 	private String numeroMercaderia;
 	
 	private Long codMercaderia;
@@ -30,17 +32,13 @@ public class Mercaderia {
 	
 	private String descripcionProducto;
 	
-	private String unidadMedida;
+	private Catalogo unidadMedida;
 	
-	private Object um;
-	
-	private Object almacen;
+	private Catalogo almacen;
 	
 	private Integer cantidad;
 	
 	private Integer cantidadOrignal;
-	
-	private String codigoAlmacen;
 	
 	private Integer saldo;
 	
