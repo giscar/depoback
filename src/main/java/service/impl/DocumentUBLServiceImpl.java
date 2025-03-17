@@ -36,8 +36,8 @@ import org.w3c.dom.Element;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import model.Factura;
-import pe.gob.sunat.servicio.registro.comppago.factura.gem.service_bta.BillService;
-import pe.gob.sunat.servicio.registro.comppago.factura.gem.service_bta.BillService_Service_fe;
+//import pe.gob.sunat.servicio.registro.comppago.factura.gem.service_bta.BillService;
+//import pe.gob.sunat.servicio.registro.comppago.factura.gem.service_bta.BillService_Service_fe;
 import service.DocumentUBLService;
 import util.GeneralFunctions;
 import util.HeaderHandlerResolver;
@@ -589,12 +589,12 @@ public class DocumentUBLServiceImpl implements DocumentUBLService{
             //================Enviando a sunat
             switch (sws) {
                 case "1":
-                    BillService_Service_fe ws1 = new BillService_Service_fe();
+                    /*BillService_Service_fe ws1 = new BillService_Service_fe();
                     HeaderHandlerResolver handlerResolver1 = new HeaderHandlerResolver();
                     handlerResolver1.setVruc(vruc);
                     ws1.setHandlerResolver(handlerResolver1);
                     BillService port1 = ws1.getBillServicePort();
-                    respuestaSunat = port1.sendBill(zipFileName, dataHandler);
+                    respuestaSunat = port1.sendBill(zipFileName, dataHandler);*/
                     log.info("enviarASunat - Ambiente Beta: " + sws);
                     break;
                 

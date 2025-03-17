@@ -23,23 +23,15 @@ public class NotaRecepcion {
 	
 	private Long numeroRecepcion;
 	
-	private String rucAgenciaAduanera;
+	private Cliente agencia;
 	
-	private String razonSociaAgenciaAduanera;
+	private Cliente empresa;
 	
-	private String direccionAgencia;
-	
-	private String rucCliente;
-	
-	private String razonSocialCliente;
-	
-	private String direccionCliente;
-	
-	private String vehiculo;
+	private String placaVehiculo;
 
 	private String chofer;
 
-	private Date fechaRecepcion;
+	private Date fechaRecepcion = new Date();
 	
 	private String observaciones;
 	

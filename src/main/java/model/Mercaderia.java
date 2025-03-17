@@ -26,6 +26,10 @@ public class Mercaderia {
 	
 	private Long codMercaderia;
 	
+	private Long numeroNotaRecepcion;
+	
+	private String idNotaRecepcion;
+	
 	private String serie;
 	
 	private String productoCodigo;
