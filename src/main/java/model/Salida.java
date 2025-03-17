@@ -18,7 +18,7 @@ public class Salida {
 	@Id
 	private String id;
 	
-	private String idIngreso;
+	private String idCodIngreso;
 	
 	private String idOrdensalida;
 	

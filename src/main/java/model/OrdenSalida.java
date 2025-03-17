@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,8 +20,6 @@ public class OrdenSalida {
 	private String codigoSalida;
 	
 	private Long numeroSalida;
-	
-	private String idMercaderiaSalida;
 	
 	private String rucDestinatario;
 	
@@ -45,6 +44,8 @@ public class OrdenSalida {
 	private String chofer;
 	
 	private String licencia;
+	
+	private List<Salida> listaSalida;
 	
 
 }
