@@ -553,6 +553,11 @@ public class ErpController {
 		return new ResponseEntity<>(notaRecepcionService.findNotaRecepcionById(id),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="notaRecepcion/findByIdIngreso")
+	public ResponseEntity<Mono<NotaRecepcion>> findByCodIngreso(@RequestParam String idIngreso) {
+		return new ResponseEntity<>(notaRecepcionService.findByCodIngreso(idIngreso),HttpStatus.OK);
+	}
+	
 	@PostMapping(value="notaRecepcion")
 	public ResponseEntity<Mono<NotaRecepcion>> saveNotaRecepcion(@RequestBody NotaRecepcion notaRecepcion) {
 		return new ResponseEntity<>(notaRecepcionService.saveNotaRecepcion(notaRecepcion),HttpStatus.OK);

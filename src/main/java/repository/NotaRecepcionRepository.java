@@ -1,6 +1,7 @@
 package repository;
 
 import org.springframework.data.mongodb.repository.Aggregation;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import model.NotaRecepcion;
@@ -13,5 +14,8 @@ public interface NotaRecepcionRepository extends ReactiveMongoRepository<NotaRec
 			"{$group: { _id: null, maxField : { $max: '$numeroRecepcion' }}}"
 	})
 	Mono<Object> findMaxNumeroRecepcion();
+	
+	@Query("{'idIngreso' :  ?0 }")
+	Mono<NotaRecepcion> findByCodIngreso(String idIngreso);
 	
 }
