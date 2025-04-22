@@ -30,8 +30,12 @@ public class NotaRecepcion {
 	private String placaVehiculo;
 
 	private String chofer;
+	
+	private String guiaRemision;
 
 	private Date fechaRecepcion = new Date();
+	
+	private String descripcion;
 	
 	private String observaciones;
 	
