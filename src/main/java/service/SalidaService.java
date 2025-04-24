@@ -13,5 +13,7 @@ public interface SalidaService {
 	Mono<Salida> salidaByID(String id);
 	
 	Flux<Salida> findByNumeroMercaderia(String numeroMercaderia);
+	
+	Flux<Salida> findByIngreso(String idIngreso);
 
 }

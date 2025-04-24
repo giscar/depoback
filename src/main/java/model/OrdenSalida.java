@@ -45,7 +45,7 @@ public class OrdenSalida {
 	
 	private String licencia;
 	
-	private List<Salida> listaSalida;
+	private List<Salida> salidas;
 	
 
 }

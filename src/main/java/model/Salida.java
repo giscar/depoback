@@ -18,11 +18,11 @@ public class Salida {
 	@Id
 	private String id;
 	
+	private String idIngreso;
+	
 	private String idCodIngreso;
 	
-	private String idOrdensalida;
-	
-	private String idNotaRecepcion;
+	private String idOrdenSalida;
 	
 	private String numeroNotaRecepcion;
 	
