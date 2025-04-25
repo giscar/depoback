@@ -548,6 +548,11 @@ public class ErpController {
 		return new ResponseEntity<>(salidaService.findByIngreso(idIngreso),HttpStatus.OK);
 	}
 	
+	@GetMapping(value="salida/findSalidaByIdIngresoAll")
+	public ResponseEntity<Flux<Salida>> findSalidaByIdIngresoAll(@RequestParam String idIngreso) {
+		return new ResponseEntity<>(salidaService.findByIngresoAll(idIngreso),HttpStatus.OK);
+	}
+	
 	@PostMapping(value="salida")
 	public ResponseEntity<Mono<Salida>> saveSalida(@RequestBody Salida salida) {
 		return new ResponseEntity<>(salidaService.save(salida),HttpStatus.OK);
@@ -586,6 +591,11 @@ public class ErpController {
 	@GetMapping(value="ordenSalida/maxOrdenSalida")
 	public ResponseEntity<Mono<Object>> findMaxNumeroOrdenSalida() {
 		return new ResponseEntity<>(ordenSalidaService.findMaxOrdenSalida(),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="ordenSalida/ordenSalidaByIdIngreso")
+	public ResponseEntity<Flux<OrdenSalida>> ordenSalidaByIdIngreso(@RequestParam String idIngreso) {
+		return new ResponseEntity<>(ordenSalidaService.findByCodIngreso(idIngreso),HttpStatus.OK);
 	}
 	
 	

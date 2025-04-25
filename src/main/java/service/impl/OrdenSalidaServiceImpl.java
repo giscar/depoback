@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import model.OrdenSalida;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import repository.OrdenSalidaRepository;
 import service.OrdenSalidaService;
@@ -16,7 +17,6 @@ public class OrdenSalidaServiceImpl implements OrdenSalidaService{
 
 	@Override
 	public Mono<OrdenSalida> saveOrdenSalida(OrdenSalida ordenSalida) {
-		// TODO Auto-generated method stub
 		return ordenSalidaRepository.save(ordenSalida);
 	}
 
@@ -27,8 +27,12 @@ public class OrdenSalidaServiceImpl implements OrdenSalidaService{
 
 	@Override
 	public Mono<Object> findMaxOrdenSalida() {
-		// TODO Auto-generated method stub
 		return ordenSalidaRepository.findMaxOrdenSalida();
+	}
+
+	@Override
+	public Flux<OrdenSalida> findByCodIngreso(String idIngreso) {
+		return ordenSalidaRepository.findByCodIngreso(idIngreso);
 	}
 
 	

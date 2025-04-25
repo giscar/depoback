@@ -15,5 +15,7 @@ public interface SalidaService {
 	Flux<Salida> findByNumeroMercaderia(String numeroMercaderia);
 	
 	Flux<Salida> findByIngreso(String idIngreso);
+	
+	Flux<Salida> findByIngresoAll(String idIngreso);
 
 }

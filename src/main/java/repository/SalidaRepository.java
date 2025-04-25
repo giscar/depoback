@@ -14,4 +14,7 @@ public interface SalidaRepository extends ReactiveMongoRepository<Salida, String
 	@Query("{'idIngreso': ?0, 'idOrdenSalida' : '' }")
 	Flux<Salida> findByIngreso(String idIngreso);
 	
+	@Query("{'idIngreso': ?0 }")
+	Flux<Salida> findByIngresoAll(String idIngreso);
+	
 }

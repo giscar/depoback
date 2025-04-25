@@ -40,5 +40,9 @@ public class SalidaServiceImpl implements SalidaService{
 		return salidaRepository.findByIngreso(idIngreso);
 	}
 	
+	@Override
+	public Flux<Salida> findByIngresoAll(String idIngreso){
+		return salidaRepository.findByIngresoAll(idIngreso);
+	}
 
 }

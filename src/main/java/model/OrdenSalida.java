@@ -17,6 +17,8 @@ public class OrdenSalida {
 	
 	private String id;
 	
+	private String idIngreso;
+	
 	private String codigoSalida;
 	
 	private Long numeroSalida;
