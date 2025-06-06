@@ -43,15 +43,33 @@ public class Ingreso implements Serializable {
 	
 	private String direccion;
 	
-	private String descripcion;
+	private String rucAgencia;
 	
-	//private List<Mercaderia> mercaderias;
+	private String razonSocialAgencia;
+	
+	private String direccionAgencia;
+	
+	private String descripcion;
 	
 	private Date fechaIngreso;
 	
 	private Date fechaRegistro = new Date();
 	
 	private String usuarioRegistro;
+	
+	private Catalogo almacen;
+	
+	private String guia;
+	
+	private String horaTermino;
+	
+	private String indFacturarFijo;
+	
+	private String nroContenedor;
+	
+	private String dimensionContenedor;
+	
+	private String observaciones;
 	
 
 }
