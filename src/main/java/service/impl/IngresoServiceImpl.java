@@ -42,6 +42,12 @@ public class IngresoServiceImpl implements IngresoService{
 
 	@Override
 	public Flux<Ingreso> findByFiltrer(String pedidoDeposito, String codigoDua, String ruc, String tipoMercaderia, String estadoRegistro) {
+		if(pedidoDeposito.equals("")) {
+			pedidoDeposito = "XXXXXXXXXXXXXXXXXX";
+		}
+		if(codigoDua.equals("")) {
+			codigoDua = "XXXXXXXXXXXXXXXXXX";
+		}
 		return ingresoRepository.findByFiltrer(pedidoDeposito, codigoDua, ruc, tipoMercaderia, estadoRegistro);
 	}
 	

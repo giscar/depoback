@@ -69,6 +69,8 @@ public class Ingreso implements Serializable {
 	
 	private String dimensionContenedor;
 	
+	private String otrosVehiculos;
+	
 	private String observaciones;
 	
 
