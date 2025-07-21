@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import model.Catalogo;
 import model.Cliente;
 import model.Factura;
+import model.FormularioContacto;
 import model.Imagen;
 import model.Ingreso;
 import model.Mercaderia;
@@ -39,6 +40,7 @@ import service.CatalogoService;
 import service.ClienteService;
 import service.DocumentUBLService;
 import service.FacturaService;
+import service.FormularioContactoService;
 import service.ImagenService;
 import service.IngresoService;
 import service.MercaderiaService;
@@ -103,6 +105,14 @@ public class ErpController {
 	
 	@Autowired
 	OrdenSalidaService ordenSalidaService;
+	
+	@Autowired
+	FormularioContactoService formularioContactoService;
+	
+	@PostMapping(value="formularioContacto")
+	public ResponseEntity<Mono<FormularioContacto>> registrarFormulario(@RequestBody FormularioContacto formularioContacto) {
+		return new ResponseEntity<>(formularioContactoService.save(formularioContacto),HttpStatus.OK);
+	}
 	
 	@GetMapping(value = "names")
 	public Flux<String> getNames(){
