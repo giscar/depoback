@@ -30,6 +30,12 @@ public class Salida {
 	
 	private String idMercaderia;
 	
+	private String codigoMercaderia;
+	
+	private String unidadMedidaMercaderia;
+	
+	private String descripcionMercaderia;
+	
 	private String numeroMercaderia;
 	
 	private Long cantidadSalida;

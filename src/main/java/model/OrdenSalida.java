@@ -41,6 +41,8 @@ public class OrdenSalida {
 	
 	private String marcaVehiculo;
 	
+	private String domicilioPuntoPartida;
+	
 	private String placaVehiculo;
 	
 	private String chofer;
