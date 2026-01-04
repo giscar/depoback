@@ -1,48 +1,54 @@
 package model;
 
-import java.util.Date;
+import java.time.Instant;
 
+import domain.type.EstadoMontacarga;
+import domain.type.EstadoRegister;
+import domain.type.EstadoRevision;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Builder
 @Document(collection = "montacargas")
 public class Montacarga {
-	
-	
+
+	@Id
 	private String id;
 
+	@Indexed(unique = true)
 	private String codigo;
-	
+
 	private String marca;
 
 	private String serie;
 
-	private String tonelaje;
-	
-	private String modelo;
-	
-	private String color;
-	
-	private String anhoFabricacion;
-	
-	private String ubicacion;
-	
-	private String estado;
-	
-	private String revisionOperatividad;
-	
-	private String estadoRegistro;
-	
-	private Date fechaRegistro = new Date();
-	
-	private String usuarioRegistro;
-	
-	private String indInactivo;
+	private Integer tonelaje;
 
+	private String modelo;
+
+	private String color;
+
+	private Integer anhoFabricacion;
+
+	private String ubicacion;
+
+	private EstadoMontacarga estado;
+
+	private EstadoRevision revisionOperatividad;
+
+	@Setter
+	private EstadoRegister estadoRegistro;
+
+	@CreatedDate
+	private Instant fechaRegistro;
+
+	private String usuarioRegistro;
+
+	private Boolean inactivo;
 }

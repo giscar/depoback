@@ -12,7 +12,6 @@ import model.Servicio;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import repository.FacturaRepository;
-import service.DocumentUBLService;
 import service.FacturaService;
 import service.ServicioService;
 
@@ -21,9 +20,6 @@ public class FacturaServiceImpl implements FacturaService{
 	
 	@Autowired
 	private FacturaRepository facturaRepository;
-	
-	@Autowired
-	private DocumentUBLService UBLService;
 	
 	@Autowired
 	private ServicioService servicioService;
@@ -84,12 +80,8 @@ public class FacturaServiceImpl implements FacturaService{
 		for (Servicio serv : factura.getServicios()) {
 				servicioService.facturarServicio(serv);
 		}
-		UBLService.generarFormatoFactura(factura);
-		return facturaRepository.save(factura).map(p -> {
-			
-			BolElectronica.generarXMLZipiadoBoleta();
-			return p;
-		});
+
+		return facturaRepository.save(factura);
 	}
 
 	@Override
