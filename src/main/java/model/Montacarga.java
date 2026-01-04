@@ -28,7 +28,7 @@ public class Montacarga {
 
 	private String serie;
 
-	private Integer tonelaje;
+	private String tonelaje;
 
 	private String modelo;
 

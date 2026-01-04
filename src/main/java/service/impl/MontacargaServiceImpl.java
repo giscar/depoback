@@ -27,7 +27,7 @@ public class MontacargaServiceImpl implements MontacargaService{
 						new IllegalArgumentException("La montacarga no puede ser null")
 				))
 				.doOnNext(p -> {
-					p.setEstadoRegistro(EstadoRegister.ACTIVE);
+					p.setEstadoRegistro(EstadoRegister.ACTIVO);
 				})
 				.flatMap(repository::save)
 				.doOnSuccess(m -> log.info("Montacarga creada correctamete con el id {}", m.getId()))
@@ -41,7 +41,7 @@ public class MontacargaServiceImpl implements MontacargaService{
 				.switchIfEmpty(Mono.error(new IllegalArgumentException("No existe la montacarga con el id {}"+ id)))
 				.flatMap(p -> {
 					log.debug("Inactivando la montacarga id: {}", p.getId());
-					p.setEstadoRegistro(EstadoRegister.INACTIVE);
+					p.setEstadoRegistro(EstadoRegister.INACTIVO);
 					return repository.save(p);
 				})
 				.doOnSuccess(s -> log.info("se inactivo la montacarga con id: {}", s.getId()))
