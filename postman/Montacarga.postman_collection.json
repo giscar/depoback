@@ -5,7 +5,65 @@
     "description": "Pruebas Postman para el controller /montacargas.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
   "item": [
+    {
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200 OK', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Guarda accessToken', function () {",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.accessToken).to.exist;",
+              "  pm.collectionVariables.set('accessToken', json.accessToken);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"documento\": \"{{authDocumento}}\",\n  \"passwd\": \"{{authPasswd}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      }
+    },
     {
       "name": "Crear montacarga",
       "event": [
@@ -286,6 +344,18 @@
     {
       "key": "baseUrl",
       "value": "http://localhost:8080"
+    },
+    {
+      "key": "authDocumento",
+      "value": ""
+    },
+    {
+      "key": "authPasswd",
+      "value": ""
+    },
+    {
+      "key": "accessToken",
+      "value": ""
     },
     {
       "key": "montacargaId",
