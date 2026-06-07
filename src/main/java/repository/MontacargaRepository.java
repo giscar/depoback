@@ -1,5 +1,6 @@
 package repository;
 
+import domain.type.EstadoRegister;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import model.Montacarga;
@@ -7,6 +8,6 @@ import reactor.core.publisher.Flux;
 
 public interface MontacargaRepository extends ReactiveMongoRepository<Montacarga, String> {
 
-	Flux<Montacarga> findByEstadoRegistro(String estadoRegistro);
+	Flux<Montacarga> findByEstadoRegistro(EstadoRegister estadoRegistro);
 
 }

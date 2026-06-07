@@ -74,7 +74,7 @@ public class MontacargaServiceImpl implements MontacargaService{
 	public Flux<Montacarga> obtenerPorEstado(EstadoRegister estadoRegister) {
 		return Mono.justOrEmpty(estadoRegister)
 				.switchIfEmpty(Mono.error(new IllegalArgumentException("el estado registro es necesario")))
-				.flatMapMany(p -> repository.findByEstadoRegistro(p.name()))
+				.flatMapMany(repository::findByEstadoRegistro)
 				.doOnComplete(() -> log.info("se encontraron las montacargaspor el estado: {}", estadoRegister))
 				.doOnError(e -> log.error("error en encotrar las montacargas con el estado {} ", estadoRegister));
 	}

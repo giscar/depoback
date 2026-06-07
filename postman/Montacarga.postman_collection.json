@@ -1,0 +1,299 @@
+{
+  "info": {
+    "name": "Depoback - Montacargas",
+    "_postman_id": "9b1ad1de-8f0a-4f28-9410-6d01f0d5e9e7",
+    "description": "Pruebas Postman para el controller /montacargas.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Crear montacarga",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 201 Created', function () {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test('Respuesta contiene id y estadoRegistro ACTIVO', function () {",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.id).to.exist;",
+              "  pm.expect(json.estadoRegistro).to.eql('ACTIVO');",
+              "  pm.collectionVariables.set('montacargaId', json.id);",
+              "  pm.collectionVariables.set('montacargaCodigo', json.codigo);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"codigo\": \"MC-{{$timestamp}}\",\n  \"marca\": \"Toyota\",\n  \"serie\": \"SER-{{$timestamp}}\",\n  \"tonelaje\": \"2.5\",\n  \"modelo\": \"8FG25\",\n  \"color\": \"Amarillo\",\n  \"anhoFabricacion\": 2020,\n  \"ubicacion\": \"Almacen principal\",\n  \"estado\": \"OPERATIVO\",\n  \"revisionOperatividad\": \"APROBADA\",\n  \"usuarioRegistro\": \"postman\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/montacargas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "montacargas"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Listar todos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200 OK', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Respuesta es un arreglo', function () {",
+              "  pm.expect(pm.response.json()).to.be.an('array');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/montacargas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "montacargas"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Listar por estado ACTIVO",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200 OK', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Todos tienen estadoRegistro ACTIVO', function () {",
+              "  const json = pm.response.json();",
+              "  pm.expect(json).to.be.an('array');",
+              "  json.forEach(item => pm.expect(item.estadoRegistro).to.eql('ACTIVO'));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/montacargas?estado=ACTIVO",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "montacargas"
+          ],
+          "query": [
+            {
+              "key": "estado",
+              "value": "ACTIVO"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Obtener por id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200 OK', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Devuelve la montacarga creada', function () {",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.id).to.eql(pm.collectionVariables.get('montacargaId'));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/montacargas/{{montacargaId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "montacargas",
+            "{{montacargaId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Actualizar montacarga",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200 OK', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Devuelve el mismo id', function () {",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.id).to.eql(pm.collectionVariables.get('montacargaId'));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"codigo\": \"{{montacargaCodigo}}\",\n  \"marca\": \"Toyota\",\n  \"serie\": \"SER-ACTUALIZADA\",\n  \"tonelaje\": \"3.0\",\n  \"modelo\": \"8FG30\",\n  \"color\": \"Rojo\",\n  \"anhoFabricacion\": 2021,\n  \"ubicacion\": \"Patio norte\",\n  \"estado\": \"OPERATIVO\",\n  \"revisionOperatividad\": \"OBSERVADA\",\n  \"usuarioRegistro\": \"postman\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/montacargas/{{montacargaId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "montacargas",
+            "{{montacargaId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Inactivar montacarga",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 204 No Content', function () {",
+              "  pm.response.to.have.status(204);",
+              "});",
+              "",
+              "pm.test('Respuesta sin body', function () {",
+              "  pm.expect(pm.response.text()).to.eql('');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/montacargas/{{montacargaId}}/inactivar",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "montacargas",
+            "{{montacargaId}}",
+            "inactivar"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Listar por estado INACTIVO",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200 OK', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Incluye la montacarga inactivada', function () {",
+              "  const json = pm.response.json();",
+              "  const id = pm.collectionVariables.get('montacargaId');",
+              "  pm.expect(json.some(item => item.id === id && item.estadoRegistro === 'INACTIVO')).to.eql(true);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/montacargas?estado=INACTIVO",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "montacargas"
+          ],
+          "query": [
+            {
+              "key": "estado",
+              "value": "INACTIVO"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "montacargaId",
+      "value": ""
+    },
+    {
+      "key": "montacargaCodigo",
+      "value": ""
+    }
+  ]
+}

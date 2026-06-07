@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.config.EnableReactiveMongoAuditing;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
-@SpringBootApplication(scanBasePackages = {"controller", "service"})
+@SpringBootApplication(scanBasePackages = {"config", "controller", "service"})
 @EnableReactiveMongoRepositories(basePackages = "repository")
 @EnableReactiveMongoAuditing
 public class ErpApplication {
