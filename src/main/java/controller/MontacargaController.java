@@ -32,9 +32,6 @@ public class MontacargaController {
 						log.error("Error al obtener montacarga id={}", id, e));
 	}
 
-	// ============================
-	// GET by estado
-	// ============================
 	@GetMapping
 	public Flux<Montacarga> obtenerPorEstado(
 			@RequestParam(name = "estado", required = false) EstadoRegister estado) {
